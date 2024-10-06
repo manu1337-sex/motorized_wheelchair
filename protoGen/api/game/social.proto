@@ -1,0 +1,380 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message GetSocialStateRequest {
+}
+
+message GetSocialStateResponse {
+  SocialState social_state = 1;
+
+  PvpSummary pvp_summary = 2;
+}
+
+message SearchUsersRequest {
+  string search_string = 1;
+}
+
+message SearchUsersResponse {
+  repeated SocialSummary searched_users = 1;
+}
+
+message GetRecommendedFriendsRequest {
+}
+
+message GetRecommendedFriendsResponse {
+  repeated SocialSummary recommended_users = 1;
+}
+
+message GetUserSummaryRequest {
+  string user_id = 1;
+}
+
+message GetUserSummaryResponse {
+  UserSummary user_summary = 1;
+}
+
+message GetUserSummariesRequest {
+  repeated string user_ids = 1;
+}
+
+message GetUserSummariesResponse {
+  repeated string searched_user_ids = 1;
+
+  repeated UserSummary existing_user_summaries = 2;
+}
+
+message GetSocialSummaryRequest {
+  string user_id = 1;
+}
+
+message GetSocialSummaryResponse {
+  SocialSummary social_summary = 1;
+}
+
+message GetSocialSummariesRequest {
+  repeated string user_ids = 1;
+}
+
+message GetSocialSummariesResponse {
+  repeated SocialSummary social_summaries = 1;
+}
+
+message GetFriendProfileRequest {
+  string user_id = 1;
+}
+
+message GetFriendProfileResponse {
+  KingdomProfile friend_kingdom_profile = 1;
+}
+
+message AddFriendRequest {
+  string friend_id = 1;
+}
+
+message AddFriendResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  FriendRequest sent_request = 2;
+}
+
+message DeleteFriendRequest {
+  string friend_id = 1;
+}
+
+message DeleteFriendResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string friend_id = 2;
+}
+
+message CancelFriendRequestRequest {
+  string friend_id = 1;
+}
+
+message CancelFriendRequestResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string friend_id = 2;
+}
+
+message AcceptFriendRequestRequest {
+  string friend_id = 1;
+}
+
+message AcceptFriendRequestResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Friend added_friend = 2;
+}
+
+message RejectFriendRequestRequest {
+  string friend_id = 1;
+}
+
+message RejectFriendRequestResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string friend_id = 2;
+}
+
+message GetFriendKingdomRequest {
+  string friend_id = 1;
+}
+
+message GetFriendKingdomResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string friend_id = 2;
+
+  Kingdom kingdom = 3;
+
+  PvpSummary pvp_summary = 4;
+
+  oneof guild_summary {
+    GuildSummary guild_summary_value = 5;
+
+    ck.Empty no_guild_summary = 6;
+  }
+}
+
+message SendLikeRequest {
+  string receiver_id = 1;
+}
+
+message SendLikeResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string receiver_id = 2;
+
+  repeated Reward rewards = 3;
+
+  int64 receiver_popularity_points_delta = 4;
+
+  int32 changed_receiver_likes_count = 5;
+}
+
+message SendDailyRandomGiftRequest {
+  int32 daily_random_gift_data_id = 1;
+
+  string receiver_id = 2;
+}
+
+message SendDailyRandomGiftResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string receiver_id = 2;
+
+  repeated Reward rewards = 3;
+
+  int32 sent_daily_random_gift_count = 4;
+
+  ck.Time daily_random_gift_count_next_reset_at = 5;
+
+  ck.Time daily_random_gift_last_sent_at = 6;
+
+  int64 receiver_popularity_points = 7;
+}
+
+message SendDailyRandomGiftsRequest {
+  int32 daily_random_gift_data_id = 1;
+
+  repeated string receiver_ids = 2;
+}
+
+message SendDailyRandomGiftsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Reward rewards = 2;
+
+  int32 sent_daily_random_gift_count = 3;
+
+  ck.Time daily_random_gift_count_next_reset_at = 4;
+
+  repeated Result results = 5;
+
+  message Result {
+    string receiver_id = 1;
+
+    ck.Time daily_random_gift_last_sent_at = 2;
+
+    int64 receiver_popularity_points = 3;
+  }
+}
+
+message SendSpecialRandomGiftRequest {
+  int32 special_random_gift_data_id = 1;
+
+  string receiver_id = 2;
+}
+
+message SendSpecialRandomGiftResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string receiver_id = 2;
+
+  repeated Payment payments = 3;
+
+  repeated Reward rewards = 4;
+
+  int32 sent_special_random_gift_count = 5;
+
+  ck.Time special_random_gift_count_next_reset_at = 6;
+}
+
+message SendPopularityGiftRequest {
+  string receiver_id = 1;
+
+  int32 popularity_gift_data_id = 2;
+
+  int64 amount = 3;
+}
+
+message SendPopularityGiftResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string receiver_id = 2;
+
+  int32 popularity_gift_data_id = 3;
+
+  int64 amount = 4;
+
+  repeated Payment payments = 5;
+
+  repeated Reward rewards = 6;
+
+  int64 receiver_popularity_points = 7;
+}
+
+message GetPopularityContributionRankingRequest {
+  string target_user_id = 1;
+}
+
+message GetPopularityContributionRankingResponse {
+  string target_user_id = 1;
+
+  int64 my_score = 2;
+
+  repeated PopularityContributionRankRecord top_records = 3;
+}
+
+message GetPopularityTopRankingRequest {
+}
+
+message GetPopularityTopRankingResponse {
+  repeated PopularityRankRecord top_records = 1;
+}
+
+message GetFriendlyPvpMatchInfoRequest {
+  string opponent_user_id = 1;
+}
+
+message GetFriendlyPvpMatchInfoResponse {
+  PvpOpponentDetail opponent_detail = 1;
+}
+
+message SendFriendlyPvpMatchResultRequest {
+  string opponent_user_id = 1;
+
+  PvpBattleReport battle_report = 2;
+}
+
+message SendFriendlyPvpMatchResultResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string opponent_user_id = 2;
+}
+
+message ChangeUserVisibilityInPopularityContributionRankingRequest {
+  string target_user_id = 1;
+
+  bool is_hidden = 2;
+}
+
+message ChangeUserVisibilityInPopularityContributionRankingResponse {
+  string target_user_id = 1;
+
+  bool is_hidden = 2;
+}
+
+message ChangeOnlyFriendsCanSendGiftsRequest {
+  bool enabled = 1;
+}
+
+message ChangeOnlyFriendsCanSendGiftsResponse {
+  bool enabled = 1;
+}
+
+message GetSocialSummariesWithPvpRatingRequest {
+  PvpType pvp_type = 1;
+
+  repeated string user_ids = 2;
+}
+
+message GetSocialSummariesWithPvpRatingResponse {
+  repeated SocialSummary social_summaries = 1;
+
+  map<string, int32> ratings = 2;
+}
+
+service SocialService {
+  rpc GetSocialState ( GetSocialStateRequest ) returns ( GetSocialStateResponse );
+
+  rpc SearchUsers ( SearchUsersRequest ) returns ( SearchUsersResponse );
+
+  rpc GetRecommendedFriends ( GetRecommendedFriendsRequest ) returns ( GetRecommendedFriendsResponse );
+
+  rpc GetUserSummary ( GetUserSummaryRequest ) returns ( GetUserSummaryResponse );
+
+  rpc GetUserSummaries ( GetUserSummariesRequest ) returns ( GetUserSummariesResponse );
+
+  rpc GetSocialSummary ( GetSocialSummaryRequest ) returns ( GetSocialSummaryResponse );
+
+  rpc GetSocialSummaries ( GetSocialSummariesRequest ) returns ( GetSocialSummariesResponse );
+
+  rpc GetFriendProfile ( GetFriendProfileRequest ) returns ( GetFriendProfileResponse );
+
+  rpc AddFriend ( AddFriendRequest ) returns ( AddFriendResponse );
+
+  rpc DeleteFriend ( DeleteFriendRequest ) returns ( DeleteFriendResponse );
+
+  rpc CancelFriendRequest ( CancelFriendRequestRequest ) returns ( CancelFriendRequestResponse );
+
+  rpc AcceptFriendRequest ( AcceptFriendRequestRequest ) returns ( AcceptFriendRequestResponse );
+
+  rpc RejectFriendRequest ( RejectFriendRequestRequest ) returns ( RejectFriendRequestResponse );
+
+  rpc GetFriendKingdom ( GetFriendKingdomRequest ) returns ( GetFriendKingdomResponse );
+
+  rpc SendLike ( SendLikeRequest ) returns ( SendLikeResponse );
+
+  rpc SendDailyRandomGift ( SendDailyRandomGiftRequest ) returns ( SendDailyRandomGiftResponse );
+
+  rpc SendDailyRandomGifts ( SendDailyRandomGiftsRequest ) returns ( SendDailyRandomGiftsResponse );
+
+  rpc SendSpecialRandomGift ( SendSpecialRandomGiftRequest ) returns ( SendSpecialRandomGiftResponse );
+
+  rpc SendPopularityGift ( SendPopularityGiftRequest ) returns ( SendPopularityGiftResponse );
+
+  rpc GetPopularityContributionRanking ( GetPopularityContributionRankingRequest ) returns ( GetPopularityContributionRankingResponse );
+
+  rpc GetPopularityTopRanking ( GetPopularityTopRankingRequest ) returns ( GetPopularityTopRankingResponse );
+
+  rpc GetFriendlyPvpMatchInfo ( GetFriendlyPvpMatchInfoRequest ) returns ( GetFriendlyPvpMatchInfoResponse );
+
+  rpc SendFriendlyPvpMatchResult ( SendFriendlyPvpMatchResultRequest ) returns ( SendFriendlyPvpMatchResultResponse );
+
+  rpc ChangeUserVisibilityInPopularityContributionRanking ( ChangeUserVisibilityInPopularityContributionRankingRequest ) returns ( ChangeUserVisibilityInPopularityContributionRankingResponse );
+
+  rpc ChangeOnlyFriendsCanSendGifts ( ChangeOnlyFriendsCanSendGiftsRequest ) returns ( ChangeOnlyFriendsCanSendGiftsResponse );
+
+  rpc GetSocialSummariesWithPvpRating ( GetSocialSummariesWithPvpRatingRequest ) returns ( GetSocialSummariesWithPvpRatingResponse );
+}

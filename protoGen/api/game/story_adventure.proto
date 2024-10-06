@@ -1,0 +1,145 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message UpdateStoryAdventureEpisodeInfoRequest {
+  int32 episode_data_id = 1;
+}
+
+message UpdateStoryAdventureEpisodeInfoResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  StoryAdventureEpisode episode = 2;
+}
+
+message ClearStoryAdventureMissionRequest {
+  int32 episode_data_id = 1;
+
+  int32 mission_data_id = 2;
+}
+
+message ClearStoryAdventureMissionResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 episode_data_id = 2;
+
+  int32 mission_data_id = 3;
+
+  repeated Reward rewards = 4;
+
+  oneof new_mission {
+    StoryAdventureMission new_mission_value = 5;
+
+    ck.Empty no_new_mission = 6;
+  }
+
+  StoryAdventureDailyMissionClearState daily_mission_clear_state = 7;
+}
+
+message StartStoryAdventureTaskRequest {
+  int32 episode_data_id = 1;
+
+  int32 task_data_id = 3;
+}
+
+message StartStoryAdventureTaskResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 episode_data_id = 2;
+
+  StoryAdventureDay day = 3;
+
+  repeated Payment payments = 4;
+}
+
+message CompleteStoryAdventureTaskRequest {
+  int32 episode_data_id = 1;
+
+  int32 task_data_id = 2;
+
+  repeated int32 flag_commands = 3;
+}
+
+message CompleteStoryAdventureTaskResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 episode_data_id = 2;
+
+  StoryAdventureDay day = 3;
+
+  repeated Reward reclaimed_rewards = 4;
+
+  repeated string deleted_quest_ids = 5;
+}
+
+message MoveStoryAdventureEpisodeRequest {
+  int32 episode_data_id = 1;
+
+  int32 move_point_day_num = 2;
+}
+
+message MoveStoryAdventureEpisodeResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 episode_data_id = 2;
+
+  repeated StoryAdventureDay days = 3;
+
+  repeated Reward reclaimed_rewards = 4;
+
+  repeated string deleted_quest_ids = 5;
+}
+
+message ReceiveStoryAdventureProgressRewardRequest {
+  int32 episode_data_id = 1;
+}
+
+message ReceiveStoryAdventureProgressRewardResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 episode_data_id = 2;
+
+  repeated Reward rewards = 3;
+
+  int32 progress_reward_count = 4;
+}
+
+message CancelStoryAdventureTaskRequest {
+  int32 episode_data_id = 1;
+
+  int32 task_data_id = 2;
+}
+
+message CancelStoryAdventureTaskResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 episode_data_id = 2;
+
+  StoryAdventureDay day = 3;
+
+  repeated Reward reclaimed_rewards = 4;
+}
+
+service StoryAdventureService {
+  rpc UpdateStoryAdventureEpisodeInfo ( UpdateStoryAdventureEpisodeInfoRequest ) returns ( UpdateStoryAdventureEpisodeInfoResponse );
+
+  rpc ClearStoryAdventureMission ( ClearStoryAdventureMissionRequest ) returns ( ClearStoryAdventureMissionResponse );
+
+  rpc StartStoryAdventureTask ( StartStoryAdventureTaskRequest ) returns ( StartStoryAdventureTaskResponse );
+
+  rpc CompleteStoryAdventureTask ( CompleteStoryAdventureTaskRequest ) returns ( CompleteStoryAdventureTaskResponse );
+
+  rpc MoveStoryAdventureEpisode ( MoveStoryAdventureEpisodeRequest ) returns ( MoveStoryAdventureEpisodeResponse );
+
+  rpc ReceiveStoryAdventureProgressReward ( ReceiveStoryAdventureProgressRewardRequest ) returns ( ReceiveStoryAdventureProgressRewardResponse );
+
+  rpc CancelStoryAdventureTask ( CancelStoryAdventureTaskRequest ) returns ( CancelStoryAdventureTaskResponse );
+}

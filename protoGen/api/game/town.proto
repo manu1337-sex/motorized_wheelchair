@@ -1,0 +1,480 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message ApproveConstructionRequest {
+  string structure_id = 1;
+}
+
+message ApproveConstructionResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Structure structure = 2;
+
+  repeated Reward rewards = 4;
+}
+
+message InstantCompleteConstructionRequest {
+  string structure_id = 1;
+
+  InstantCompletionMethod instant_completion_method = 2;
+}
+
+message InstantCompleteConstructionResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Structure structure = 2;
+
+  repeated Payment payments = 4;
+
+  repeated Reward rewards = 5;
+
+  AdvertisementState advertisement_state = 6;
+}
+
+message AccelerateConstructionRequest {
+  string structure_id = 1;
+
+  map<int32, int64> time_reducer_spends = 2;
+
+  oneof viewed_advertisement {
+    ViewedAdvertisement viewed_advertisement_value = 4;
+
+    ck.Empty no_viewed_advertisement = 5;
+  }
+}
+
+message AccelerateConstructionResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Structure accelerated_structure = 2;
+
+  repeated Payment payments = 3;
+
+  AdvertisementState advertisement_state = 4;
+}
+
+message ExpandCraftQueueRequest {
+  string structure_id = 1;
+}
+
+message ExpandCraftQueueResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  Structure structure = 3;
+}
+
+message LevelUpStructureRequest {
+  string id = 1;
+
+  bool use_event_material = 2;
+}
+
+message LevelUpStructureResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Structure updated_structure = 2;
+
+  repeated Payment payments = 4;
+
+  repeated Reward rewards = 5;
+}
+
+message SupplyConstructionMaterialsRequest {
+  string structure_id = 1;
+}
+
+message SupplyConstructionMaterialsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Structure structure = 2;
+
+  repeated Payment payments = 3;
+
+  repeated Reward rewards = 4;
+}
+
+message DemolishStructureRequest {
+  string structure_id = 1;
+}
+
+message DemolishStructureResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string structure_id = 2;
+
+  repeated Reward refund_rewards = 3;
+}
+
+message EditTownRequest {
+  repeated EditCommand commands = 1;
+}
+
+message EditTownResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated TownChange town_changes = 2;
+
+  repeated Payment payments = 3;
+
+  repeated Reward rewards = 4;
+
+  map<string, string> structure_ids_by_dummy_id = 5;
+}
+
+message StartTownSegmentUnlockRequest {
+  int32 segment_data_id = 1;
+}
+
+message StartTownSegmentUnlockResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownSegmentUnlockProgress segment_unlock_progress = 2;
+
+  repeated Payment payments = 3;
+}
+
+message FinishTownSegmentUnlockRequest {
+  int32 segment_data_id = 1;
+}
+
+message FinishTownSegmentUnlockResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownSegment unlocked_segment = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message InstantCompleteTownSegmentUnlockRequest {
+  int32 segment_data_id = 1;
+
+  InstantCompletionMethod instant_completion_method = 2;
+}
+
+message InstantCompleteTownSegmentUnlockResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownSegment unlocked_segment = 2;
+
+  repeated Payment payments = 3;
+
+  repeated Reward rewards = 4;
+
+  AdvertisementState advertisement_state = 5;
+}
+
+message AccelerateTownSegmentUnlockRequest {
+  int32 segment_data_id = 1;
+
+  map<int32, int64> time_reducer_spends = 2;
+
+  oneof viewed_advertisement {
+    ViewedAdvertisement viewed_advertisement_value = 4;
+
+    ck.Empty no_viewed_advertisement = 5;
+  }
+}
+
+message AccelerateTownSegmentUnlockResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownSegmentUnlockProgress segment_unlock_progress = 2;
+
+  repeated Payment payments = 3;
+
+  AdvertisementState advertisement_state = 4;
+}
+
+message UnlockBattleTownSegmentRequest {
+  int32 segment_data_id = 1;
+}
+
+message UnlockBattleTownSegmentResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownSegment unlocked_segment = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message ReceiveCumulativeAutoProductionsRewardRequest {
+  repeated string structure_ids = 1;
+}
+
+message ReceiveCumulativeAutoProductionsRewardResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated TownChange town_changes = 2;
+
+  map<string, RewardList> rewards_by_structure_id = 3;
+
+  message RewardList {
+    repeated Reward rewards = 3;
+  }
+}
+
+message RefreshFountainProductionRewardRequest {
+  string structure_id = 1;
+}
+
+message RefreshFountainProductionRewardResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string structure_id = 2;
+
+  FountainProduction fountain_production = 3;
+}
+
+message ReceiveFountainProductionRewardRequest {
+  string structure_id = 1;
+}
+
+message ReceiveFountainProductionRewardResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string structure_id = 2;
+
+  FountainProduction fountain_production = 3;
+
+  repeated Reward rewards = 4;
+}
+
+message ReceiveLandmarkProductionRewardRequest {
+  string structure_id = 1;
+}
+
+message ReceiveLandmarkProductionRewardResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string structure_id = 2;
+
+  repeated TownChange town_changes = 3;
+
+  repeated Reward rewards = 4;
+}
+
+message ChangeAutoProductionCanActivateRequest {
+  string structure_id = 1;
+
+  bool enabled = 2;
+}
+
+message ChangeAutoProductionCanActivateResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string structure_id = 2;
+
+  AutoProduction auto_production = 3;
+}
+
+message SaveTownPresetRequest {
+  int32 preset_slot = 1;
+
+  string preset_name = 2;
+
+  bytes screenshot_binary = 3;
+}
+
+message SaveTownPresetResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownPresetRef preset_ref = 2;
+
+  string screenshot_url = 3;
+}
+
+message LoadTownPresetRequest {
+  string preset_id = 1;
+}
+
+message LoadTownPresetResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownPlacement town_placement = 2;
+
+  repeated TownChange town_changes = 5;
+
+  repeated Reward rewards = 3;
+
+  TownPresetRef preset_ref = 4;
+}
+
+message RenameTownPresetRequest {
+  string preset_id = 1;
+
+  string new_preset_name = 2;
+}
+
+message RenameTownPresetResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string preset_id = 2;
+
+  TownPresetRef new_preset_ref = 3;
+}
+
+message DeleteTownPresetRequest {
+  string preset_id = 1;
+}
+
+message DeleteTownPresetResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string preset_id = 2;
+}
+
+message ClearTownRequest {
+  bool keep_landmarks = 1;
+
+  bool keep_productions = 2;
+
+  bool keep_cookie_houses = 3;
+}
+
+message ClearTownResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  TownPlacement town_placement = 2;
+
+  repeated TownChange town_changes = 4;
+
+  repeated Reward rewards = 3;
+}
+
+message UpgradeTownPresetStorageRequest {
+}
+
+message UpgradeTownPresetStorageResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 town_preset_storage_level = 2;
+
+  repeated Payment payments = 3;
+}
+
+message SetStructureBookmarkedRequest {
+  int32 structure_data_id = 1;
+
+  bool bookmarked = 2;
+}
+
+message SetStructureBookmarkedResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 structure_data_id = 2;
+
+  bool bookmarked = 3;
+}
+
+message SetHouseIdsBookmarkedRequest {
+  repeated string house_ids = 1;
+
+  bool bookmarked = 2;
+}
+
+message SetHouseIdsBookmarkedResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated string house_ids = 2;
+
+  bool bookmarked = 3;
+}
+
+message UnlockSkyGardenIslandRequest {
+  int32 island_data_id = 1;
+}
+
+message UnlockSkyGardenIslandResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 island_data_id = 2;
+
+  repeated Payment payments = 3;
+}
+
+message GetTownPresetRequest {
+  string preset_id = 1;
+}
+
+message GetTownPresetResponse {
+  TownPreset town_preset = 1;
+
+  UserSummary owner_summary = 2;
+
+  oneof guild_summary {
+    GuildSummary guild_summary_value = 3;
+
+    ck.Empty no_guild_summary = 4;
+  }
+
+  repeated ProfileDeco selected_profile_decos = 5;
+}
+
+service TownService {
+  rpc ApproveConstruction ( ApproveConstructionRequest ) returns ( ApproveConstructionResponse );
+
+  rpc InstantCompleteConstruction ( InstantCompleteConstructionRequest ) returns ( InstantCompleteConstructionResponse );
+
+  rpc AccelerateConstruction ( AccelerateConstructionRequest ) returns ( AccelerateConstructionResponse );
+
+  rpc ExpandCraftQueue ( ExpandCraftQueueRequest ) returns ( ExpandCraftQueueResponse );
+
+  rpc LevelUpStructure ( LevelUpStructureRequest ) returns ( LevelUpStructureResponse );
+
+  rpc SupplyConstructionMaterials ( SupplyConstructionMaterialsRequest ) returns ( SupplyConstructionMaterialsResponse );
+
+  rpc DemolishStructure ( DemolishStructureRequest ) returns ( DemolishStructureResponse );
+
+  rpc EditTown ( EditTownRequest ) returns ( EditTownResponse );
+
+  rpc StartTownSegmentUnlock ( StartTownSegmentUnlockRequest ) returns ( StartTownSegmentUnlockResponse );
+
+  rpc FinishTownSegmentUnlock ( FinishTownSegmentUnlockRequest ) returns ( FinishTownSegmentUnlockResponse );
+
+  rpc InstantCompleteTownSegmentUnlock ( InstantCompleteTownSegmentUnlockRequest ) returns ( InstantCompleteTownSegmentUnlockResponse );
+
+  rpc AccelerateTownSegmentUnlock ( AccelerateTownSegmentUnlockRequest ) returns ( AccelerateTownSegmentUnlockResponse );
+
+  rpc UnlockBattleTownSegment ( UnlockBattleTownSegmentRequest ) returns ( UnlockBattleTownSegmentResponse );
+
+  rpc ReceiveCumulativeAutoProductionsReward ( ReceiveCumulativeAutoProductionsRewardRequest ) returns ( ReceiveCumulativeAutoProductionsRewardResponse );
+
+  rpc RefreshFountainProductionReward ( RefreshFountainProductionRewardRequest ) returns ( RefreshFountainProductionRewardResponse );
+
+  rpc ReceiveFountainProductionReward ( ReceiveFountainProductionRewardRequest ) returns ( ReceiveFountainProductionRewardResponse );
+
+  rpc ReceiveLandmarkProductionReward ( ReceiveLandmarkProductionRewardRequest ) returns ( ReceiveLandmarkProductionRewardResponse );
+
+  rpc ChangeAutoProductionCanActivate ( ChangeAutoProductionCanActivateRequest ) returns ( ChangeAutoProductionCanActivateResponse );
+
+  rpc SaveTownPreset ( SaveTownPresetRequest ) returns ( SaveTownPresetResponse );
+
+  rpc LoadTownPreset ( LoadTownPresetRequest ) returns ( LoadTownPresetResponse );
+
+  rpc RenameTownPreset ( RenameTownPresetRequest ) returns ( RenameTownPresetResponse );
+
+  rpc DeleteTownPreset ( DeleteTownPresetRequest ) returns ( DeleteTownPresetResponse );
+
+  rpc ClearTown ( ClearTownRequest ) returns ( ClearTownResponse );
+
+  rpc UpgradeTownPresetStorage ( UpgradeTownPresetStorageRequest ) returns ( UpgradeTownPresetStorageResponse );
+
+  rpc SetStructureBookmarked ( SetStructureBookmarkedRequest ) returns ( SetStructureBookmarkedResponse );
+
+  rpc SetHouseIdsBookmarked ( SetHouseIdsBookmarkedRequest ) returns ( SetHouseIdsBookmarkedResponse );
+
+  rpc UnlockSkyGardenIsland ( UnlockSkyGardenIslandRequest ) returns ( UnlockSkyGardenIslandResponse );
+
+  rpc GetTownPreset ( GetTownPresetRequest ) returns ( GetTownPresetResponse );
+}

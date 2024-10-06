@@ -1,0 +1,369 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message UpdatePvpRequest {
+  PvpType pvp_type = 1;
+}
+
+message UpdatePvpResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Pvp pvp = 2;
+
+  bool is_activated_now = 3;
+
+  bool is_season_notified_now = 4;
+
+  PvpType pvp_type = 5;
+}
+
+message GetPvpOpponentForRevengeRequest {
+  string user_id = 1;
+
+  string defense_record_id = 2;
+}
+
+message GetPvpOpponentForRevengeResponse {
+  PvpOpponent opponent = 1;
+}
+
+message ResetPvpOpponentPoolRequest {
+  PvpOpponentPoolResetMethod method = 1;
+
+  PvpType pvp_type = 2;
+}
+
+message ResetPvpOpponentPoolResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  PvpOpponentPool opponent_pool = 3;
+
+  PvpOpponentPoolResetWithCrystalCount pvp_opponent_pool_reset_with_crystal_count = 4;
+
+  PvpType pvp_type = 5;
+}
+
+message GetPvpDefenseRecordsRequest {
+}
+
+message GetPvpDefenseRecordsResponse {
+  repeated PvpDefenseRecord records = 1;
+}
+
+message ChangePvpDefenseDeckRequest {
+  PvpDefenseDeck defense_deck = 1;
+}
+
+message ChangePvpDefenseDeckResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  PvpDefenseDeck defense_deck = 2;
+}
+
+message StartPvpBattleRequest {
+  PvpBattleKind battle_kind = 1;
+
+  int32 battle_team_index = 2;
+
+  PvpOpponentId opponent_id = 3;
+
+  PvpType pvp_type = 4;
+
+  oneof spec_adjustment_group_data_id {
+    int32 spec_adjustment_group_data_id_value = 5;
+
+    ck.Empty no_spec_adjustment_group_data_id = 6;
+  }
+}
+
+message StartPvpBattleResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  OngoingPvpBattle ongoing_battle = 2;
+
+  BattleTeamDetail team_detail = 3;
+
+  repeated Payment payments = 4;
+
+  int32 my_rank = 5;
+
+  int32 opponent_rank = 6;
+
+  int32 battle_team_index = 7;
+
+  PvpType pvp_type = 8;
+}
+
+message PreFinishPvpBattleRequest {
+  string battle_id = 1;
+
+  PvpBattleReport battle_report = 2;
+
+  PvpType pvp_type = 3;
+}
+
+message PreFinishPvpBattleResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string battle_id = 2;
+}
+
+message FinishPvpBattleRequest {
+  string battle_id = 1;
+
+  PvpBattleReport battle_report = 2;
+
+  bool is_restoration = 3;
+
+  PvpType pvp_type = 4;
+
+  oneof best_play_cookie_data_id {
+    int32 best_play_cookie_data_id_value = 5;
+
+    ck.Empty no_best_play_cookie_data_id = 6;
+  }
+
+  bool is_skip = 7;
+}
+
+message FinishPvpBattleResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string finished_battle_id = 2;
+
+  int32 rating = 3;
+
+  int32 rating_delta = 4;
+
+  repeated Reward rewards = 5;
+
+  bool red_flag = 8;
+
+  PvpType pvp_type = 9;
+
+  oneof master_league_info {
+    MasterLeagueInformation master_league_information_value = 6;
+
+    ck.Empty no_master_league_information = 7;
+  }
+
+  int32 winning_streak_bonus = 10;
+
+  message MasterLeagueInformation {
+    double master_league_top_ratio = 1;
+
+    int32 master_league_rank = 2;
+
+    int32 master_league_rank_delta = 3;
+
+    bool is_master_league_new = 4;
+  }
+}
+
+message CheckPvpTierChangeNotificationRequest {
+  PvpType pvp_type = 1;
+}
+
+message CheckPvpTierChangeNotificationResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Reward tier_rewards = 2;
+
+  int32 max_rewarded_tier = 3;
+
+  int32 max_rewardable_tier = 4;
+
+  int32 last_notified_tier = 5;
+
+  PvpType pvp_type = 6;
+}
+
+message CheckPvpSeasonResultRequest {
+  int32 pvp_season_data_id = 1;
+
+  PvpType pvp_type = 2;
+}
+
+message CheckPvpSeasonResultResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 pvp_season_data_id = 2;
+
+  repeated Reward rewards = 3;
+
+  PvpType pvp_type = 4;
+
+  repeated Reward guild_rewards = 5;
+}
+
+message GetPvpRankingRequest {
+  int32 offset = 1;
+
+  int32 limit = 2;
+
+  PvpType pvp_type = 3;
+
+  oneof pvp_season_data_id_opt {
+    int32 pvp_season_data_id = 4;
+
+    ck.Empty no_pvp_season_data_id = 5;
+  }
+}
+
+message GetPvpRankingResponse {
+  PvpRankRecord my_record = 1;
+
+  repeated PvpRankRecord top_records = 2;
+
+  PvpType pvp_type = 3;
+}
+
+message GetMyPvpGuildRankingRequest {
+  PvpType pvp_type = 1;
+
+  int32 pvp_season_data_id = 2;
+
+  string guild_id = 3;
+}
+
+message GetMyPvpGuildRankingResponse {
+  PvpGuildRankRecord my_record_value = 1;
+
+  PvpType pvp_type = 2;
+}
+
+message GetPvpGuildRankingRequest {
+  int32 offset = 1;
+
+  int32 limit = 2;
+
+  PvpType pvp_type = 3;
+
+  oneof pvp_season_data_id_opt {
+    int32 pvp_season_data_id = 4;
+
+    ck.Empty no_pvp_season_data_id = 5;
+  }
+}
+
+message GetPvpGuildRankingResponse {
+  oneof my_record {
+    PvpGuildRankRecord my_record_value = 1;
+
+    ck.Empty no_my_record = 2;
+  }
+
+  repeated PvpGuildRankRecord top_records = 3;
+
+  PvpType pvp_type = 4;
+}
+
+message GetPvpHallOfFameRequest {
+  int32 pvp_season_data_id = 1;
+}
+
+message GetPvpHallOfFameResponse {
+  oneof my_record {
+    PvpHallOfFameRecord my_record_value = 1;
+
+    ck.Empty no_my_record = 2;
+  }
+
+  repeated PvpHallOfFameRecord top_records = 3;
+
+  int32 pvp_season_data_id = 4;
+}
+
+message GetPvpAnalyticsDeckRankingRequest {
+  int32 pvp_season_data_id = 1;
+
+  PvpAnalyticsDeckType pvp_analytics_deck_type = 2;
+
+  int32 limit = 3;
+}
+
+message GetPvpAnalyticsDeckRankingResponse {
+  int32 pvp_season_data_id = 1;
+
+  PvpAnalyticsDeckType pvp_analytics_deck_type = 2;
+
+  repeated PvpAnalyticsDeck pvp_analytics_decks = 3;
+}
+
+message GetPvpAnalyticsCookieRankingRequest {
+  int32 pvp_season_data_id = 1;
+}
+
+message GetPvpAnalyticsCookieRankingResponse {
+  int32 pvp_season_data_id = 1;
+
+  repeated PvpAnalyticsCookie pvp_analytics_cookies = 2;
+}
+
+message GetPvpPracticeInfoRequest {
+}
+
+message GetPvpPracticeInfoResponse {
+  PvpOpponentDetail opponent_detail = 1;
+}
+
+message CheckCurrentSeasonNotificationRequest {
+  PvpType pvp_type = 1;
+}
+
+message CheckCurrentSeasonNotificationResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  bool is_season_notified = 2;
+
+  PvpType pvp_type = 3;
+}
+
+service PvpService {
+  rpc UpdatePvp ( UpdatePvpRequest ) returns ( UpdatePvpResponse );
+
+  rpc GetPvpOpponentForRevenge ( GetPvpOpponentForRevengeRequest ) returns ( GetPvpOpponentForRevengeResponse );
+
+  rpc ResetPvpOpponentPool ( ResetPvpOpponentPoolRequest ) returns ( ResetPvpOpponentPoolResponse );
+
+  rpc GetPvpDefenseRecords ( GetPvpDefenseRecordsRequest ) returns ( GetPvpDefenseRecordsResponse );
+
+  rpc ChangePvpDefenseDeck ( ChangePvpDefenseDeckRequest ) returns ( ChangePvpDefenseDeckResponse );
+
+  rpc StartPvpBattle ( StartPvpBattleRequest ) returns ( StartPvpBattleResponse );
+
+  rpc PreFinishPvpBattle ( PreFinishPvpBattleRequest ) returns ( PreFinishPvpBattleResponse );
+
+  rpc FinishPvpBattle ( FinishPvpBattleRequest ) returns ( FinishPvpBattleResponse );
+
+  rpc CheckPvpTierChangeNotification ( CheckPvpTierChangeNotificationRequest ) returns ( CheckPvpTierChangeNotificationResponse );
+
+  rpc CheckPvpSeasonResult ( CheckPvpSeasonResultRequest ) returns ( CheckPvpSeasonResultResponse );
+
+  rpc GetPvpRanking ( GetPvpRankingRequest ) returns ( GetPvpRankingResponse );
+
+  rpc GetMyPvpGuildRanking ( GetMyPvpGuildRankingRequest ) returns ( GetMyPvpGuildRankingResponse );
+
+  rpc GetPvpGuildRanking ( GetPvpGuildRankingRequest ) returns ( GetPvpGuildRankingResponse );
+
+  rpc GetPvpHallOfFame ( GetPvpHallOfFameRequest ) returns ( GetPvpHallOfFameResponse );
+
+  rpc GetPvpAnalyticsDeckRanking ( GetPvpAnalyticsDeckRankingRequest ) returns ( GetPvpAnalyticsDeckRankingResponse );
+
+  rpc GetPvpAnalyticsCookieRanking ( GetPvpAnalyticsCookieRankingRequest ) returns ( GetPvpAnalyticsCookieRankingResponse );
+
+  rpc GetPvpPracticeInfo ( GetPvpPracticeInfoRequest ) returns ( GetPvpPracticeInfoResponse );
+
+  rpc CheckCurrentSeasonNotification ( CheckCurrentSeasonNotificationRequest ) returns ( CheckCurrentSeasonNotificationResponse );
+}

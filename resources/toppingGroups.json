@@ -1,0 +1,144 @@
+{
+    "ToppingGroups": [
+        {
+            "ToppingGroupID": 1732225444,
+            "Order": 1,
+            "PassiveType": "AttackPointRatio",
+            "Description": {
+                "Key": "ToppingGroup.Description.1732225444",
+                "OriginalText": "공격력"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1732225444",
+                "OriginalText": "라즈베리"
+            },
+            "ToppingTagBackgroundColor": "#A92216"
+        },
+        {
+            "ToppingGroupID": 1879933274,
+            "Order": 2,
+            "PassiveType": "DefencePointRatio",
+            "Description": {
+                "Key": "ToppingGroup.Description.1879933274",
+                "OriginalText": "방어력"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1879933274",
+                "OriginalText": "호두"
+            },
+            "ToppingTagBackgroundColor": "#788EF6"
+        },
+        {
+            "ToppingGroupID": 1684136807,
+            "Order": 3,
+            "PassiveType": "HealthPointRatio",
+            "Description": {
+                "Key": "ToppingGroup.Description.1684136807",
+                "OriginalText": "체력"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1684136807",
+                "OriginalText": "땅콩"
+            },
+            "ToppingTagBackgroundColor": "#51C7D9"
+        },
+        {
+            "ToppingGroupID": 1145128577,
+            "Order": 4,
+            "PassiveType": "AttackSpeed",
+            "Description": {
+                "Key": "ToppingGroup.Description.1145128577",
+                "OriginalText": "공격속도"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1145128577",
+                "OriginalText": "캐러멜"
+            },
+            "ToppingTagBackgroundColor": "#FE824C"
+        },
+        {
+            "ToppingGroupID": 1554757734,
+            "Order": 5,
+            "PassiveType": "CriticalRate",
+            "Description": {
+                "Key": "ToppingGroup.Description.1554757734",
+                "OriginalText": "치명타 확률"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1554757734",
+                "OriginalText": "애플젤리"
+            },
+            "ToppingTagBackgroundColor": "#3F841E"
+        },
+        {
+            "ToppingGroupID": 2061896720,
+            "Order": 6,
+            "PassiveType": "Cooltime",
+            "Description": {
+                "Key": "ToppingGroup.Description.2061896720",
+                "OriginalText": "쿨타임"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.2061896720",
+                "OriginalText": "초콜렛칩"
+            },
+            "ToppingTagBackgroundColor": "#912CB6"
+        },
+        {
+            "ToppingGroupID": 2065926906,
+            "Order": 7,
+            "PassiveType": "DamageReduceRatio",
+            "Description": {
+                "Key": "ToppingGroup.Description.2065926906",
+                "OriginalText": "피해감소"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.2065926906",
+                "OriginalText": "아몬드"
+            },
+            "ToppingTagBackgroundColor": "#A36038"
+        },
+        {
+            "ToppingGroupID": 1615258860,
+            "Order": 8,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "Description": {
+                "Key": "ToppingGroup.Description.1615258860",
+                "OriginalText": "치명타 피해감소"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1615258860",
+                "OriginalText": "헤이즐넛"
+            },
+            "ToppingTagBackgroundColor": "#EEC076"
+        },
+        {
+            "ToppingGroupID": 1940317439,
+            "Order": 9,
+            "PassiveType": "BuffIncrease",
+            "Description": {
+                "Key": "ToppingGroup.Description.1940317439",
+                "OriginalText": "이로운 효과 증가"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1940317439",
+                "OriginalText": "초코캔디"
+            },
+            "ToppingTagBackgroundColor": "#3E8BF7"
+        },
+        {
+            "ToppingGroupID": 1862165955,
+            "Order": 10,
+            "PassiveType": "DebuffDecrease",
+            "Description": {
+                "Key": "ToppingGroup.Description.1862165955",
+                "OriginalText": "해로운 효과 감소"
+            },
+            "GroupDescription": {
+                "Key": "ToppingGroup.GroupDescription.1862165955",
+                "OriginalText": "키위"
+            },
+            "ToppingTagBackgroundColor": "#DDD947"
+        }
+    ]
+}

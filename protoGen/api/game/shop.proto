@@ -1,0 +1,644 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message GetHistoriesRequest {
+  HistoryType history_type = 1;
+
+  enum HistoryType {
+    GACHA = 0;
+
+    COOKIE_LOOK_COMPOSITION = 1;
+  }
+}
+
+message GetHistoriesResponse {
+  oneof histories_result {
+    Gacha gacha_histories = 1;
+
+    CookieLookComposition cookie_look_composition_histories = 2;
+  }
+
+  message Gacha {
+    repeated GachaHistory histories = 1;
+  }
+
+  message CookieLookComposition {
+    repeated CookieLookCompositionHistory histories = 1;
+  }
+}
+
+message PurchaseSummonRequest {
+  int32 summon_data_id = 1;
+
+  oneof purchase_method {
+    int32 price_index = 2;
+
+    ck.Empty free = 3;
+  }
+
+  oneof gacha_at_once {
+    int32 count = 4;
+
+    ck.Empty no_count = 5;
+  }
+
+  oneof summon_report {
+    SummonReportForClient summon_report_value = 6;
+
+    ck.Empty no_summon_report = 7;
+  }
+}
+
+message PurchaseSummonResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+
+  repeated Reward bonus_rewards = 6;
+
+  oneof free_summon {
+    FreeSummon free_summon_value = 4;
+
+    ck.Empty no_free_summon = 5;
+  }
+
+  SummonStates summon_states = 7;
+}
+
+message UpdateItemShopRequest {
+  repeated int32 item_shop_data_ids = 1;
+}
+
+message UpdateItemShopResponse {
+  repeated ItemShop item_shops = 1;
+}
+
+message ResetItemShopManuallyRequest {
+  int32 item_shop_data_id = 1;
+
+  bool is_free_reset_method = 2;
+}
+
+message ResetItemShopManuallyResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  ItemShop item_shop = 3;
+}
+
+message PurchaseItemShopSlotRequest {
+  string slot_id = 1;
+
+  int32 item_shop_data_id = 2;
+
+  int32 amount = 3;
+}
+
+message PurchaseItemShopSlotResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+
+  ItemShop item_shop = 4;
+}
+
+message PurchaseMileageItemRequest {
+  int32 mileage_shop_data_id = 3;
+
+  int32 shop_item_data_id = 1;
+
+  int32 amount = 2;
+}
+
+message PurchaseMileageItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message PurchasePackageRequest {
+  int32 package_data_id = 1;
+
+  repeated RewardSelection reward_selections = 3;
+
+  BillingInfo billing_info = 2;
+
+  oneof package_report {
+    PackageReportForClient package_report_value = 4;
+
+    ck.Empty no_package_report = 5;
+  }
+}
+
+message PurchasePackageResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  PackageState updated_package_state = 2;
+
+  repeated Payment payments = 3;
+
+  repeated RandomRewardsWithDataId random_rewards = 4;
+
+  repeated Reward non_random_rewards = 6;
+
+  VerifiedBillingInfo verified_billing_info = 5;
+
+  repeated ShoppingBoxRewardCount updated_shopping_box_reward_counts = 7;
+
+  message RandomRewardsWithDataId {
+    int32 random_reward_data_id = 1;
+
+    repeated Reward random_rewards = 2;
+  }
+}
+
+message RegisterShownPackagePopupRequest {
+  repeated int32 package_data_ids = 1;
+}
+
+message RegisterShownPackagePopupResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated PackageState updated_package_states = 2;
+}
+
+message ClearPackageMissionRequest {
+  int32 package_data_id = 1;
+
+  int32 mission_data_id = 2;
+}
+
+message ClearPackageMissionResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 mission_data_id = 2;
+
+  PackageState updated_package_state = 3;
+
+  repeated Reward rewards = 4;
+}
+
+message ClearPackageMissionsGroupsRequest {
+  repeated MissionsGroup missions_groups = 1;
+
+  message MissionsGroup {
+    int32 package_data_id = 1;
+
+    repeated int32 mission_data_ids = 2;
+  }
+}
+
+message ClearPackageMissionsGroupsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated ClearedMissionsGroup cleared_missions_groups = 2;
+
+  message ClearedMission {
+    int32 mission_data_id = 1;
+
+    repeated Reward rewards = 2;
+  }
+
+  message ClearedMissionsGroup {
+    PackageState updated_package_state = 1;
+
+    repeated ClearedMission cleared_missions = 2;
+  }
+}
+
+message ReceivePackageBonusRequest {
+  int32 package_data_id = 1;
+
+  int32 package_bonus_data_id = 2;
+
+  oneof package_bonus_type {
+    Serial serial = 3;
+
+    Selectable selectable = 4;
+  }
+
+  message Serial {
+    int32 purchase_count_in_repeat = 1;
+  }
+
+  message Selectable {
+    int32 order_for_selectable = 1;
+  }
+}
+
+message ReceivePackageBonusResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  PackageState updated_package_state = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message ReceiveAccumulatedBonusRequest {
+  int32 accumulated_bonus_data_id = 1;
+}
+
+message ReceiveAccumulatedBonusResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated int32 received_accumulated_bonus_data_ids = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message PurchaseInsufficientItemsRequest {
+  repeated Command commands = 1;
+
+  message Command {
+    int32 item_data_id = 1;
+
+    int64 amount = 2;
+  }
+}
+
+message PurchaseInsufficientItemsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message ChargeItemRequest {
+  int32 item_data_id = 1;
+
+  oneof viewed_advertisement {
+    ViewedAdvertisement viewed_advertisement_value = 2;
+
+    ck.Empty no_viewed_advertisement = 3;
+  }
+}
+
+message ChargeItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  DailyPurchaseLimitState changed_limit_state = 2;
+
+  repeated Payment payments = 3;
+
+  repeated Reward rewards = 4;
+
+  AdvertisementState advertisement_state = 5;
+}
+
+message PurchaseCurrencyRequest {
+  int32 currency_data_id = 1;
+
+  BillingInfo billing_info = 2;
+}
+
+message PurchaseCurrencyResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Reward rewards = 2;
+
+  repeated Payment payments = 3;
+
+  int32 purchased_currency_data_id = 4;
+
+  VerifiedBillingInfo verified_billing_info = 5;
+}
+
+message PurchaseFlatRequest {
+  int32 flat_data_id = 1;
+
+  BillingInfo billing_info = 2;
+}
+
+message PurchaseFlatResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  FlatSubscription updated_subscription = 2;
+
+  repeated Reward daily_rewards = 3;
+
+  repeated Reward bonus_rewards = 4;
+
+  VerifiedBillingInfo verified_billing_info = 5;
+}
+
+message ReceiveFlatDailyRewardsRequest {
+  int32 flat_data_id = 1;
+}
+
+message ReceiveFlatDailyRewardsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  FlatSubscription updated_subscription = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message PurchaseKingdomPassRequest {
+  int32 kingdom_pass_data_id = 1;
+
+  BillingInfo billing_info = 2;
+}
+
+message PurchaseKingdomPassResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  KingdomPass kingdom_pass = 2;
+
+  repeated Reward bonus_rewards = 3;
+
+  VerifiedBillingInfo verified_billing_info = 4;
+}
+
+message CompleteStructureThemeRequest {
+  int32 structure_theme_data_id = 1;
+}
+
+message CompleteStructureThemeResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Reward rewards = 2;
+
+  int32 completed_structure_theme_data_id = 3;
+}
+
+message UnlockTileRequest {
+  int32 tile_data_id = 2;
+}
+
+message UnlockTileResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 unlocked_tile_data_id = 2;
+
+  repeated Payment payments = 3;
+}
+
+message UnlockStructureSkinRequest {
+  int32 structure_skin_data_id = 1;
+}
+
+message UnlockStructureSkinResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 unlocked_structure_skin_data_id = 2;
+
+  repeated Payment payments = 3;
+}
+
+message UnlockTownBackgroundSkinRequest {
+  int32 town_background_skin_data_id = 1;
+}
+
+message UnlockTownBackgroundSkinResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 unlocked_town_background_skin_data_id = 2;
+
+  repeated Payment payments = 3;
+}
+
+message ReceiveAllExternalStoreUnrelatedRewardsRequest {
+}
+
+message ReceiveAllExternalStoreUnrelatedRewardsResponse {
+  int64 number_of_rewarded_mail = 1;
+}
+
+message ReceiveExternalStoreRelatedRewardRequest {
+  int32 external_event_reward_data_id = 1;
+
+  BillingInfo billing_info = 2;
+}
+
+message ReceiveExternalStoreRelatedRewardResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 external_event_reward_data_id = 2;
+
+  oneof rewards {
+    InstantRewards instant_rewards = 3;
+
+    ck.Empty sent_to_mail_box = 4;
+  }
+
+  VerifiedBillingInfo verified_billing_info = 5;
+
+  message InstantRewards {
+    repeated Reward rewards = 1;
+  }
+}
+
+message VerifyBillingInfoRequest {
+  BillingInfo billing_info = 1;
+}
+
+message VerifyBillingInfoResponse {
+  BillingInfo billing_info = 1;
+}
+
+message ExchangeItemRequest {
+  int32 price_item_data_id = 1;
+
+  int64 exchange_amount = 2;
+}
+
+message ExchangeItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Payment payment = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message RewardSelectableBoxRequest {
+  int32 box_data_id = 1;
+
+  repeated int32 selected_item_data_ids = 2;
+
+  int32 repeat_count = 3;
+}
+
+message RewardSelectableBoxResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message GetRewardBoxRatesRequest {
+  repeated int32 reward_box_data_ids = 1;
+}
+
+message GetRewardBoxRatesResponse {
+  repeated SummonRates summon_rates = 1;
+}
+
+message GetUserSummonRatesRequest {
+  repeated int32 summon_data_ids = 1;
+}
+
+message GetUserSummonRatesResponse {
+  repeated SummonRates summon_rates = 1;
+}
+
+message UpdateGachaPickupGroupsRequest {
+  repeated GachaPickupGroup gacha_pickup_groups = 1;
+}
+
+message UpdateGachaPickupGroupsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  GachaPickupGroups gacha_pickup_groups = 2;
+}
+
+message ExchangeItemsToAcornRequest {
+  repeated Payment payment_items = 1;
+
+  message Payment {
+    int32 data_id = 1;
+
+    int32 quantity = 2;
+  }
+}
+
+message ExchangeItemsToAcornResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message CloseItemShopRequest {
+  int32 item_shop_data_id = 1;
+}
+
+message CloseItemShopResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 item_shop_data_id = 2;
+
+  repeated Payment payments = 3;
+
+  repeated Reward rewards = 4;
+}
+
+message OpenUsableRandomRewardBoxRequest {
+  int32 box_data_id = 1;
+
+  int32 repeat_count = 2;
+}
+
+message OpenUsableRandomRewardBoxResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message ReceiveGachaStepRewardsRequest {
+  int32 summon_group_data_id = 1;
+
+  oneof target {
+    int32 step_group = 2;
+
+    int32 summon_reward_step_data_id = 3;
+  }
+}
+
+message ReceiveGachaStepRewardsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Reward rewards = 2;
+
+  SummonStates summon_states = 3;
+}
+
+service ShopService {
+  rpc GetHistories ( GetHistoriesRequest ) returns ( GetHistoriesResponse );
+
+  rpc PurchaseSummon ( PurchaseSummonRequest ) returns ( PurchaseSummonResponse );
+
+  rpc UpdateItemShop ( UpdateItemShopRequest ) returns ( UpdateItemShopResponse );
+
+  rpc ResetItemShopManually ( ResetItemShopManuallyRequest ) returns ( ResetItemShopManuallyResponse );
+
+  rpc PurchaseItemShopSlot ( PurchaseItemShopSlotRequest ) returns ( PurchaseItemShopSlotResponse );
+
+  rpc PurchaseMileageItem ( PurchaseMileageItemRequest ) returns ( PurchaseMileageItemResponse );
+
+  rpc PurchasePackage ( PurchasePackageRequest ) returns ( PurchasePackageResponse );
+
+  rpc RegisterShownPackagePopup ( RegisterShownPackagePopupRequest ) returns ( RegisterShownPackagePopupResponse );
+
+  rpc ClearPackageMission ( ClearPackageMissionRequest ) returns ( ClearPackageMissionResponse );
+
+  rpc ClearPackageMissionsGroups ( ClearPackageMissionsGroupsRequest ) returns ( ClearPackageMissionsGroupsResponse );
+
+  rpc ReceivePackageBonus ( ReceivePackageBonusRequest ) returns ( ReceivePackageBonusResponse );
+
+  rpc ReceiveAccumulatedBonus ( ReceiveAccumulatedBonusRequest ) returns ( ReceiveAccumulatedBonusResponse );
+
+  rpc PurchaseInsufficientItems ( PurchaseInsufficientItemsRequest ) returns ( PurchaseInsufficientItemsResponse );
+
+  rpc ChargeItem ( ChargeItemRequest ) returns ( ChargeItemResponse );
+
+  rpc PurchaseCurrency ( PurchaseCurrencyRequest ) returns ( PurchaseCurrencyResponse );
+
+  rpc PurchaseFlat ( PurchaseFlatRequest ) returns ( PurchaseFlatResponse );
+
+  rpc ReceiveFlatDailyRewards ( ReceiveFlatDailyRewardsRequest ) returns ( ReceiveFlatDailyRewardsResponse );
+
+  rpc PurchaseKingdomPass ( PurchaseKingdomPassRequest ) returns ( PurchaseKingdomPassResponse );
+
+  rpc CompleteStructureTheme ( CompleteStructureThemeRequest ) returns ( CompleteStructureThemeResponse );
+
+  rpc UnlockTile ( UnlockTileRequest ) returns ( UnlockTileResponse );
+
+  rpc UnlockStructureSkin ( UnlockStructureSkinRequest ) returns ( UnlockStructureSkinResponse );
+
+  rpc UnlockTownBackgroundSkin ( UnlockTownBackgroundSkinRequest ) returns ( UnlockTownBackgroundSkinResponse );
+
+  rpc ReceiveAllExternalStoreUnrelatedRewards ( ReceiveAllExternalStoreUnrelatedRewardsRequest ) returns ( ReceiveAllExternalStoreUnrelatedRewardsResponse );
+
+  rpc ReceiveExternalStoreRelatedReward ( ReceiveExternalStoreRelatedRewardRequest ) returns ( ReceiveExternalStoreRelatedRewardResponse );
+
+  rpc VerifyBillingInfo ( VerifyBillingInfoRequest ) returns ( VerifyBillingInfoResponse );
+
+  rpc ExchangeItem ( ExchangeItemRequest ) returns ( ExchangeItemResponse );
+
+  rpc RewardSelectableBox ( RewardSelectableBoxRequest ) returns ( RewardSelectableBoxResponse );
+
+  rpc GetRewardBoxRates ( GetRewardBoxRatesRequest ) returns ( GetRewardBoxRatesResponse );
+
+  rpc GetUserSummonRates ( GetUserSummonRatesRequest ) returns ( GetUserSummonRatesResponse );
+
+  rpc UpdateGachaPickupGroups ( UpdateGachaPickupGroupsRequest ) returns ( UpdateGachaPickupGroupsResponse );
+
+  rpc ExchangeItemsToAcorn ( ExchangeItemsToAcornRequest ) returns ( ExchangeItemsToAcornResponse );
+
+  rpc CloseItemShop ( CloseItemShopRequest ) returns ( CloseItemShopResponse );
+
+  rpc OpenUsableRandomRewardBox ( OpenUsableRandomRewardBoxRequest ) returns ( OpenUsableRandomRewardBoxResponse );
+
+  rpc ReceiveGachaStepRewards ( ReceiveGachaStepRewardsRequest ) returns ( ReceiveGachaStepRewardsResponse );
+}

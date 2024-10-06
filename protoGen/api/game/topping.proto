@@ -1,0 +1,273 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message TransferToppingRequest {
+  string moved_topping_id = 1;
+
+  int32 giver_cookie_data_id = 2;
+
+  int32 giver_cookie_preset_slot_index = 3;
+
+  int32 giver_cookie_topping_slot_index = 4;
+
+  int32 receiver_cookie_data_id = 5;
+
+  int32 receiver_cookie_preset_slot_index = 6;
+
+  int32 receiver_cookie_topping_slot_index = 7;
+}
+
+message TransferToppingResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Topping moved_topping = 2;
+
+  ToppingOptional receiver_preexisting_topping = 3;
+
+  repeated Payment receiver_unequip_payments = 4;
+
+  repeated Payment giver_unequip_payments = 5;
+}
+
+message EquipToppingRequest {
+  TargetTopping topping = 1;
+
+  int32 cookie_data_id = 2;
+
+  int32 preset_slot_index = 3;
+
+  int32 topping_slot_index = 4;
+}
+
+message EquipToppingResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Topping topping = 2;
+
+  ToppingOptional preexisting_topping = 3;
+
+  repeated Payment unequip_payments = 4;
+
+  PaymentOptional vanilla_topping_payment = 5;
+}
+
+message UnequipToppingRequest {
+  int32 cookie_data_id = 1;
+
+  int32 preset_slot_index = 2;
+
+  int32 topping_slot_index = 3;
+}
+
+message UnequipToppingResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Topping topping = 2;
+
+  repeated Payment payments = 3;
+}
+
+message UpgradeToppingRequest {
+  TargetTopping topping = 1;
+
+  bool is_auto = 2;
+}
+
+message UpgradeToppingResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Topping topping = 2;
+
+  repeated Payment payments = 3;
+
+  PaymentOptional vanilla_topping_payment = 4;
+
+  bool is_success = 5;
+}
+
+message DisassembleToppingsRequest {
+  repeated string topping_ids = 1;
+
+  map<int32, int64> vanilla_toppings = 2;
+}
+
+message DisassembleToppingsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+
+  repeated ToppingCombinationSlot changed_topping_combinations = 4;
+}
+
+message MarkToppingRequest {
+  TargetTopping topping = 1;
+
+  FavoriteMarker marker = 2;
+}
+
+message MarkToppingResponse {
+  Topping topping = 1;
+
+  PaymentOptional vanilla_topping_payment = 3;
+
+  KingdomAdditionalEvents additional_events = 4;
+}
+
+message UnmarkToppingRequest {
+  string topping_id = 1;
+}
+
+message UnmarkToppingResponse {
+  Topping topping = 1;
+
+  KingdomAdditionalEvents additional_events = 3;
+}
+
+message SaveToppingCombinationRequest {
+  int32 combination_slot_data_id = 1;
+
+  string name = 2;
+
+  int32 cookie_data_id = 3;
+
+  int32 preset_slot_index = 4;
+}
+
+message SaveToppingCombinationResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  ToppingCombinationSlot saved_slot = 2;
+}
+
+message LoadToppingCombinationRequest {
+  int32 combination_slot_data_id = 1;
+
+  int32 cookie_data_id = 2;
+
+  int32 preset_slot_index = 3;
+}
+
+message LoadToppingCombinationResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Topping equipped_toppings = 2;
+
+  repeated Topping detached_toppings = 3;
+
+  repeated Payment payments = 4;
+}
+
+message ChangeToppingCombinationSlotNameRequest {
+  int32 combination_slot_data_id = 1;
+
+  string name = 2;
+}
+
+message ChangeToppingCombinationSlotNameResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 combination_slot_data_id = 2;
+
+  string name = 3;
+}
+
+message UnlockToppingCombinationSlotRequest {
+  int32 combination_slot_data_id = 1;
+}
+
+message UnlockToppingCombinationSlotResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  ToppingCombinationSlot unlocked_slot = 2;
+
+  repeated Payment payments = 3;
+}
+
+message UpgradeToppingsAtOnceRequest {
+  repeated TargetTopping toppings = 1;
+
+  int32 target_grade = 2;
+}
+
+message ToppingUpgradeResults {
+  repeated bool results = 1;
+}
+
+message UpgradeToppingsAtOnceResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Topping toppings = 2;
+
+  int32 step = 3;
+
+  ToppingBatchUpgradeEndCause end_cause = 4;
+
+  repeated Payment payments = 5;
+
+  repeated Payment vanilla_topping_payments = 6;
+
+  map<string, ToppingUpgradeResults> result_per_step = 7;
+}
+
+message ResetToppingCombinationSlotRequest {
+  int32 combination_slot_data_id = 1;
+}
+
+message ResetToppingCombinationSlotResponse {
+  ToppingCombinationSlot combination_slot = 1;
+}
+
+message ResetEquippedToppingsRequest {
+  int32 cookie_data_id = 1;
+
+  int32 preset_slot_index = 2;
+}
+
+message ResetEquippedToppingsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Topping toppings = 2;
+
+  repeated Payment payments = 3;
+}
+
+service ToppingService {
+  rpc TransferTopping ( TransferToppingRequest ) returns ( TransferToppingResponse );
+
+  rpc EquipTopping ( EquipToppingRequest ) returns ( EquipToppingResponse );
+
+  rpc UnequipTopping ( UnequipToppingRequest ) returns ( UnequipToppingResponse );
+
+  rpc UpgradeTopping ( UpgradeToppingRequest ) returns ( UpgradeToppingResponse );
+
+  rpc DisassembleToppings ( DisassembleToppingsRequest ) returns ( DisassembleToppingsResponse );
+
+  rpc MarkTopping ( MarkToppingRequest ) returns ( MarkToppingResponse );
+
+  rpc UnmarkTopping ( UnmarkToppingRequest ) returns ( UnmarkToppingResponse );
+
+  rpc SaveToppingCombination ( SaveToppingCombinationRequest ) returns ( SaveToppingCombinationResponse );
+
+  rpc LoadToppingCombination ( LoadToppingCombinationRequest ) returns ( LoadToppingCombinationResponse );
+
+  rpc ChangeToppingCombinationSlotName ( ChangeToppingCombinationSlotNameRequest ) returns ( ChangeToppingCombinationSlotNameResponse );
+
+  rpc UnlockToppingCombinationSlot ( UnlockToppingCombinationSlotRequest ) returns ( UnlockToppingCombinationSlotResponse );
+
+  rpc UpgradeToppingsAtOnce ( UpgradeToppingsAtOnceRequest ) returns ( UpgradeToppingsAtOnceResponse );
+
+  rpc ResetToppingCombinationSlot ( ResetToppingCombinationSlotRequest ) returns ( ResetToppingCombinationSlotResponse );
+
+  rpc ResetEquippedToppings ( ResetEquippedToppingsRequest ) returns ( ResetEquippedToppingsResponse );
+}

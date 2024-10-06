@@ -1,0 +1,62 @@
+{
+    "code": 20000,
+    "country_code": "US",
+    "coupon_url": "https://coupon.devplay.com/coupon/ck/en",
+    "cs_url": "https://cs-cookierunkingdom.devsisters.com",
+    "device_login_enabled": true,
+    "download_url": "https://play.google.com/store/apps/details?id=com.devsisters.ck",
+    "force_update": null,
+    "game_endpoints": [
+        "server",
+        "https://server.live.prod.devsjelly.cloud:443",
+        "route",
+        "https://route.live.prod.devsjelly.cloud:443",
+        "pv",
+        "https://pv-server.live.prod.devsjelly.cloud:443",
+        "hb",
+        "https://hb-server.live.prod.devsjelly.cloud:443",
+        "dc",
+        "https://dc-server.live.prod.devsjelly.cloud:443",
+        "lobby-server",
+        "https://lobby-server.live.prod.devsjelly.cloud:443",
+        "matchmaker",
+        "https://matchmaker.live.prod.devsjelly.cloud:443"
+    ],
+    "is_in_review": false,
+    "login_types_allowed": [
+        "google",
+        "apple",
+        "facebook",
+        "gpgs",
+        "devsisters",
+        "guest"
+    ],
+    "maintenance": {
+        "end_time": 0,
+        "extra": "",
+        "message": "",
+        "ongoing": false,
+        "url": ""
+    },
+    "remote_configs": [
+        {
+            "key": "disable-idp",
+            "type": "string",
+            "value": "steam"
+        }
+    ],
+    "resource_endpoints": [
+        "main",
+        "https://static.devscdn.com/ck/resource/YuPyxe5mNt9LD95R"
+    ],
+    "resource_hash": "YuPyxe5mNt9LD95R",
+    "terms_contents": null,
+    "terms_region": "",
+    "terms_type": "postponed",
+    "update": {
+        "download_url": "",
+        "market_available": false,
+        "ongoing": false,
+        "type": ""
+    }
+}

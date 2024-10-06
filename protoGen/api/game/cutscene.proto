@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message RegisterPlayedCutscenesRequest {
+  repeated int32 cutscene_ids = 1;
+}
+
+message RegisterPlayedCutscenesResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated int32 registered_cutscene_ids = 2;
+}
+
+message CompleteTutorialsRequest {
+  repeated int32 tutorial_data_ids = 1;
+}
+
+message CompleteTutorialsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated int32 appended_tutorial_data_ids = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message RegisterContentUnlockPopUpsRequest {
+  repeated int32 content_data_ids = 1;
+}
+
+message RegisterContentUnlockPopUpsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated int32 unlocked_content_data_ids = 2;
+}
+
+message UnlockSeasonableRecordsRequest {
+  SeasonableRecordType seasonable_record_type = 1;
+
+  repeated int32 record_data_ids = 2;
+}
+
+message UnlockSeasonableRecordsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  SeasonableRecordsGroup seasonable_records_group = 2;
+
+  repeated int32 unlocked_record_data_ids = 3;
+}
+
+service CutsceneService {
+  rpc RegisterPlayedCutscenes ( RegisterPlayedCutscenesRequest ) returns ( RegisterPlayedCutscenesResponse );
+
+  rpc CompleteTutorials ( CompleteTutorialsRequest ) returns ( CompleteTutorialsResponse );
+
+  rpc RegisterContentUnlockPopUps ( RegisterContentUnlockPopUpsRequest ) returns ( RegisterContentUnlockPopUpsResponse );
+
+  rpc UnlockSeasonableRecords ( UnlockSeasonableRecordsRequest ) returns ( UnlockSeasonableRecordsResponse );
+}

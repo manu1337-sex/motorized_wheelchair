@@ -1,0 +1,65 @@
+{
+  "preprocessedEvents": {
+    "gameEventChanges": {},
+    "kingdomPassSeasonChange": {
+      "noChanged": {}
+    },
+    "itemChanges": {},
+    "cookieSquadSeasonChanges": {
+      "noChanged": {}
+    },
+    "packageShopChanges": {}
+  },
+  "leagueChanges": {
+    "noGeneratedCookieRandomSpeech": {}
+  },
+  "additionalDiscoveries": {},
+  "actionCounterChanges": {
+    "activityStartPerCookieCounter": {},
+    "activityCompletionPerCookieCounter": {},
+    "fountainProductionDurationCounter": {},
+    "pvpMatchAttackWinCounter": {},
+    "pvpMatchRevengeWinCounter": {},
+    "pvpMatchDefenseWinCounter": {},
+    "rhythmStageClearCounter": {},
+    "cakeDungeonPlayCounter": {},
+    "boardAdventureMapObjectCompleteCounter": {},
+    "pvpMatchBattleCounter": {
+      "records": [
+        {},
+        {
+          "pvpType": "PVP_SMASH"
+        }
+      ]
+    },
+    "infiniteDungeonClearCounter": {},
+    "itemShopPaymentCounter": {},
+    "beastRaidClearCounter": {},
+    "missionRunGameFieldItemCounter": {},
+    "towerAdventureBattleClearCounter": {}
+  },
+  "updatedDailyActionCounters": {
+    "noUpdated": {}
+  },
+  "gameEventChanges": {},
+  "packageShopChanges": {},
+  "guildChanges": {
+    "noUpdate": {}
+  },
+  "updatedItems": {},
+  "eventDungeonChanges": {},
+  "itemChanges": {},
+  "castleChanges": {
+    "noNewCastleQuests": {}
+  },
+  "townChanges": {
+    "noNewTownLastEditedAt": {},
+    "noIsEditedAfterSaveAndLoad": {}
+  },
+  "contentAccessControlChanges": {
+    "noUpdated": {}
+  },
+  "boardAdventureChanges": {},
+  "socialRaidChanges": {},
+  "lobbyGameResult": {}
+}

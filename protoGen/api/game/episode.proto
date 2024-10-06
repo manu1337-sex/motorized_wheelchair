@@ -1,0 +1,252 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message ClearNodeRequest {
+  int32 episode_node_data_id = 1;
+}
+
+message ClearNodeResponse {
+  repeated int32 episode_node_data_ids = 1;
+
+  KingdomAdditionalEvents additional_events = 2;
+
+  repeated Payment payments = 3;
+
+  repeated Reward first_clear_rewards = 4;
+}
+
+message CompleteLandNodeRequest {
+  string land_battle_id = 1;
+
+  int32 adventure_stars = 2;
+
+  LandBattleReport battle_report = 3;
+
+  bool is_restoration = 4;
+
+  int32 episode_node_data_id = 5;
+
+  repeated int32 user_commands = 6;
+
+  bool is_auto_skill_enabled_when_start = 7;
+}
+
+message CompleteLandNodeResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string completed_land_battle_id = 2;
+
+  LandRecord land_record = 3;
+
+  repeated LandStarReward star_rewards = 4;
+
+  repeated Reward rewards = 5;
+
+  oneof land_play_count {
+    LandPlayCount land_play_count_value = 6;
+
+    ck.Empty no_land_play_count = 7;
+  }
+
+  repeated int32 episode_node_data_ids = 8;
+
+  repeated Payment payments = 9;
+
+  repeated EpisodeLandNodeFirstClearRewards first_clear_rewards = 11;
+
+  oneof episode_land_mutation_rewards {
+    EpisodeLandMutationRewards episode_land_mutation_rewards_value = 12;
+
+    ck.Empty no_episode_land_mutation_rewards = 13;
+  }
+
+  message EpisodeLandNodeFirstClearRewards {
+    LandDifficulty difficulty = 1;
+
+    repeated Reward rewards = 2;
+  }
+}
+
+message SelectBranchRequest {
+  int32 branch_node_data_id = 1;
+
+  int32 selected_node_data_id = 2;
+}
+
+message SelectBranchResponse {
+  int32 branch_node_data_id = 1;
+
+  int32 selected_node_data_id = 2;
+
+  KingdomAdditionalEvents additional_events = 3;
+}
+
+message UnlockEpisodeGroupCollectionEntryRequest {
+  int32 episode_group_collection_entry_data_id = 1;
+}
+
+message UnlockEpisodeGroupCollectionEntryResponse {
+  int32 episode_group_collection_entry_data_id = 1;
+
+  KingdomAdditionalEvents additional_events = 2;
+}
+
+message CompleteEpisodeGroupCollectionRequest {
+  int32 episode_group_data_id = 1;
+
+  int32 character_data_id = 2;
+}
+
+message CompleteEpisodeGroupCollectionResponse {
+  int32 episode_group_data_id = 1;
+
+  int32 character_data_id = 2;
+
+  KingdomAdditionalEvents additional_events = 3;
+
+  repeated Reward rewards = 4;
+}
+
+message OpenEpisodeGroupRequest {
+  int32 episode_group_data_id = 1;
+}
+
+message OpenEpisodeGroupResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  int32 episode_group_data_id = 3;
+
+  repeated int32 initially_auto_cleared_episode_node_data_ids = 4;
+}
+
+message ClearStoryCollectionBookMissionRequest {
+  int32 story_collection_book_mission_data_id = 1;
+}
+
+message ClearStoryCollectionBookMissionResponse {
+  int32 story_collection_book_mission_data_id = 1;
+
+  KingdomAdditionalEvents additional_events = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message ReceiveAccumulatedStarRewardRequest {
+  int32 episode_group_data_id = 1;
+
+  int32 episode_data_id = 2;
+}
+
+message ReceiveAccumulatedStarRewardResponse {
+  int32 episode_group_data_id = 1;
+
+  int32 episode_data_id = 2;
+
+  KingdomAdditionalEvents additional_events = 3;
+
+  repeated Reward rewards = 4;
+
+  EpisodeStarRewardRecord episode_star_reward_record = 5;
+}
+
+message RestoreEpisodeStructureRequest {
+  int32 node_data_id = 1;
+}
+
+message RestoreEpisodeStructureResponse {
+  repeated Payment payments = 1;
+
+  oneof ends_at {
+    ck.Time ends_at_value = 2;
+
+    ck.Empty no_ends_at = 3;
+  }
+
+  repeated int32 node_data_ids = 4;
+
+  repeated Reward rewards = 5;
+
+  KingdomAdditionalEvents additional_events = 6;
+}
+
+message AccelerateEpisodeStructureRestorationRequest {
+  int32 node_data_id = 1;
+
+  map<int32, int64> time_reducer_spends = 2;
+
+  oneof viewed_advertisement {
+    ViewedAdvertisement viewed_advertisement_value = 4;
+
+    ck.Empty no_viewed_advertisement = 5;
+  }
+}
+
+message AccelerateEpisodeStructureRestorationResponse {
+  int32 node_data_id = 1;
+
+  repeated Payment payments = 2;
+
+  ck.Time new_ends_at = 3;
+
+  AdvertisementState advertisement_state = 4;
+
+  KingdomAdditionalEvents additional_events = 5;
+}
+
+message InstantCompleteEpisodeStructureRestorationRequest {
+  int32 node_data_id = 1;
+
+  InstantCompletionMethod instant_completion_method = 2;
+}
+
+message InstantCompleteEpisodeStructureRestorationResponse {
+  repeated int32 node_data_ids = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+
+  AdvertisementState advertisement_state = 4;
+
+  KingdomAdditionalEvents additional_events = 5;
+}
+
+message UpdateEpisodeLandMutationRequest {
+}
+
+message UpdateEpisodeLandMutationResponse {
+  EpisodeLandMutation episode_land_mutation = 1;
+
+  KingdomAdditionalEvents additional_events = 2;
+}
+
+service EpisodeService {
+  rpc ClearNode ( ClearNodeRequest ) returns ( ClearNodeResponse );
+
+  rpc SelectBranch ( SelectBranchRequest ) returns ( SelectBranchResponse );
+
+  rpc CompleteLandNode ( CompleteLandNodeRequest ) returns ( CompleteLandNodeResponse );
+
+  rpc ReceiveAccumulatedStarReward ( ReceiveAccumulatedStarRewardRequest ) returns ( ReceiveAccumulatedStarRewardResponse );
+
+  rpc UnlockEpisodeGroupCollectionEntry ( UnlockEpisodeGroupCollectionEntryRequest ) returns ( UnlockEpisodeGroupCollectionEntryResponse );
+
+  rpc CompleteEpisodeGroupCollection ( CompleteEpisodeGroupCollectionRequest ) returns ( CompleteEpisodeGroupCollectionResponse );
+
+  rpc ClearStoryCollectionBookMission ( ClearStoryCollectionBookMissionRequest ) returns ( ClearStoryCollectionBookMissionResponse );
+
+  rpc OpenEpisodeGroup ( OpenEpisodeGroupRequest ) returns ( OpenEpisodeGroupResponse );
+
+  rpc UpdateEpisodeLandMutation ( UpdateEpisodeLandMutationRequest ) returns ( UpdateEpisodeLandMutationResponse );
+}

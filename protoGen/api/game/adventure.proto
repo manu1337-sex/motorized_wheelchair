@@ -1,0 +1,338 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message UpdateAdventureInfoRequest {
+}
+
+message UpdateAdventureInfoResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  DailyDungeonState updated_daily_dungeon_state = 2;
+
+  PvpSummary pvp_summary = 3;
+
+  GuildBattleTicketState guild_battle_ticket_state = 4;
+
+  repeated int32 pending_smash_season_data_ids = 5;
+
+  SocialRaids social_raids = 6;
+
+  JamStoneDungeonState updated_jam_stone_dungeon_state = 7;
+
+  repeated int32 pending_pvp_season_data_ids = 8;
+
+  repeated int32 pending_beast_raid_season_data_ids = 9;
+}
+
+message StartLandRequest {
+  int32 land_data_id = 1;
+
+  oneof battle_participant {
+    int32 battle_team_index = 2;
+
+    SpecAdjustmentBattleTeamParticipant spec_adjustment_battle_team_participant = 3;
+  }
+}
+
+message StartLandResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  OngoingLandBattle ongoing_battle = 2;
+
+  BattleTeamDetail team_detail = 3;
+}
+
+message GetOngoingLandBattleRequest {
+  string battle_id = 1;
+}
+
+message GetOngoingLandBattleResponse {
+  OngoingLandBattle ongoing_battle = 1;
+
+  BattleTeamDetail team_detail = 2;
+}
+
+message CompleteLandRequest {
+  string land_battle_id = 1;
+
+  int32 adventure_stars = 2;
+
+  LandBattleReport battle_report = 3;
+
+  bool is_restoration = 4;
+
+  repeated int32 user_commands = 5;
+
+  bool is_auto_skill_enabled_when_start = 6;
+}
+
+message CompleteLandResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string completed_land_battle_id = 2;
+
+  LandRecord land_record = 3;
+
+  repeated LandStarReward star_rewards = 4;
+
+  repeated Reward first_clear_rewards = 5;
+
+  repeated Reward rewards = 6;
+
+  oneof land_play_count {
+    LandPlayCount land_play_count_value = 7;
+
+    ck.Empty no_land_play_count = 8;
+  }
+}
+
+message FailToCompleteLandRequest {
+  string land_battle_id = 1;
+
+  LandPosition end_position = 2;
+
+  LandBattleReport battle_report = 3;
+
+  bool is_restoration = 4;
+
+  repeated int32 user_commands = 5;
+
+  bool is_auto_skill_enabled_when_start = 6;
+}
+
+message FailToCompleteLandResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string completed_land_battle_id = 2;
+
+  repeated Reward rewards = 3;
+
+  bool battle_reset = 4;
+
+  oneof land_record {
+    LandRecord land_record_value = 5;
+
+    ck.Empty no_land_record = 6;
+  }
+}
+
+message FastForwardLandRequest {
+  int32 land_data_id = 1;
+
+  oneof battle_participant {
+    int32 battle_team_index = 2;
+
+    SpecAdjustmentBattleTeamParticipant spec_adjustment_battle_team_participant = 3;
+  }
+
+  int32 play_count = 4;
+}
+
+message FastForwardLandResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated RewardPerPlay rewards_per_play = 2;
+
+  repeated Payment payments = 3;
+
+  oneof land_play_count {
+    LandPlayCount land_play_count_value = 4;
+
+    ck.Empty no_land_play_count = 5;
+  }
+
+  message RewardPerPlay {
+    repeated Reward rewards = 1;
+  }
+}
+
+message ChargeLandPlayCountRequest {
+  int32 land_data_id = 1;
+}
+
+message ChargeLandPlayCountResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  LandPlayCount land_play_count = 2;
+
+  repeated Payment payments = 3;
+}
+
+message UpdateDailyDungeonStateRequest {
+}
+
+message UpdateDailyDungeonStateResponse {
+  DailyDungeonState daily_dungeon_state = 1;
+
+  KingdomAdditionalEvents additional_events = 2;
+}
+
+message StartDailyDungeonRequest {
+  int32 dungeon_data_id = 1;
+
+  int32 level = 2;
+
+  int32 battle_team_index = 3;
+}
+
+message StartDailyDungeonResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 battle_team_index = 2;
+
+  OngoingDailyDungeon ongoing_dungeon = 3;
+
+  BattleTeamDetail team_detail = 4;
+}
+
+message GetOngoingDailyDungeonRequest {
+  string battle_id = 1;
+}
+
+message GetOngoingDailyDungeonResponse {
+  OngoingDailyDungeon ongoing_dungeon = 1;
+
+  BattleTeamDetail team_detail = 2;
+}
+
+message CompleteDailyDungeonRequest {
+  string daily_dungeon_id = 1;
+
+  LandBattleReport battle_report = 2;
+}
+
+message CompleteDailyDungeonResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string completed_daily_dungeon_id = 2;
+
+  DailyDungeonRecord changed_record = 3;
+
+  DailyDungeonPlayLimitState changed_play_limit_state = 4;
+
+  repeated Reward other_rewards = 5;
+}
+
+message FailToCompleteDailyDungeonRequest {
+  string daily_dungeon_id = 1;
+
+  LandPosition end_position = 2;
+
+  LandBattleReport battle_report = 3;
+}
+
+message FailToCompleteDailyDungeonResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string completed_daily_dungeon_id = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message FastForwardDailyDungeonRequest {
+  int32 dungeon_data_id = 1;
+
+  int32 level = 2;
+
+  int32 battle_team_index = 3;
+
+  int32 play_count = 4;
+}
+
+message FastForwardDailyDungeonResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  DailyDungeonPlayLimitState changed_play_limit_state = 2;
+
+  repeated RewardPerPlay rewards_per_play = 3;
+
+  repeated Payment payments = 4;
+
+  message RewardPerPlay {
+    repeated Reward rewards = 1;
+  }
+}
+
+message ChargeDailyDungeonPlayCountRequest {
+}
+
+message ChargeDailyDungeonPlayCountResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  DailyDungeonPlayLimitState changed_play_limit_state = 2;
+
+  repeated Payment payments = 3;
+}
+
+message SelectDailyDungeonBountyRequest {
+  int32 dungeon_data_id = 1;
+
+  oneof selection {
+    DailyDungeonBountySelection selection_value = 2;
+
+    ck.Empty no_selection = 3;
+  }
+}
+
+message SelectDailyDungeonBountyResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  DailyDungeonBountyState bounty_state = 2;
+}
+
+message ChargeDailyDungeonPlayCountByTicketRequest {
+  int32 ticket_data_id = 1;
+
+  int32 use_count = 2;
+}
+
+message ChargeDailyDungeonPlayCountByTicketResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  DailyDungeonPlayLimitState changed_play_limit_state = 2;
+
+  repeated Payment payments = 3;
+}
+
+service AdventureService {
+  rpc UpdateAdventureInfo ( UpdateAdventureInfoRequest ) returns ( UpdateAdventureInfoResponse );
+
+  rpc StartLand ( StartLandRequest ) returns ( StartLandResponse );
+
+  rpc GetOngoingLandBattle ( GetOngoingLandBattleRequest ) returns ( GetOngoingLandBattleResponse );
+
+  rpc CompleteLand ( CompleteLandRequest ) returns ( CompleteLandResponse );
+
+  rpc FailToCompleteLand ( FailToCompleteLandRequest ) returns ( FailToCompleteLandResponse );
+
+  rpc FastForwardLand ( FastForwardLandRequest ) returns ( FastForwardLandResponse );
+
+  rpc ChargeLandPlayCount ( ChargeLandPlayCountRequest ) returns ( ChargeLandPlayCountResponse );
+
+  rpc UpdateDailyDungeonState ( UpdateDailyDungeonStateRequest ) returns ( UpdateDailyDungeonStateResponse );
+
+  rpc StartDailyDungeon ( StartDailyDungeonRequest ) returns ( StartDailyDungeonResponse );
+
+  rpc GetOngoingDailyDungeon ( GetOngoingDailyDungeonRequest ) returns ( GetOngoingDailyDungeonResponse );
+
+  rpc CompleteDailyDungeon ( CompleteDailyDungeonRequest ) returns ( CompleteDailyDungeonResponse );
+
+  rpc FailToCompleteDailyDungeon ( FailToCompleteDailyDungeonRequest ) returns ( FailToCompleteDailyDungeonResponse );
+
+  rpc FastForwardDailyDungeon ( FastForwardDailyDungeonRequest ) returns ( FastForwardDailyDungeonResponse );
+
+  rpc ChargeDailyDungeonPlayCount ( ChargeDailyDungeonPlayCountRequest ) returns ( ChargeDailyDungeonPlayCountResponse );
+
+  rpc SelectDailyDungeonBounty ( SelectDailyDungeonBountyRequest ) returns ( SelectDailyDungeonBountyResponse );
+
+  rpc ChargeDailyDungeonPlayCountByTicket ( ChargeDailyDungeonPlayCountByTicketRequest ) returns ( ChargeDailyDungeonPlayCountByTicketResponse );
+}

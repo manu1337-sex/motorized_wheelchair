@@ -1,0 +1,676 @@
+{
+    "SubOptionPools": [
+        {
+            "ID": 1856961413,
+            "SubOptionPoolID": 2109545270,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1289471620,
+            "SubOptionPoolID": 2109545270,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 2022949896,
+            "SubOptionPoolID": 2109545270,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1445422781,
+            "SubOptionPoolID": 2109545270,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2129269953,
+            "SubOptionPoolID": 2109545270,
+            "PassiveType": "BuffIncrease",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1851341143,
+            "SubOptionPoolID": 2109545270,
+            "PassiveType": "DebuffDecrease",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1131684199,
+            "SubOptionPoolID": 1177166159,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1455953136,
+            "SubOptionPoolID": 1177166159,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1302622181,
+            "SubOptionPoolID": 1177166159,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2068645253,
+            "SubOptionPoolID": 1177166159,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1262197054,
+            "SubOptionPoolID": 1177166159,
+            "PassiveType": "BuffIncrease",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1681582460,
+            "SubOptionPoolID": 1177166159,
+            "PassiveType": "DebuffDecrease",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2057491192,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1948362054,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "DefencePointRatio",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1243551581,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "HealthPointRatio",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1386170585,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1167599227,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1950738401,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1100026334,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.03,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1471313504,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2050161930,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "BuffIncrease",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2042256208,
+            "SubOptionPoolID": 1754129634,
+            "PassiveType": "DebuffDecrease",
+            "PassiveValueMin": 0.01,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1965167508,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1644705646,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "DefencePointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1406024601,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "HealthPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1407393205,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1841577636,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1328444433,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.06999999999999999
+        },
+        {
+            "ID": 1547583311,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.04,
+            "PassiveValueMax": 0.05
+        },
+        {
+            "ID": 1866454616,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1815089222,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "BuffIncrease",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1123907433,
+            "SubOptionPoolID": 1863499340,
+            "PassiveType": "DebuffDecrease",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1535901268,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.045
+        },
+        {
+            "ID": 1437763254,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "DefencePointRatio",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.045
+        },
+        {
+            "ID": 1312817043,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "HealthPointRatio",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.045
+        },
+        {
+            "ID": 1250587950,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.045
+        },
+        {
+            "ID": 1773085252,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.045
+        },
+        {
+            "ID": 1845002065,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.075
+        },
+        {
+            "ID": 1525890826,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.055
+        },
+        {
+            "ID": 1460393442,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.034999999999999996
+        },
+        {
+            "ID": 1428087746,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "BuffIncrease",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.034999999999999996
+        },
+        {
+            "ID": 1685896294,
+            "SubOptionPoolID": 1657253567,
+            "PassiveType": "DebuffDecrease",
+            "PassiveValueMin": 0.025,
+            "PassiveValueMax": 0.034999999999999996
+        },
+        {
+            "ID": 229384233,
+            "SubOptionPoolID": 566743439,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 434174129,
+            "SubOptionPoolID": 566743439,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 693858044,
+            "SubOptionPoolID": 566743439,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 803181848,
+            "SubOptionPoolID": 566743439,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 196622791,
+            "SubOptionPoolID": 566743439,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 228116996,
+            "SubOptionPoolID": 566743439,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1341206092,
+            "SubOptionPoolID": 1210051277,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1307614251,
+            "SubOptionPoolID": 1210051277,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1562894439,
+            "SubOptionPoolID": 1210051277,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 2004647672,
+            "SubOptionPoolID": 1210051277,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1202764870,
+            "SubOptionPoolID": 1210051277,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1697648683,
+            "SubOptionPoolID": 1210051277,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2026614189,
+            "SubOptionPoolID": 1739396604,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1755369947,
+            "SubOptionPoolID": 1739396604,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 2121786398,
+            "SubOptionPoolID": 1739396604,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1734895923,
+            "SubOptionPoolID": 1739396604,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1609093677,
+            "SubOptionPoolID": 1739396604,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1138309246,
+            "SubOptionPoolID": 1739396604,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1165239617,
+            "SubOptionPoolID": 1649210480,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1662848731,
+            "SubOptionPoolID": 1649210480,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1195222672,
+            "SubOptionPoolID": 1649210480,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1374075112,
+            "SubOptionPoolID": 1649210480,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1215538680,
+            "SubOptionPoolID": 1649210480,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1419709751,
+            "SubOptionPoolID": 1649210480,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2096556331,
+            "SubOptionPoolID": 1261204174,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1567602811,
+            "SubOptionPoolID": 1261204174,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1192056831,
+            "SubOptionPoolID": 1261204174,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1993592120,
+            "SubOptionPoolID": 1261204174,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1758355939,
+            "SubOptionPoolID": 1261204174,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1286310467,
+            "SubOptionPoolID": 1261204174,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2065865126,
+            "SubOptionPoolID": 1147305992,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1646339649,
+            "SubOptionPoolID": 1147305992,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1771983019,
+            "SubOptionPoolID": 1147305992,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1185020086,
+            "SubOptionPoolID": 1147305992,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1118168565,
+            "SubOptionPoolID": 1147305992,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1139343635,
+            "SubOptionPoolID": 1147305992,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 2035357622,
+            "SubOptionPoolID": 1952939738,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1515204107,
+            "SubOptionPoolID": 1952939738,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1460380890,
+            "SubOptionPoolID": 1952939738,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1285257000,
+            "SubOptionPoolID": 1952939738,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1890111663,
+            "SubOptionPoolID": 1952939738,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1276081322,
+            "SubOptionPoolID": 1952939738,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1614222850,
+            "SubOptionPoolID": 1365670508,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1180873567,
+            "SubOptionPoolID": 1365670508,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1861317639,
+            "SubOptionPoolID": 1365670508,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1748043281,
+            "SubOptionPoolID": 1365670508,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 2084794895,
+            "SubOptionPoolID": 1365670508,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1435968550,
+            "SubOptionPoolID": 1365670508,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        },
+        {
+            "ID": 1951044527,
+            "SubOptionPoolID": 1718900156,
+            "PassiveType": "AttackPointRatio",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1401041236,
+            "SubOptionPoolID": 1718900156,
+            "PassiveType": "AttackSpeed",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 1298970533,
+            "SubOptionPoolID": 1718900156,
+            "PassiveType": "CriticalRate",
+            "PassiveValueMin": 0.02,
+            "PassiveValueMax": 0.03
+        },
+        {
+            "ID": 2079996627,
+            "SubOptionPoolID": 1718900156,
+            "PassiveType": "DamageReduceRatio",
+            "PassiveValueMin": 0.045,
+            "PassiveValueMax": 0.06
+        },
+        {
+            "ID": 1715093904,
+            "SubOptionPoolID": 1718900156,
+            "PassiveType": "CriticalDamageReduceRatio",
+            "PassiveValueMin": 0.035,
+            "PassiveValueMax": 0.04
+        },
+        {
+            "ID": 1888958810,
+            "SubOptionPoolID": 1718900156,
+            "PassiveType": "Cooltime",
+            "PassiveValueMin": 0.015,
+            "PassiveValueMax": 0.02
+        }
+    ]
+}

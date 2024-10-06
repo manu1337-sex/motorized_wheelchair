@@ -1,0 +1,317 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+import "game/entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message UseExpPotionRequest {
+  int32 cookie_data_id = 1;
+
+  map<int32, int64> exp_potion_spends = 2;
+}
+
+message UseExpPotionResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 cookie_data_id = 2;
+
+  repeated Reward rewards = 3;
+
+  repeated Payment payments = 4;
+}
+
+message UseForcedCookieLevelUpItemRequest {
+  int32 cookie_data_id = 1;
+
+  int32 item_data_id = 2;
+}
+
+message UseForcedCookieLevelUpItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 cookie_data_id = 2;
+
+  int32 leveled_up_cookie_level = 3;
+
+  repeated Reward rewards = 4;
+
+  repeated Payment payments = 5;
+}
+
+message LevelUpSkillRequest {
+  int32 cookie_data_id = 1;
+
+  int32 level_up_amount = 2;
+}
+
+message LevelUpSkillResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 cookie_data_id = 2;
+
+  int32 leveled_up_skill_level = 3;
+
+  repeated Payment payments = 4;
+}
+
+message SummonCookieRequest {
+  int32 cookie_data_id = 1;
+}
+
+message SummonCookieResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Reward new_cookie_reward = 2;
+
+  repeated Payment payments = 3;
+}
+
+message UpgradeCookieRequest {
+  int32 cookie_data_id = 1;
+}
+
+message UpgradeCookieResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Cookie cookie = 2;
+
+  repeated Payment payments = 3;
+
+  oneof guild_member_changes {
+    GuildMember guild_member_changes_value = 4;
+
+    ck.Empty no_guild_member_changes = 5;
+  }
+
+  repeated Reward rewards = 6;
+}
+
+message UpdateRandomSpeechesRequest {
+}
+
+message UpdateRandomSpeechesResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  CookieRandomSpeeches cookie_random_speeches = 2;
+}
+
+message FinishRandomSpeechRequest {
+  string cookie_random_speech_id = 1;
+}
+
+message FinishRandomSpeechResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  string finished_cookie_random_speech_id = 2;
+
+  CookieRandomSpeech next_cookie_random_speech = 3;
+
+  repeated Reward rewards = 4;
+}
+
+message EquipCookieSkinRequest {
+  int32 cookie_data_id = 1;
+
+  int32 cookie_skin_data_id = 2;
+}
+
+message EquipCookieSkinResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 cookie_data_id = 2;
+
+  int32 cookie_skin_data_id = 3;
+
+  oneof guild_member_changes {
+    GuildMember guild_member_changes_value = 4;
+
+    ck.Empty no_guild_member_changes = 5;
+  }
+}
+
+message PurchaseCookieSkinRequest {
+  int32 shop_item_data_id = 1;
+}
+
+message PurchaseCookieSkinResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  repeated Payment payments = 2;
+
+  repeated Reward rewards = 3;
+}
+
+message UseAprilFoolsItemRequest {
+  int32 cookie_data_id = 1;
+}
+
+message UseAprilFoolsItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Payment payment = 2;
+
+  repeated Reward rewards = 3;
+
+  int32 cookie_data_id = 4;
+}
+
+message ToggleAprilFoolsAppearanceRequest {
+  int32 cookie_data_id = 1;
+
+  bool is_enabled = 2;
+}
+
+message ToggleAprilFoolsAppearanceResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  int32 cookie_data_id = 2;
+
+  bool is_enabled = 3;
+}
+
+message CreateEquipmentItemRequest {
+  EquipmentItemType equipment_item_type = 1;
+
+  int32 equipment_item_data_id = 2;
+}
+
+message CreateEquipmentItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  EquipmentItemUpgradeResult upgrade_result = 2;
+
+  EquipmentItemType equipment_item_type = 3;
+
+  EquipmentItem equipment_item = 4;
+
+  Cookie cookie = 5;
+
+  repeated Payment payments = 6;
+
+  repeated Reward rewards = 7;
+
+  oneof guild_member_changes {
+    GuildMember guild_member_changes_value = 8;
+
+    ck.Empty no_guild_member_changes = 9;
+  }
+}
+
+message UpgradeEquipmentItemRequest {
+  EquipmentItemType equipment_item_type = 1;
+
+  int32 equipment_item_data_id = 2;
+}
+
+message UpgradeEquipmentItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  EquipmentItemUpgradeResult upgrade_result = 2;
+
+  EquipmentItemType equipment_item_type = 3;
+
+  EquipmentItem equipment_item = 4;
+
+  repeated Payment payments = 5;
+
+  repeated Reward rewards = 6;
+
+  Cookie cookie = 7;
+
+  oneof guild_member_changes {
+    GuildMember guild_member_changes_value = 8;
+
+    ck.Empty no_guild_member_changes = 9;
+  }
+}
+
+message EquipEquipmentItemRequest {
+  int32 cookie_data_id = 1;
+
+  EquipmentItemType equipment_item_type = 2;
+
+  int32 equipment_item_data_id = 3;
+}
+
+message EquipEquipmentItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Cookie cookie = 2;
+}
+
+message UnequipEquipmentItemRequest {
+  int32 cookie_data_id = 1;
+
+  int32 equipment_item_data_id = 2;
+}
+
+message UnequipEquipmentItemResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  Cookie cookie = 2;
+}
+
+message UpdateSpeechBalloonGroupsRequest {
+}
+
+message UpdateSpeechBalloonGroupsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  SpeechBalloonGroups speech_balloon_groups = 2;
+}
+
+message ReceiveSpeechBalloonRewardsRequest {
+  int32 group_data_id = 1;
+
+  string balloon_id = 2;
+}
+
+message ReceiveSpeechBalloonRewardsResponse {
+  KingdomAdditionalEvents additional_events = 1;
+
+  SpeechBalloonGroup speech_balloon_group = 2;
+
+  repeated Reward rewards = 3;
+}
+
+service CookieService {
+  rpc UseExpPotion ( UseExpPotionRequest ) returns ( UseExpPotionResponse );
+
+  rpc UseForcedCookieLevelUpItem ( UseForcedCookieLevelUpItemRequest ) returns ( UseForcedCookieLevelUpItemResponse );
+
+  rpc LevelUpSkill ( LevelUpSkillRequest ) returns ( LevelUpSkillResponse );
+
+  rpc SummonCookie ( SummonCookieRequest ) returns ( SummonCookieResponse );
+
+  rpc UpgradeCookie ( UpgradeCookieRequest ) returns ( UpgradeCookieResponse );
+
+  rpc UpdateRandomSpeeches ( UpdateRandomSpeechesRequest ) returns ( UpdateRandomSpeechesResponse );
+
+  rpc FinishRandomSpeech ( FinishRandomSpeechRequest ) returns ( FinishRandomSpeechResponse );
+
+  rpc EquipCookieSkin ( EquipCookieSkinRequest ) returns ( EquipCookieSkinResponse );
+
+  rpc PurchaseCookieSkin ( PurchaseCookieSkinRequest ) returns ( PurchaseCookieSkinResponse );
+
+  rpc UseAprilFoolsItem ( UseAprilFoolsItemRequest ) returns ( UseAprilFoolsItemResponse );
+
+  rpc ToggleAprilFoolsAppearance ( ToggleAprilFoolsAppearanceRequest ) returns ( ToggleAprilFoolsAppearanceResponse );
+
+  rpc CreateEquipmentItem ( CreateEquipmentItemRequest ) returns ( CreateEquipmentItemResponse );
+
+  rpc UpgradeEquipmentItem ( UpgradeEquipmentItemRequest ) returns ( UpgradeEquipmentItemResponse );
+
+  rpc EquipEquipmentItem ( EquipEquipmentItemRequest ) returns ( EquipEquipmentItemResponse );
+
+  rpc UnequipEquipmentItem ( UnequipEquipmentItemRequest ) returns ( UnequipEquipmentItemResponse );
+
+  rpc UpdateSpeechBalloonGroups ( UpdateSpeechBalloonGroupsRequest ) returns ( UpdateSpeechBalloonGroupsResponse );
+
+  rpc ReceiveSpeechBalloonRewards ( ReceiveSpeechBalloonRewardsRequest ) returns ( ReceiveSpeechBalloonRewardsResponse );
+}

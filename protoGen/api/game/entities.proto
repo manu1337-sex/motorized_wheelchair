@@ -1,0 +1,10207 @@
+syntax = "proto3";
+
+package ck.game;
+
+import "common_entities.proto";
+
+option csharp_namespace = "Services.Game.Protobuf";
+
+option java_package = "com.devsisters.ck.services.game.protobuf";
+
+message UserSummary {
+  reserved 5, 6;
+
+  string id = 1;
+
+  string name = 2;
+
+  int32 level = 3;
+
+  int64 kingdom_points = 4;
+
+  ProfileImage profile_image = 7;
+
+  UserCakeTowerSummary user_cake_tower_summary = 9;
+
+  bool is_kingdom_pass_activated = 8;
+
+  repeated int32 attending_event_data_ids = 10;
+
+  oneof profile_title {
+    ck.Empty no_profile_title = 11;
+
+    ProfileTitle profile_title_value = 12;
+  }
+
+  oneof profile_frame {
+    ck.Empty no_profile_frame = 13;
+
+    ProfileFrame profile_frame_value = 14;
+  }
+
+  GuildJoinStateSummary guild_join_state_summary = 15;
+
+  oneof custom_cookie_summary {
+    CustomCookieSummary custom_cookie_summary_value = 16;
+
+    ck.Empty no_custom_cookie_summary = 17;
+  }
+}
+
+message UserCakeTowerSummary {
+  int32 tower_adventure_season_data_id = 1;
+
+  oneof highest_cleared_node_data_id {
+    int32 data_id = 2;
+
+    ck.Empty no_data_id = 3;
+  }
+
+  ck.Time current_max_floor_node_cleared_at = 4;
+}
+
+message SocialSummary {
+  UserSummary user_summary = 1;
+
+  ck.Time last_access_time = 2;
+
+  bool is_online = 3;
+
+  bool can_receive_friend_requests = 4;
+
+  int64 popularity_points = 5;
+
+  int32 received_likes_count = 6;
+
+  PvpSummary pvp_summary = 7;
+
+  PvpSummary smash_summary = 12;
+
+  bool can_send_like = 8;
+
+  bool only_friends_can_send_gifts = 11;
+
+  bool is_social_raid_unlocked = 13;
+
+  map<int32, int32> social_raid_help_counts = 14;
+}
+
+message KingdomProfile {
+  reserved 18;
+
+  string name = 1;
+
+  ProfileImage profile_image = 2;
+
+  bool is_kingdom_pass_activated = 3;
+
+  int32 kingdom_level = 4;
+
+  int64 kingdom_points = 5;
+
+  int32 pvp_tier = 9;
+
+  int64 popularity_points = 10;
+
+  int64 environment_score = 11;
+
+  int32 castle_level = 12;
+
+  int64 wishtree_deliveries = 13;
+
+  int64 train_deliveries = 14;
+
+  int64 air_balloons_completed = 15;
+
+  int64 landmarks_owned = 16;
+
+  int64 landmarks_built = 17;
+
+  int64 constructed_theme_structure_count = 45;
+
+  int64 constructed_theme_structure_max = 49;
+
+  oneof highest_cleared_normal_mode_land {
+    int32 highest_cleared_normal_mode_land_value = 19;
+
+    ck.Empty no_highest_cleared_normal_mode_land = 20;
+  }
+
+  oneof highest_cleared_hard_mode_land {
+    int32 highest_cleared_hard_mode_land_value = 25;
+
+    ck.Empty no_highest_cleared_hard_mode_land = 26;
+  }
+
+  oneof highest_cleared_master_mode_land {
+    int32 highest_cleared_master_mode_land_value = 42;
+
+    ck.Empty no_highest_cleared_master_mode_land = 43;
+  }
+
+  oneof highest_cleared_beast_yeast_node {
+    int32 highest_cleared_beast_yeast_node_value = 51;
+
+    ck.Empty no_highest_cleared_beast_yeast_node = 52;
+  }
+
+  int64 normal_mode_lands_completed = 21;
+
+  int64 hard_mode_lands_completed = 35;
+
+  int64 master_mode_lands_completed = 44;
+
+  int64 beast_yeast_nodes_completed = 53;
+
+  int32 episode_stars_count = 41;
+
+  int32 episode_stars_max = 50;
+
+  int64 dungeons_cleared = 22;
+
+  int64 pvp_battles = 23;
+
+  int64 activated_relationships = 24;
+
+  int64 port_beach_shop_item_purchased = 27;
+
+  int64 gnome_researched = 28;
+
+  int64 port_trade_ended = 29;
+
+  int64 guild_battles = 30;
+
+  int32 max_cake_tower_floor = 31;
+
+  int64 ocean_segment_unlocked = 32;
+
+  oneof guild_summary {
+    GuildSummaryForProfile guild_summary_value = 33;
+
+    ck.Empty no_guild_summary = 34;
+  }
+
+  int32 infinite_dungeon_season_data_id = 6;
+
+  int32 infinite_dungeon_tier_data_id = 7;
+
+  repeated ProsperityEntry prosperity_entries = 36;
+
+  oneof profile_title {
+    ck.Empty no_profile_title = 37;
+
+    ProfileTitle profile_title_value = 38;
+  }
+
+  oneof profile_frame {
+    ck.Empty no_profile_frame = 39;
+
+    ProfileFrame profile_frame_value = 40;
+  }
+
+  int32 prosperity_rank = 46;
+
+  double prosperity_top_ratio = 47;
+
+  repeated HonorTrophy honor_trophies = 48;
+
+  oneof custom_cookie_summary {
+    CustomCookieSummary custom_cookie_summary_value = 54;
+
+    ck.Empty no_custom_cookie_summary = 55;
+  }
+}
+
+message CustomCookieSummary {
+  string custom_cookie_name = 1;
+
+  int32 custom_cookie_voice_data_id = 2;
+
+  map<int32, CookieLookColor> equipped_cookie_look_colors = 3;
+}
+
+message CurrencyAmount {
+  int64 paid = 1;
+
+  int64 free = 2;
+}
+
+message Kingdom {
+  string name = 1;
+
+  int64 coins = 2;
+
+  int64 crystals = 3;
+
+  int64 rainbow_cubes = 63;
+
+  int64 rainbow_crystals = 41;
+
+  Stamina stamina = 4;
+
+  int64 mileage_points = 5;
+
+  Cookies cookies = 6;
+
+  Town town = 7;
+
+  Inventory inventory = 8;
+
+  repeated Quest ongoing_quests = 9;
+
+  repeated int32 cleared_quest_data_ids = 10;
+
+  AdventureMap adventure_map = 11;
+
+  StoryAdventure story_adventure = 44;
+
+  repeated int32 played_cutscene_ids = 12;
+
+  repeated int32 completed_tutorial_data_ids = 13;
+
+  repeated int32 unlocked_content_data_ids = 29;
+
+  Shop shop = 14;
+
+  League league = 15;
+
+  Activities activities = 16;
+
+  Discoveries discoveries = 17;
+
+  ActionCounters action_counters = 18;
+
+  DailyActionCounters daily_action_counters = 19;
+
+  repeated Achievement achievements = 20;
+
+  GameEvents game_events = 21;
+
+  Conversations conversations = 22;
+
+  Profiles profiles = 23;
+
+  Frames frames = 30;
+
+  KingdomPassSeason kingdom_pass_season = 24;
+
+  Trains trains = 25;
+
+  Wishtree wishtree = 26;
+
+  Castle castle = 27;
+
+  FriendInviteState friend_invite_state = 28;
+
+  PersonalInfoState personal_info_state = 31;
+
+  GnomeLab gnome_lab = 33;
+
+  repeated BattleTeamsForType battle_teams = 34;
+
+  Ports ports = 36;
+
+  Ocean ocean = 35;
+
+  RecordTower record_tower = 39;
+
+  EventDungeons event_dungeons = 40;
+
+  InfiniteDungeons infinite_dungeons = 43;
+
+  bool platform_connect_reward_received = 42;
+
+  KingdomProsperity kingdom_prosperity = 45;
+
+  ck.Time last_attended_at = 46;
+
+  ck.Time previously_attended_at = 47;
+
+  int32 client_logic_version = 48;
+
+  HeroesHall heroes_hall = 49;
+
+  int64 pvp_medals = 50;
+
+  int64 guild_battle_medals = 51;
+
+  BoardAdventures board_adventures = 52;
+
+  FloatingObjectGroups floating_object_groups = 53;
+
+  AdvertisementState advertisement_state = 54;
+
+  ToppingCombinations topping_combinations = 55;
+
+  GachaPickupGroups gacha_pickup_groups = 56;
+
+  TownContests town_contests = 57;
+
+  SpeechBalloonGroups speech_balloon_groups = 58;
+
+  HotTimeBuffs hot_time_buffs = 59;
+
+  ContentAccessControl content_access_control = 60;
+
+  CookieTrials cookie_trials = 61;
+
+  CakeDungeons cake_dungeons = 62;
+
+  MusicBox music_box = 64;
+
+  VisualNovels visual_novels = 65;
+
+  VisualNovelFavorGiftState visual_novel_favor_gift_state = 66;
+
+  oneof cookie_squad_season {
+    CookieSquadSeason cookie_squad_season_value = 68;
+
+    ck.Empty no_cookie_squad_season = 69;
+  }
+
+  SubGames sub_games = 70;
+
+  CookieRelationships cookie_relationships = 71;
+
+  Episodes episodes = 72;
+
+  RelayDungeons relay_dungeons = 73;
+
+  SocialRaids social_raids = 74;
+
+  repeated SeasonableRecordsGroup seasonable_records_groups = 75;
+
+  JamStoneDungeonState jam_stone_dungeon_state = 76;
+
+  TowerAdventures tower_adventures = 77;
+
+  RandomDungeons random_dungeons = 78;
+
+  BeastRaids beast_raids = 79;
+
+  UnionWars union_wars = 80;
+
+  LobbyState lobby_state = 81;
+
+  LobbyGames lobby_games = 82;
+}
+
+message Ocean {
+  oneof map_data_id {
+    int32 map_data_id_value = 1;
+
+    ck.Empty no_map_data_id = 2;
+  }
+
+  repeated OceanSegmentUnlockProgress segment_unlock_progresses = 3;
+
+  repeated int32 unlocked_segment_data_ids = 4;
+
+  repeated OceanStructureEditProgress structure_edit_progresses = 5;
+
+  repeated int32 edited_structure_data_ids = 6;
+
+  repeated int32 opened_treasure_box_data_ids = 7;
+
+  repeated int32 interacted_npc_data_ids = 8;
+
+  Sunbeds sunbeds = 9;
+
+  oneof ongoing_battle {
+    OngoingOceanBattle ongoing_battle_value = 10;
+
+    ck.Empty no_ongoing_battle = 11;
+  }
+
+  repeated OceanVillageState village_states = 12;
+
+  repeated OceanVillageReoccupation village_reoccupations = 14;
+
+  OceanProductionDelivery production_delivery = 13;
+}
+
+message OceanVillageReoccupation {
+  ck.Time reoccupies_at = 1;
+}
+
+message Sunbeds {
+  repeated Sunbed sunbeds = 1;
+
+  repeated SunbedWaitingCookie waiting_cookies = 2;
+}
+
+message Sunbed {
+  int32 cookie_data_id = 1;
+
+  int32 village_data_id = 2;
+
+  ck.Time begun_at = 3;
+
+  int32 slot_index = 4;
+}
+
+message SunbedWaitingCookie {
+  int32 cookie_data_id = 1;
+
+  int32 village_data_id = 2;
+}
+
+message OngoingOceanBattle {
+  string id = 1;
+
+  int32 land_data_id = 2;
+
+  int32 random_seed = 3;
+
+  LandPosition start_position = 4;
+}
+
+message OceanVillageState {
+  oneof value {
+    Liberated liberated = 1;
+
+    Occupied occupied = 2;
+  }
+
+  message Liberated {
+    int32 village_data_id = 1;
+  }
+
+  message Occupied {
+    int32 village_data_id = 1;
+
+    map<int32, int64> stacked_items = 2;
+
+    LandPosition last_position = 3;
+
+    bool is_reoccupied = 4;
+  }
+}
+
+message OceanProductionDelivery {
+  oneof value {
+    Waiting waiting = 1;
+
+    Ongoing ongoing = 2;
+  }
+
+  message Waiting {
+  }
+
+  message Ongoing {
+    ck.Time delivers_at = 1;
+  }
+}
+
+message OceanSegmentUnlockProgress {
+  int32 data_id = 1;
+
+  ck.Time passive_not_applied_unlocks_at = 2;
+}
+
+message OceanStructureEditProgress {
+  int32 data_id = 1;
+
+  ck.Time ends_at = 2;
+}
+
+message BattleTeamsForType {
+  BattleType battle_type = 1;
+
+  repeated UserBattleTeam battle_teams = 2;
+
+  int32 latest_battle_team_index = 3;
+}
+
+message GnomeLab {
+  repeated DevelopedGnomeResearch developed_researches = 1;
+
+  repeated OngoingGnomeResearch ongoing_researches = 2;
+}
+
+message DevelopedGnomeResearch {
+  int32 data_id = 1;
+
+  int32 level = 2;
+}
+
+message OngoingGnomeResearch {
+  int32 data_id = 1;
+
+  int32 level = 2;
+
+  ck.Time begun_at = 3;
+
+  ck.Time ends_at = 4;
+}
+
+message Achievement {
+  int32 data_id = 1;
+
+  ck.Time completed_at = 2;
+}
+
+message KingdomPassSeason {
+  int32 kingdom_season_data_id = 1;
+
+  SeasonMissions daily_missions = 4;
+
+  SeasonMissions weekly_missions = 11;
+
+  SeasonMissions season_missions = 5;
+
+  int64 mission_points = 6;
+
+  repeated int32 received_default_reward_indices = 7;
+
+  repeated int32 received_kingdom_pass_reward_indices = 8;
+
+  bool start_pop_up_watched = 9;
+
+  oneof kingdom_pass {
+    KingdomPass kingdom_pass_value = 2;
+
+    ck.Empty no_kingdom_pass = 3;
+  }
+
+  repeated KingdomPassSeasonResult previous_season_results = 10;
+}
+
+message KingdomPass {
+  int32 kingdom_pass_data_id = 1;
+
+  KingdomPassAttendReward attend_reward = 2;
+}
+
+message KingdomPassAttendReward {
+  oneof value {
+    Received received = 1;
+
+    Receivable receivable = 2;
+  }
+
+  message Received {
+    ck.Time last_updated_at = 1;
+  }
+
+  message Receivable {
+    ck.Time last_updated_at = 1;
+  }
+}
+
+message Conversations {
+  CookieRandomSpeeches cookie_random_speeches = 1;
+}
+
+message CookieRandomSpeeches {
+  oneof speech {
+    CookieRandomSpeech speech_value = 1;
+
+    ck.Empty no_speech = 2;
+  }
+}
+
+message CookieRandomSpeech {
+  string id = 1;
+
+  int32 cookie_data_id = 2;
+
+  ck.Time available_from = 3;
+}
+
+message SeasonMissions {
+  repeated Quest quests = 1;
+
+  repeated int32 cleared_quest_data_ids = 2;
+
+  ck.Time expires_at = 3;
+}
+
+message PvpCounter {
+  repeated Record records = 1;
+
+  message Record {
+    PvpType pvp_type = 1;
+
+    int64 count = 2;
+  }
+}
+
+message ActionCounters {
+  map<int32, int64> summon_purchase_counter = 1;
+
+  map<int32, int64> pvp_shop_slot_purchase_counter = 2;
+
+  map<int32, int64> package_purchase_counter = 3;
+
+  ck.AchievementCounter2 activity_start_per_cookie_counter = 4;
+
+  map<int32, int64> activity_start_counter = 5;
+
+  ck.AchievementCounter2 activity_completion_per_cookie_counter = 6;
+
+  map<int32, int64> activity_completion_counter = 7;
+
+  int64 friend_request_sending_counter = 8;
+
+  int64 friend_like_sending_counter = 9;
+
+  int64 friend_visit_counter = 10;
+
+  int64 friend_daily_random_gift_sending_counter = 11;
+
+  int64 friendly_pvp_match_counter = 12;
+
+  int64 friend_pvp_win_counter = 13;
+
+  int64 friend_pvp_lose_counter = 14;
+
+  map<int32, int64> obstacle_removal_counter = 15;
+
+  map<int32, int64> structure_initial_construction_start_counter = 16;
+
+  map<int32, int64> structure_placement_counter = 17;
+
+  map<int32, int64> tile_placement_counter = 18;
+
+  map<int32, int64> daily_dungeon_clear_counter = 19;
+
+  map<int32, int64> enemy_kill_counter = 20;
+
+  map<int32, int64> reward_box_open_counter = 21;
+
+  int64 wishtree_completion_counter = 23;
+
+  int64 wishtree_daily_gifts_receive_counter = 24;
+
+  ck.Duration fountain_production_duration_counter = 25;
+
+  int64 fountain_production_receiving_counter = 26;
+
+  int64 train_start_counter = 27;
+
+  int64 train_completion_counter = 28;
+
+  int64 pvp_revenge_battle_counter = 30;
+
+  int64 deprecated_pvp_revenge_win_counter = 31;
+
+  int64 pvp_revenge_lose_counter = 32;
+
+  int64 air_balloon_start_counter = 33;
+
+  map<int32, int64> air_balloon_started_today_completion_counter = 84;
+
+  int64 topping_upgrade_success_counter = 34;
+
+  int64 topping_upgrade_failure_counter = 35;
+
+  int64 guild_battle_counter = 38;
+
+  map<int32, int64> structure_merge_counter = 41;
+
+  map<int32, int64> structure_split_counter = 42;
+
+  int64 port_completion_counter = 43;
+
+  map<int32, int64> acquired_relic_counter = 45;
+
+  int64 deprecated_pvp_defense_win_counter = 48;
+
+  int64 guild_activity_points_counter = 49;
+
+  int64 guild_relic_activity_points_counter = 50;
+
+  int64 guild_segment_unlock_activity_points_counter = 51;
+
+  int64 ocean_battle_counter = 52;
+
+  int64 infinite_dungeon_participation_counter = 53;
+
+  PvpCounter pvp_match_attack_win_counter = 54;
+
+  PvpCounter pvp_match_revenge_win_counter = 55;
+
+  PvpCounter pvp_match_defense_win_counter = 56;
+
+  map<int32, int64> equipment_item_material_acquired_counter = 61;
+
+  map<int32, int64> item_shop_slot_purchase_counter = 62;
+
+  int64 guild_attendance_counter = 63;
+
+  RhythmStageClearCounter rhythm_stage_clear_counter = 64;
+
+  map<int32, int64> rhythm_stage_score_counter = 65;
+
+  map<int32, int64> event_dungeon_clear_counter = 66;
+
+  int64 acorn_exchanges_counter = 67;
+
+  map<int32, int64> theme_topping_upgrade_success_counter = 68;
+
+  map<int32, int64> theme_topping_upgrade_failure_counter = 69;
+
+  ck.AchievementCounter2 cake_dungeon_play_counter = 70;
+
+  map<int32, int64> board_adventure_score_counter = 71;
+
+  ck.AchievementCounter2 board_adventure_map_object_complete_counter = 72;
+
+  map<int32, int64> sub_game_clear_counter = 73;
+
+  PvpCounter pvp_match_battle_counter = 75;
+
+  repeated EquipmentItemUpgradeCounter equipment_item_upgrade_try_counter = 76;
+
+  repeated EquipmentItemUpgradeCounter equipment_item_upgrade_success_counter = 77;
+
+  repeated EquipmentItemUpgradeCounter equipment_item_upgrade_fail_counter = 78;
+
+  repeated EquipmentItemUpgradeCounter equipment_item_upgrade_great_success_counter = 79;
+
+  map<int32, int64> jam_stone_dungeon_clear_counter = 80;
+
+  map<int32, int64> random_dungeon_play_counter = 81;
+
+  InfiniteDungeonClearCounter infinite_dungeon_clear_counter = 82;
+
+  ck.AchievementCounter2 item_shop_payment_counter = 83;
+
+  int64 beast_raid_battle_counter = 85;
+
+  ck.AchievementCounter2 beast_raid_clear_counter = 86;
+
+  ck.AchievementCounter2 mission_run_game_field_item_counter = 88;
+
+  map<int32, int64> mission_run_game_score_counter = 89;
+
+  map<int32, int64> sub_game_play_counter = 90;
+
+  map<int32, int64> lobby_event_rewards_receive_counter = 91;
+
+  TowerAdventureBattleClearCounter tower_adventure_battle_clear_counter = 92;
+
+  map<string, int64> structure_production_collection_counter = 93;
+
+  int64 cookie_look_composition_counter = 94;
+
+  map<int32, int64> lobby_game_play_counter = 95;
+
+  int64 guild_battle_negligible_reset_counter = 96;
+}
+
+message InfiniteDungeonClearCounter {
+  repeated Record records = 1;
+
+  message Record {
+    InfiniteDungeonDifficulty difficulty = 1;
+
+    int64 count = 2;
+  }
+}
+
+message TowerAdventureBattleClearCounter {
+  repeated Record records = 1;
+
+  message Record {
+    TowerAdventureType tower_adventure_type = 1;
+
+    int64 count = 2;
+  }
+}
+
+message EquipmentItemUpgradeCounter {
+  EquipmentItemType equipment_item_type = 1;
+
+  int64 count = 2;
+}
+
+message RhythmStageClearCounter {
+  repeated Record record = 1;
+
+  message Record {
+    int32 event_dungeon_stage_data_id = 1;
+
+    EventDungeonRhythmStageGrade grade = 2;
+
+    int64 count = 3;
+  }
+}
+
+message DailyActionCounters {
+  ck.Time last_updated_at = 1;
+
+  int64 stamina_using_counter = 2;
+
+  map<int32, int64> daily_dungeon_clear_counter = 3;
+
+  int64 guild_battle_counter = 4;
+
+  int64 guild_attendance_counter = 5;
+
+  int64 acorn_exchanges_counter = 6;
+
+  map<int32, int64> air_balloon_started_today_completion_counter = 7;
+
+  map<int32, int64> lobby_event_rewards_receive_counter = 8;
+
+  int64 guild_battle_negligible_reset_counter = 9;
+}
+
+message Stamina {
+  int64 points = 1;
+
+  ck.Time last_updated_at = 2;
+}
+
+message PvpTicketState {
+  int64 tickets = 1;
+
+  ck.Time last_updated_at = 2;
+}
+
+message FixedWishtreeQuest {
+  int32 quest_data_id = 1;
+
+  int32 quantity = 2;
+}
+
+message Wishtree {
+  repeated Slot slots = 1;
+
+  int32 today_completed_count = 2;
+
+  int32 today_delivery_achievement_received_count = 3;
+
+  ck.Time delivery_achievement_reset_at = 4;
+
+  message Slot {
+    int32 slot_number = 1;
+
+    ck.Time available_at = 2;
+
+    repeated FixedWishtreeQuest wishtree_quests = 3;
+
+    int32 cookie_data_id = 4;
+
+    bool is_visible = 5;
+  }
+}
+
+message Castle {
+  repeated Quest quests = 1;
+}
+
+message PortState {
+  oneof value {
+    Trading trading = 1;
+
+    TradeReadied trade_readied = 2;
+
+    TradeEnded trade_ended = 3;
+  }
+
+  message Trading {
+    repeated int32 next_bonus_item_data_ids = 1;
+
+    int64 accumulated_points = 2;
+
+    ck.Time trade_ends_at = 3;
+  }
+
+  message TradeReadied {
+    repeated int32 bonus_item_data_ids = 1;
+
+    int64 accumulated_points = 2;
+
+    map<int32, int64> item_accumulated_counts = 3;
+
+    ck.Time trade_starts_at = 4;
+  }
+
+  message TradeEnded {
+    repeated int32 next_bonus_item_data_ids = 1;
+
+    int64 accumulated_points = 2;
+  }
+}
+
+message Ports {
+  map<int32, PortState> states = 1;
+
+  int32 expanded_count = 2;
+}
+
+message FixedTrainQuest {
+  int32 quest_index = 6;
+
+  int32 quest_data_id = 1;
+
+  bool is_paid = 2;
+
+  bool is_received = 3;
+
+  int32 reward_data_id = 4;
+
+  int32 reward_data_quantity = 5;
+}
+
+message TrainState {
+  oneof value {
+    Trading trading = 1;
+
+    TradeReadied trade_readied = 2;
+
+    TradeEnded trade_ended = 3;
+  }
+
+  message Trading {
+    repeated FixedTrainQuest train_quests = 1;
+
+    ck.Time trade_ends_at = 2;
+  }
+
+  message TradeReadied {
+    repeated FixedTrainQuest train_quests = 1;
+
+    repeated int32 delivery_ticket_used_indexes = 2;
+  }
+
+  message TradeEnded {
+    repeated FixedTrainQuest train_quests = 1;
+  }
+}
+
+message Trains {
+  map<int32, TrainState> states = 1;
+
+  int32 expanded_count = 2;
+}
+
+message Profiles {
+  ProfileImage selected_profile_image = 1;
+
+  repeated ProfileImage unlocked_profile_images = 2;
+
+  oneof selected_profile_title {
+    ck.Empty no_selected_profile_title = 3;
+
+    ProfileTitle selected_profile_title_value = 4;
+  }
+
+  repeated ProfileTitle unlocked_profile_titles = 5;
+
+  repeated ProfileTitle received_profile_titles = 6;
+
+  oneof selected_profile_frame {
+    ck.Empty no_selected_profile_frame = 7;
+
+    ProfileFrame selected_profile_frame_value = 8;
+  }
+
+  repeated ProfileFrame unlocked_profile_frames = 9;
+
+  repeated ProfileFrame received_profile_frames = 10;
+
+  repeated ProfileDeco unlocked_profile_decos = 11;
+
+  repeated ProfileDeco selected_profile_decos = 12;
+}
+
+message ProfileDeco {
+  int32 data_id = 1;
+
+  ProfileDecoType deco_type = 2;
+}
+
+message Frames {
+  repeated int32 frame_data_ids = 1;
+}
+
+message ProfileImage {
+  int32 data_id = 1;
+}
+
+message ProfileTitle {
+  int32 data_id = 1;
+}
+
+message ProfileFrame {
+  int32 data_id = 1;
+}
+
+message Discoveries {
+  repeated int32 cookie_data_ids = 1;
+
+  repeated int32 item_data_ids = 2;
+
+  repeated int32 activity_data_ids = 3;
+
+  repeated int32 cookie_look_data_ids = 4;
+}
+
+message League {
+  reserved 3, 4, 5, 6, 7, 8;
+
+  int64 kingdom_points = 1;
+
+  repeated int32 rewarded_kingdom_levels = 2;
+}
+
+message KingdomAdditionalEvents {
+  reserved 6, 3, 4, 13, 14;
+
+  PreprocessedEvents preprocessed_events = 1;
+
+  CastleChanges castle_changes = 20;
+
+  LeagueChanges league_changes = 2;
+
+  repeated QuestRequirementStateChange quest_requirement_state_changes = 5;
+
+  AdditionalDiscoveries additional_discoveries = 7;
+
+  ActionCounters action_counter_changes = 8;
+
+  UpdatedDailyActionCounters updated_daily_action_counters = 9;
+
+  GameEventChanges game_event_changes = 10;
+
+  PackageShopChanges package_shop_changes = 11;
+
+  GuildChanges guild_changes = 12;
+
+  UpdatedItems updated_items = 16;
+
+  EventDungeonChanges event_dungeon_changes = 17;
+
+  ItemChanges item_changes = 18;
+
+  repeated PassiveChange passive_changes = 19;
+
+  TownChanges town_changes = 21;
+
+  ContentAccessControlChanges content_access_control_changes = 23;
+
+  BoardAdventureChanges board_adventure_changes = 24;
+
+  SocialRaidChanges social_raid_changes = 25;
+
+  OptionalLobbyGameResult lobby_game_result = 27;
+
+  message PreprocessedEvents {
+    reserved 2, 3;
+
+    GameEventChanges game_event_changes = 1;
+
+    KingdomPassSeasonChange kingdom_pass_season_change = 4;
+
+    ItemChanges item_changes = 5;
+
+    CookieSquadSeasonChanges cookie_squad_season_changes = 6;
+
+    PackageShopChanges package_shop_changes = 7;
+  }
+
+  message CastleChanges {
+    oneof new_castle_quests {
+      QuestList new_castle_quests_value = 1;
+
+      ck.Empty no_new_castle_quests = 2;
+    }
+
+    message QuestList {
+      repeated Quest quests = 1;
+    }
+  }
+
+  message LeagueChanges {
+    oneof generated_cookie_random_speech {
+      CookieRandomSpeech generated_cookie_random_speech_value = 1;
+
+      ck.Empty no_generated_cookie_random_speech = 2;
+    }
+  }
+
+  message AdditionalDiscoveries {
+    repeated int32 cookie_data_ids = 1;
+
+    repeated int32 item_data_ids = 2;
+
+    repeated int32 activity_data_ids = 3;
+
+    repeated int32 cookie_look_data_ids = 4;
+  }
+
+  message UpdatedDailyActionCounters {
+    oneof updated {
+      DailyActionCounters updated_value = 1;
+
+      ck.Empty no_updated = 2;
+    }
+  }
+
+  message GameEventChanges {
+    repeated GameEventMission ended_missions = 7;
+
+    repeated GameEvent started_events = 1;
+
+    repeated GameEventMission started_missions = 2;
+
+    repeated string ended_event_ids = 3;
+
+    repeated GameEventTimeAttendanceState changed_time_attendance_states = 4;
+
+    map<string, ChangedBingoMissions> changed_bingo_missions = 5;
+
+    map<string, ChangedAchievementMissionsClearedAt> changed_achievement_missions_cleared_at = 6;
+
+    message ChangedBingoMissions {
+      map<int32, GameEventExtension.BingoMission> bingo_missions = 1;
+    }
+
+    message ChangedAchievementMissionsClearedAt {
+      map<int32, ck.Time> missions_cleared_at = 1;
+    }
+  }
+
+  message KingdomPassSeasonChange {
+    oneof changed {
+      ChangedSeason changed_season = 1;
+
+      SeasonMissions changed_daily_missions = 2;
+
+      SeasonMissions changed_weekly_missions = 4;
+
+      ck.Empty no_changed = 3;
+    }
+
+    message ChangedSeason {
+      KingdomPassSeason kingdom_pass_season = 1;
+    }
+  }
+
+  message PackageShopChanges {
+    repeated PackageState begun_package_states = 1;
+
+    repeated int32 reset_package_data_ids = 2;
+  }
+
+  message GuildChanges {
+    oneof updated_level {
+      int32 level_value = 1;
+
+      ck.Empty no_guild = 2;
+
+      ck.Empty no_update = 3;
+    }
+  }
+
+  message UpdatedItems {
+    repeated UpdatedItem updated_items = 1;
+
+    message UpdatedItem {
+      int32 item_data_id = 1;
+
+      int64 item_quantity = 2;
+
+      ck.Time last_updated_at = 3;
+    }
+  }
+
+  message EventDungeonChanges {
+    map<int32, EventDungeon> started_event_dungeons_by_season = 1;
+
+    repeated int32 ended_event_dungeon_season_data_ids = 2;
+
+    repeated EventDungeonHistory ended_event_dungeon_histories = 3;
+  }
+
+  message ItemChanges {
+    repeated Reward rewards = 1;
+
+    repeated Payment payments = 2;
+  }
+
+  message TownChanges {
+    oneof new_town_last_edited_at {
+      ck.Time new_town_last_edited_at_value = 1;
+
+      ck.Empty no_new_town_last_edited_at = 2;
+    }
+
+    oneof is_edited_after_save_and_load {
+      bool is_edited_after_save_and_load_value = 3;
+
+      ck.Empty no_is_edited_after_save_and_load = 4;
+    }
+  }
+
+  message ContentAccessControlChanges {
+    oneof updated {
+      ContentAccessControl updated_value = 1;
+
+      ck.Empty no_updated = 2;
+    }
+  }
+
+  message BoardAdventureChanges {
+    map<int32, int64> total_obtained_session_coin_amount_changes = 1;
+
+    map<int32, int64> score_changes = 2;
+
+    map<int32, bool> score_red_flag_detected_changes = 3;
+  }
+
+  message CookieSquadSeasonChanges {
+    oneof value {
+      NoChanged no_changed = 1;
+
+      SeasonChanged season_changed = 2;
+    }
+
+    message NoChanged {
+    }
+
+    message SeasonChanged {
+      oneof cookie_squad_season {
+        CookieSquadSeason cookie_squad_season_value = 1;
+
+        ck.Empty no_cookie_squad_season = 2;
+      }
+    }
+  }
+
+  message SocialRaidChanges {
+    repeated SocialRaid new_social_raids = 1;
+  }
+
+  message OptionalLobbyGameResult {
+    oneof lobby_game_result {
+      LobbyGameResult lobby_game_result_value = 1;
+
+      ck.Empty no_lobby_game_result = 2;
+    }
+  }
+}
+
+message PassiveChange {
+  oneof value {
+    Reset reset = 1;
+
+    Difference difference = 2;
+  }
+
+  KingdomPassiveContentType passive_type = 3;
+
+  message Reset {
+    map<int32, int32> passives = 1;
+  }
+
+  message Difference {
+    map<int32, int32> changes = 1;
+  }
+}
+
+message Shop {
+  PackageShop package_shop = 2;
+
+  repeated FlatSubscription flat_subscriptions = 3;
+
+  repeated int32 purchased_currency_data_ids = 4;
+
+  repeated int32 completed_structure_theme_data_ids = 5;
+
+  repeated int32 completed_cookie_look_theme_data_ids = 14;
+
+  repeated int32 unlocked_tile_data_ids = 6;
+
+  repeated int32 unlocked_structure_skin_data_ids = 10;
+
+  repeated int32 unlocked_town_background_skin_data_ids = 13;
+
+  repeated FreeSummon free_summons = 7;
+
+  SummonStates summon_states = 9;
+
+  repeated DailyPurchaseLimitState daily_purchase_limit_states = 8;
+
+  repeated ItemShop item_shops = 12;
+}
+
+message SummonStates {
+  map<int32, int32> summon_upper_bound_state_counts = 1;
+
+  map<int32, SummonRewardStep> received_summon_reward_steps = 2;
+}
+
+message SummonRewardStep {
+  int32 summon_group_data_id = 1;
+
+  repeated int32 received_reward_steps = 2;
+}
+
+message Histories {
+  repeated GachaHistory gacha_histories = 1;
+
+  repeated CookieLookCompositionHistory cookie_look_composition_histories = 2;
+}
+
+message GachaHistory {
+  ck.Time rewarded_at = 1;
+
+  repeated Reward rewards = 2;
+
+  oneof gacha_kind {
+    Summon summon = 3;
+
+    int32 package_data_id = 4;
+
+    int32 event_data_id = 5;
+
+    int32 event_reward_exchange_data_id = 6;
+  }
+
+  message Summon {
+    int32 summon_data_id = 1;
+
+    oneof purchase_method {
+      int32 price_index = 2;
+
+      ck.Empty free = 3;
+    }
+  }
+}
+
+message CookieLookCompositionHistory {
+  ck.Time rewarded_at = 1;
+
+  int32 cookie_look_compose_data_id = 2;
+
+  repeated int32 used_cookie_look_data_ids = 3;
+
+  repeated Reward composition_rewards = 4;
+}
+
+message FreeSummon {
+  int32 summon_data_id = 1;
+
+  int32 remaining_count = 2;
+
+  ck.Time next_reset_at = 3;
+}
+
+message FlatSubscription {
+  int32 flat_data_id = 1;
+
+  ck.Time expires_at = 2;
+
+  ck.Time daily_reward_receivable_at = 3;
+}
+
+message ItemShop {
+  int32 data_id = 1;
+
+  repeated ItemShopSlot slots = 2;
+
+  bool is_closed = 3;
+
+  oneof reset_policy {
+    ItemShopResetPolicy reset_policy_value = 4;
+
+    ck.Empty no_reset_policy = 5;
+  }
+}
+
+message ItemShopResetPolicy {
+  oneof value {
+    ManualReset manual_reset = 1;
+
+    AutoResetAtMidnight auto_reset_at_midnight = 2;
+
+    AutoResetAtNewPvpSeason auto_reset_at_new_pvp_season = 3;
+
+    NoReset no_reset = 4;
+
+    AutoResetAtStartDate auto_reset_at_start_date = 5;
+  }
+
+  message ManualReset {
+    ck.Time resets_at = 1;
+  }
+
+  message AutoResetAtMidnight {
+    ck.Time resets_at = 1;
+  }
+
+  message AutoResetAtNewPvpSeason {
+    oneof season_data_id {
+      int32 season_data_id_value = 2;
+
+      ck.Empty no_season_data_id = 3;
+    }
+  }
+
+  message NoReset {
+  }
+
+  message AutoResetAtStartDate {
+    ck.Time resets_at = 1;
+  }
+}
+
+message ItemShopSlot {
+  string id = 1;
+
+  int32 item_shop_slot_data_id = 2;
+
+  int32 fixed_reward_data_id = 3;
+
+  int32 sold_count = 4;
+
+  int32 slot_item_data_id = 5;
+}
+
+message PackageShop {
+  repeated PackageState package_states = 1;
+
+  repeated ShoppingBoxRewardCount shopping_box_reward_counts = 2;
+
+  repeated AccumulatedBonusMission accumulated_bonus_missions = 3;
+
+  repeated int32 received_accumulated_bonus_data_ids = 4;
+}
+
+message AccumulatedBonusMission {
+  int32 bonus_data_id = 1;
+
+  repeated RequirementState requirement_states = 2;
+}
+
+message ShoppingBoxRewardCount {
+  int32 reward_selection_data_id = 1;
+
+  int32 shopping_box_data_id = 2;
+
+  int32 count = 3;
+}
+
+message PackageState {
+  int32 package_data_id = 1;
+
+  int32 purchase_count = 2;
+
+  ck.Time last_purchased_at = 3;
+
+  oneof popup_last_shown_at {
+    ck.Time popup_last_shown_at_value = 4;
+
+    ck.Empty no_popup_last_shown_at = 5;
+  }
+
+  repeated PackageBonusState package_bonus_states = 6;
+
+  PackagePurchaseLimitBonus purchase_limit_bonus = 7;
+
+  repeated PackageExtension extensions = 8;
+}
+
+message PackageExtension {
+  oneof value {
+    TimeDeal time_deal = 1;
+
+    Mission mission = 2;
+
+    PiggyBank piggy_bank = 3;
+  }
+
+  message TimeDeal {
+    ck.Time time_deal_begun_at = 1;
+  }
+
+  message Mission {
+    repeated int32 cleared_mission_data_ids = 1;
+
+    repeated PackageMission package_missions = 2;
+  }
+
+  message PiggyBank {
+    oneof requirement_state {
+      RequirementState requirement_state_value = 2;
+
+      ck.Empty no_requirement_state = 3;
+    }
+
+    oneof rewarded_milestone_data_id {
+      ck.Empty no_rewarded_milestone_data_id = 4;
+
+      int32 rewarded_milestone_data_id_value = 5;
+    }
+  }
+}
+
+message PackageBonusState {
+  int32 package_bonus_data_id = 1;
+
+  int32 purchased_count = 2;
+
+  int32 finished_repeat_count = 3;
+
+  repeated int32 received_purchase_counts_in_repeat = 4;
+
+  int32 received_selectable_reward_count = 5;
+}
+
+message PackageMission {
+  int32 package_data_id = 1;
+
+  int32 mission_data_id = 2;
+
+  repeated RequirementState requirement_states = 3;
+}
+
+message PackagePurchaseLimitBonus {
+  int32 package_data_id = 1;
+
+  int32 bonus_count = 2;
+}
+
+message PackageReportForClient {
+  string screen_name = 1;
+
+  string path_name = 2;
+
+  repeated int32 path_values = 3;
+}
+
+message SummonReportForClient {
+  string screen_name = 1;
+
+  string path_name = 2;
+
+  repeated int32 path_values = 3;
+}
+
+message Cookies {
+  repeated Cookie acquired = 1;
+
+  CustomCookieOptional custom_cookie = 5;
+
+  repeated SoulStone normal_soul_stones = 2;
+
+  repeated CookieSkin cookie_skins = 3;
+
+  repeated SoulStone beyond_soul_stones = 4;
+}
+
+message CookieSkin {
+  int32 cookie_data_id = 1;
+
+  repeated int32 acquired_skin_data_ids = 2;
+}
+
+message TownSegmentUnlockProgress {
+  int32 data_id = 1;
+
+  ck.Time passive_not_applied_unlocks_at = 2;
+}
+
+message TownSegment {
+  int32 data_id = 1;
+}
+
+message GuildSegmentUnlockState {
+  int32 data_id = 1;
+
+  bool is_recommended = 2;
+
+  oneof progress {
+    WaitingContribution waiting_contribution = 3;
+
+    InProgress in_progress = 4;
+  }
+
+  message WaitingContribution {
+    map<int32, int64> item_contributions = 1;
+  }
+
+  message InProgress {
+    ck.Time unlocks_at = 1;
+  }
+}
+
+message Town {
+  repeated Structure structures = 1;
+
+  repeated TownSegmentUnlockProgress segment_unlock_progresses = 2;
+
+  repeated TownSegment unlocked_segments = 3;
+
+  TownPlacement town_placement = 4;
+
+  repeated TownPresetRef town_preset_refs = 5;
+
+  int32 town_preset_storage_level = 6;
+
+  repeated int32 bookmarked_structure_data_ids = 7;
+
+  repeated string bookmarked_house_ids = 12;
+
+  repeated int32 historically_constructed_structure_data_ids = 8;
+
+  repeated int32 unlocked_sky_garden_island_data_ids = 9;
+
+  ck.Time town_last_edited_at = 10;
+
+  bool is_edited_after_save_and_load = 11;
+}
+
+message StructureSetting {
+  oneof skin_data_id {
+    int32 skin_data_id_value = 1;
+
+    ck.Empty no_skin_data_id = 2;
+  }
+
+  bool hide_floor = 3;
+}
+
+message TownPlacement {
+  map<string, StructureSetting> structure_settings = 3;
+
+  map<string, StructurePlacement> structure_placements = 1;
+
+  map<int32, TilePlacements> tile_placements = 2;
+
+  oneof town_background_skin_data_id {
+    ck.Empty no_town_background_skin_data_id = 4;
+
+    int32 town_background_skin_data_id_value = 5;
+  }
+}
+
+message TownPresetRef {
+  string preset_id = 1;
+
+  string name = 2;
+
+  int32 slot = 3;
+
+  ck.Time saved_at = 4;
+
+  ck.Time last_loaded_at = 5;
+}
+
+message TownPresetStructureMetadata {
+  int32 structure_data_id = 1;
+
+  int32 structure_level = 2;
+}
+
+message TownPreset {
+  string preset_id = 1;
+
+  string owner_id = 2;
+
+  TownPlacement town_placement = 3;
+
+  map<string, TownPresetStructureMetadata> structure_metadatas = 4;
+
+  repeated int32 unlocked_segment_data_ids = 5;
+}
+
+message GuildTown {
+  repeated Structure structures = 1;
+
+  repeated GuildSegmentUnlockState segment_unlock_states = 2;
+
+  repeated int32 unlocked_segment_data_ids = 3;
+
+  TownPlacement town_placement = 4;
+}
+
+message StructurePlacement {
+  oneof value {
+    Town town = 1;
+
+    SkyGarden sky_garden = 2;
+  }
+
+  message Town {
+    ck.Coordinates coordinates = 1;
+
+    Rotation rotation = 2;
+  }
+
+  message SkyGarden {
+    int32 island_data_id = 1;
+
+    Rotation rotation = 2;
+  }
+}
+
+message ConstructionStatus {
+  oneof value {
+    PreConstruction pre_construction = 1;
+
+    Constructing constructing = 2;
+
+    Constructed constructed = 3;
+  }
+
+  message PreConstruction {
+    ConstructionKind kind = 1;
+  }
+
+  message Constructing {
+    ConstructionKind kind = 1;
+
+    ck.Time passive_not_applied_ends_at = 2;
+  }
+
+  message Constructed {
+    ck.Time constructed_at = 1;
+  }
+}
+
+message TileRef {
+  int32 tile_data_id = 1;
+
+  TilePlacement placement = 2;
+}
+
+message TilePlacement {
+  ck.Coordinates coordinates = 1;
+
+  int32 appearance_number = 2;
+}
+
+message TilePlacements {
+  map<int32, CoordinatesList> coordinates_by_appearance_number = 1;
+
+  message CoordinatesList {
+    repeated ck.Coordinates coordinates = 1;
+  }
+}
+
+message Structure {
+  reserved 5, 6, 7, 9;
+
+  string id = 1;
+
+  int32 data_id = 2;
+
+  int32 level = 3;
+
+  int32 craft_queue_expansion_count = 4;
+
+  bool was_broken = 8;
+
+  oneof fountain_production {
+    FountainProduction fountain_production_value = 10;
+
+    ck.Empty no_fountain_production = 11;
+  }
+
+  oneof auto_production {
+    AutoProduction auto_production_value = 12;
+
+    ck.Empty no_auto_production = 13;
+  }
+
+  repeated MergedStructure merged_structures = 17;
+
+  ck.Time last_updated_at = 18;
+
+  ConstructionStatus construction_status = 19;
+
+  oneof first_placed_at {
+    ck.Time first_placed_at_value = 20;
+
+    ck.Empty no_first_placed_at = 21;
+  }
+}
+
+message MergedStructure {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  bool was_broken = 3;
+
+  oneof first_placed_at {
+    ck.Time first_placed_at_value = 4;
+
+    ck.Empty no_first_placed_at = 5;
+  }
+}
+
+message AutoProduction {
+  ck.Duration production_duration = 1;
+
+  ck.Time last_updated_at = 2;
+
+  StructureProductionStatus production_status = 3;
+
+  bool is_not_activated = 4;
+}
+
+message FountainProduction {
+  ck.Time last_rewarded_at = 1;
+
+  ck.Time last_updated_at = 2;
+
+  map<int32, int64> stacked_items = 3;
+}
+
+message Inventory {
+  reserved 2;
+
+  map<int32, int32> expanded_counts = 1;
+
+  repeated Treasure treasures = 3;
+
+  repeated StackableItem stackable_items = 4;
+
+  repeated NonStackableItem non_stackable_items = 15;
+
+  repeated ChargeableItem chargeable_items = 9;
+
+  repeated Topping toppings = 5;
+
+  repeated Beascuit beascuits = 14;
+
+  repeated EventItem event_items = 6;
+
+  repeated int32 collected_cutscene_data_ids = 7;
+
+  repeated EquipmentItem magic_candies = 8;
+
+  DeliveryTicket delivery_ticket = 10;
+
+  map<int32, int64> vanilla_toppings = 11;
+
+  repeated int32 pvp_podium_parts = 12;
+
+  repeated EquipmentItem jam_stones = 13;
+
+  repeated EquipmentItem awakenings = 16;
+
+  repeated CookieLook cookie_looks = 17;
+
+  map<int32, int64> vanilla_cookie_looks = 18;
+
+  Currencies currencies = 19;
+}
+
+message Currencies {
+  int64 cookie_look_gacha_items = 1;
+}
+
+message ChargeableItem {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+
+  ck.Time last_updated_at = 3;
+}
+
+message GuildInventory {
+  reserved 1;
+
+  repeated int32 unlocked_tile_data_ids = 2;
+
+  repeated GuildStructurePurchaseHistory purchase_histories = 3;
+}
+
+message GuildStructurePurchaseHistory {
+  int32 structure_data_id = 1;
+
+  string member_id = 2;
+
+  int32 count = 3;
+
+  ck.Time purchased_at = 4;
+}
+
+message Treasure {
+  int32 data_id = 1;
+
+  int32 level = 2;
+
+  int64 count = 3;
+}
+
+message SoulStone {
+  int32 data_id = 1;
+
+  int64 count = 2;
+}
+
+message ConvertedReward {
+  repeated RewardElement rewards = 1;
+
+  int64 replaced_origin_quantity = 2;
+
+  int32 replaced_origin_data_id = 3;
+}
+
+message ForDeprecated {
+  repeated RewardElement rewards = 1;
+}
+
+message SoulStonePayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message StackableItem {
+  int32 data_id = 1;
+
+  int64 count = 2;
+}
+
+message NonStackableItem {
+  int32 data_id = 1;
+
+  int64 count = 2;
+}
+
+message EventItem {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message StackableItemReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message NonStackableItemReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message TreasureReward {
+  oneof reward {
+    Treasure new_treasure = 1;
+
+    PreexistingTreasure preexisting_treasure = 2;
+  }
+
+  message PreexistingTreasure {
+    int32 data_id = 1;
+
+    int64 amount = 2;
+  }
+}
+
+message CookieReward {
+  oneof reward {
+    NewCookieReward new_cookie = 1;
+
+    NormalSoulStoneReward preexisting_cookie_normal_soul_stone = 2;
+
+    BeyondSoulStoneReward preexisting_cookie_beyond_soul_stone = 3;
+
+    int32 full_grade_cookie_data_id = 4;
+
+    NewAwakeningCookieReward new_awakening_cookie = 5;
+
+    AwakeningMaterialReward preexisting_cookie_awakening_material = 6;
+  }
+}
+
+message NewAwakeningCookieReward {
+  int32 awakening_cookie_reward_data_id = 1;
+
+  AwakeningMaterialReward awakening_material = 2;
+}
+
+message NewCookieReward {
+  reserved 2;
+
+  Cookie cookie = 1;
+
+  oneof overflowed_beyond_soul_stone_reward {
+    RewardElement overflowed_beyond_soul_stone_reward_value = 3;
+
+    ck.Empty no_overflowed_beyond_soul_stone_reward = 4;
+  }
+}
+
+message NormalSoulStoneReward {
+  int32 normal_soul_stone_data_id = 1;
+
+  int64 quantity = 2;
+
+  oneof replaced {
+    BeyondSoulStoneReward beyond_soul_stone_reward = 3;
+
+    ck.Empty no_beyond_soul_stone_reward = 4;
+  }
+}
+
+message BeyondSoulStoneReward {
+  int32 beyond_soul_stone_data_id = 1;
+
+  int64 quantity = 2;
+}
+
+message StructureReward {
+  reserved 4;
+
+  int32 structure_data_id = 1;
+
+  oneof reward {
+    Structure structure = 2;
+
+    int64 fallback_crystal = 3;
+  }
+}
+
+message CookieExperienceReward {
+  int32 cookie_data_id = 1;
+
+  int64 amount = 2;
+}
+
+message NpcFriendshipPointReward {
+  int32 npc_kingdom_data_id = 1;
+
+  int64 amount = 2;
+}
+
+message NpcTokenReward {
+  int32 npc_kingdom_data_id = 1;
+
+  int64 amount = 2;
+}
+
+message FriendshipPointReward {
+  string friend_id = 1;
+
+  int64 amount = 2;
+}
+
+message PopularityPointReward {
+  string contributor_id = 1;
+
+  int64 amount = 2;
+}
+
+message ProfileImageReward {
+  int32 data_id = 1;
+}
+
+message ProfileTitleReward {
+  int32 data_id = 1;
+}
+
+message ProfileFrameReward {
+  int32 data_id = 1;
+}
+
+message FrameReward {
+  int32 data_id = 1;
+}
+
+message EventDungeonKeyReward {
+  int32 data_id = 1;
+
+  int32 event_dungeon_group_data_id = 2;
+
+  int64 amount = 3;
+}
+
+message CookieSkinReward {
+  reserved 2, 3;
+
+  int32 cookie_skin_data_id = 1;
+
+  int32 cookie_data_id = 4;
+}
+
+message StructureSkinReward {
+  int32 data_id = 1;
+}
+
+message CutsceneReward {
+  int32 data_id = 1;
+}
+
+message MagicCandyReward {
+  EquipmentItem magic_candy = 1;
+}
+
+message JamStoneReward {
+  EquipmentItem jam_stone = 1;
+}
+
+message JamStoneMaterialReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message AwakeningReward {
+  EquipmentItem awakening = 1;
+}
+
+message AwakeningMaterialReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message TileReward {
+  int32 data_id = 1;
+}
+
+message ChargeableItemReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message HotTimeBuffReward {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  ck.Time expires_at = 3;
+}
+
+message TownBackgroundSkinReward {
+  int32 data_id = 1;
+}
+
+message MusicBoxTrackReward {
+  int32 data_id = 1;
+}
+
+message CookieSquadStatuePartsReward {
+  int32 data_id = 1;
+}
+
+message PvpPodiumPartReward {
+  int32 data_id = 1;
+}
+
+message AdditionalReward {
+  int32 origin_data_id = 1;
+
+  RewardElement reward = 2;
+}
+
+message Reward {
+  reserved 1, 2;
+
+  oneof origin_reward {
+    RewardElement origin_reward_value = 3;
+
+    ck.Empty no_reward = 4;
+  }
+
+  oneof converted_reward {
+    ConvertedReward converted_reward_value = 5;
+
+    ck.Empty no_converted_reward = 6;
+  }
+
+  repeated AdditionalReward additional_rewards = 7;
+}
+
+message RewardsPerPlay {
+  repeated Reward rewards = 1;
+}
+
+message RewardElement {
+  reserved 15, 36, 37, 38, 43, 44, 50;
+
+  oneof value {
+    int64 coin = 1;
+
+    int64 crystal = 2;
+
+    int64 rainbow_cube = 48;
+
+    int64 rainbow_crystal = 28;
+
+    int64 kingdom_point = 3;
+
+    int64 kingdom_pass_mission_point = 4;
+
+    int64 stamina = 5;
+
+    int64 pvp_ticket = 6;
+
+    int64 pvp_smash_ticket = 26;
+
+    int64 pvp_reset_ticket = 7;
+
+    int64 pvp_medal = 8;
+
+    ck.Empty deprecated_cake_tower_key = 23;
+
+    TreasureReward treasure = 9;
+
+    CookieReward cookie = 10;
+
+    StructureReward structure = 11;
+
+    CookieExperienceReward cookie_experience = 12;
+
+    FriendshipPointReward friendship_point = 13;
+
+    StackableItemReward stackable_item = 14;
+
+    NonStackableItemReward non_stackable_item = 65;
+
+    ToppingReward topping = 16;
+
+    BeascuitReward beascuit = 62;
+
+    PopularityPointReward popularity_point = 17;
+
+    ProfileImageReward profile_image = 18;
+
+    int64 mileage_point = 19;
+
+    ck.Empty foreign_prize = 21;
+
+    FrameReward frame = 22;
+
+    ck.Empty obsolete = 24;
+
+    EventDungeonKeyReward event_dungeon_key = 25;
+
+    StructureSkinReward structure_skin = 27;
+
+    CookieSkinReward cookie_skin = 29;
+
+    EventItem event_item = 30;
+
+    ck.Empty deprecated_infinite_dungeon_ticket = 31;
+
+    CutsceneReward cutscene = 32;
+
+    ProfileTitleReward profile_title = 33;
+
+    ProfileFrameReward profile_frame = 34;
+
+    MagicCandyReward magic_candy = 35;
+
+    MagicCandyMaterialReward magic_candy_material = 39;
+
+    TileReward tile = 40;
+
+    int64 guild_battle_ticket = 41;
+
+    int64 guild_battle_medal = 42;
+
+    ChargeableItemReward chargeable_item = 45;
+
+    HotTimeBuffReward hot_time_buff = 46;
+
+    TownBackgroundSkinReward town_background_skin = 47;
+
+    MusicBoxTrackReward music_box_track = 49;
+
+    ck.Empty triple_cone_cup_flag = 51;
+
+    DeliveryTicketReward delivery_ticket = 52;
+
+    NormalSoulStoneReward normal_soul_stone = 53;
+
+    BeyondSoulStoneReward beyond_soul_stone = 54;
+
+    ForDeprecated for_deprecated = 55;
+
+    CookieSquadStatuePartsReward cookie_squad_statue_parts = 56;
+
+    VanillaToppingReward vanilla_topping = 57;
+
+    SocialRaidDiscoveryTicketReward social_raid_discovery_ticket = 58;
+
+    PvpPodiumPartReward pvp_podium_part = 59;
+
+    JamStoneReward jam_stone = 60;
+
+    JamStoneMaterialReward jam_stone_material = 61;
+
+    ProfileDecoReward profile_deco = 63;
+
+    AirBalloonSpecialItemReward air_balloon_special_item = 64;
+
+    AwakeningReward awakening = 66;
+
+    AwakeningMaterialReward awakening_material = 67;
+
+    CookieLookReward cookie_look = 68;
+
+    VanillaCookieLookReward vanilla_cookie_look = 69;
+
+    LobbyTimeBoostReward lobby_time_boost = 70;
+
+    int64 cookie_look_gacha_item = 71;
+  }
+}
+
+message SocialRaidDiscoveryTicketReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message DeliveryTicketReward {
+  int64 amount = 1;
+}
+
+message ToppingReward {
+  Topping topping = 1;
+}
+
+message VanillaToppingReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message BeascuitReward {
+  Beascuit beascuit = 1;
+}
+
+message CookieLookReward {
+  CookieLook cookie_look = 1;
+}
+
+message VanillaCookieLookReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message LobbyTimeBoostReward {
+  LobbyTimeBoost boost = 1;
+}
+
+message StackableItemPayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message NonStackableItemPayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message TreasurePayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message StructurePayment {
+  int32 data_id = 1;
+
+  repeated string ids = 2;
+}
+
+message NpcTokenPayment {
+  int32 npc_kingdom_data_id = 1;
+
+  int64 amount = 2;
+}
+
+message EventDungeonKeyPayment {
+  int32 data_id = 1;
+
+  int32 event_dungeon_group_data_id = 2;
+
+  int64 amount = 3;
+}
+
+message ChargeableItemPayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message Payment {
+  oneof value {
+    int64 coin = 1;
+
+    int64 crystal = 2;
+
+    int64 rainbow_cube = 24;
+
+    int64 kingdom_point = 3;
+
+    int64 stamina = 4;
+
+    TreasurePayment treasure = 5;
+
+    StructurePayment structure = 6;
+
+    StackableItemPayment stackable_item = 7;
+
+    NonStackableItemPayment non_stackable_item = 29;
+
+    SoulStonePayment normal_soul_stone = 8;
+
+    int64 pvp_ticket = 9;
+
+    int64 pvp_smash_ticket = 16;
+
+    int64 pvp_reset_ticket = 10;
+
+    int64 pvp_medal = 11;
+
+    ck.Empty deprecated_cake_tower_key = 14;
+
+    ToppingPayment topping = 12;
+
+    BeascuitPayment beascuit = 28;
+
+    int64 mileage_point = 13;
+
+    EventDungeonKeyPayment event_dungeon_key = 15;
+
+    int64 rainbow_crystal = 17;
+
+    EventItem event_item = 18;
+
+    ck.Empty deprecated_infinite_dungeon_ticket = 19;
+
+    SoulStonePayment beyond_soul_stone = 20;
+
+    int64 guild_battle_ticket = 21;
+
+    int64 guild_battle_medal = 22;
+
+    ChargeableItemPayment chargeable_item = 23;
+
+    DeliveryTicketPayment delivery_ticket = 25;
+
+    VanillaToppingPayment vanilla_topping = 26;
+
+    SocialRaidDiscoveryTicketPayment social_raid_discovery_ticket = 27;
+
+    CookieLookPayment cookie_look = 30;
+
+    VanillaCookieLookPayment vanilla_cookie_look = 31;
+
+    int64 cookie_look_gacha_item = 32;
+  }
+}
+
+message SocialRaidDiscoveryTicketPayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message DeliveryTicketPayment {
+  int64 paid_for_amount = 1;
+
+  int64 paid_for_charge_amount = 2;
+}
+
+message ToppingPayment {
+  string topping_id = 1;
+}
+
+message VanillaToppingPayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message BeascuitPayment {
+  string beascuit_id = 1;
+}
+
+message CookieLookPayment {
+  string cookie_look_id = 1;
+}
+
+message VanillaCookieLookPayment {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message TownChange {
+  oneof value {
+    Removed removed = 6;
+
+    Added added = 7;
+
+    ConstructionStatusChanged construction_status_changed = 10;
+
+    LevelChanged level_changed = 11;
+
+    AutoProductionReset auto_production_reset = 12;
+
+    Stashed stashed = 1;
+
+    Unstashed unstashed = 2;
+
+    Updated updated = 3;
+
+    TilesUpdated tiles_updated = 4;
+
+    AutoProductionUpdated auto_production_updated = 5;
+
+    SetHideFloor set_hide_floor = 8;
+
+    SetSkin set_skin = 9;
+
+    SetTownBackgroundSkin set_town_background_skin = 13;
+
+    CraftActivityParticipantsChanged craft_activity_participants_changed = 14;
+  }
+
+  message Removed {
+    string id = 1;
+
+    int32 data_id = 2;
+  }
+
+  message Added {
+    Structure structure = 1;
+  }
+
+  message ConstructionStatusChanged {
+    string id = 1;
+
+    int32 data_id = 3;
+
+    ConstructionStatus construction_status = 2;
+  }
+
+  message LevelChanged {
+    string id = 1;
+
+    int32 data_id = 3;
+
+    int32 level = 2;
+  }
+
+  message AutoProductionReset {
+    string id = 1;
+
+    int32 data_id = 4;
+
+    ck.Time reset_at = 2;
+
+    StructureProductionStatus production_status = 3;
+  }
+
+  message Stashed {
+    string id = 1;
+
+    int32 data_id = 3;
+
+    ck.Time stashed_at = 2;
+  }
+
+  message Unstashed {
+    string id = 1;
+
+    int32 data_id = 2;
+
+    StructurePlacement placement = 3;
+
+    ck.Time unstashed_at = 4;
+
+    ck.Time first_placed_at = 5;
+  }
+
+  message Updated {
+    string id = 1;
+
+    int32 data_id = 3;
+
+    StructurePlacement placement = 2;
+
+    ck.Time updated_at = 4;
+  }
+
+  message TilesUpdated {
+    int32 data_id = 1;
+
+    repeated TilePlacement placements = 2;
+  }
+
+  message AutoProductionUpdated {
+    string id = 1;
+
+    int32 data_id = 4;
+
+    ck.Duration added_production_duration = 2;
+
+    ck.Time updated_at = 3;
+  }
+
+  message SetHideFloor {
+    string id = 1;
+
+    int32 data_id = 3;
+
+    bool hide_floor = 2;
+  }
+
+  message SetSkin {
+    string id = 1;
+
+    int32 data_id = 3;
+
+    int32 skin_data_id = 2;
+  }
+
+  message SetTownBackgroundSkin {
+    int32 town_background_skin_data_id = 1;
+  }
+
+  message CraftActivityParticipantsChanged {
+    string activity_id = 1;
+
+    repeated int32 changed_participants = 2;
+  }
+}
+
+message CookieLookChange {
+  oneof value {
+    IsEquippedChanged is_equipped_changed = 1;
+
+    MarkerChanged marker_changed = 2;
+
+    IsLockedChanged is_locked_changed = 3;
+
+    VoiceSwapped voice_swapped = 4;
+  }
+
+  message IsEquippedChanged {
+    string id = 1;
+
+    bool is_equipped = 2;
+  }
+
+  message MarkerChanged {
+    string id = 1;
+
+    FavoriteMarkerOptional marker = 2;
+  }
+
+  message IsLockedChanged {
+    string id = 1;
+
+    bool is_locked = 2;
+  }
+
+  message VoiceSwapped {
+    int32 voice_data_id = 1;
+  }
+}
+
+message Cookie {
+  int32 data_id = 1;
+
+  int64 experience = 2;
+
+  int32 skill_level = 3;
+
+  int32 grade = 4;
+
+  int32 skin_data_id = 5;
+
+  bool april_fools_item_used = 6;
+
+  bool april_fools_appearance_enabled = 7;
+
+  repeated EquippedEquipmentItem equipped_equipment_items = 8;
+}
+
+message CustomCookie {
+  string name = 1;
+
+  int32 voice_data_id = 2;
+}
+
+message EquippedEquipmentItem {
+  int32 data_id = 1;
+}
+
+message EquippedToppingIndex {
+  int32 cookie_data_id = 1;
+
+  int32 topping_preset_slot_index = 2;
+
+  int32 topping_slot_index = 3;
+}
+
+message BeascuitOptional {
+  oneof value {
+    Beascuit beascuit_value = 1;
+
+    ck.Empty no_beascuit_value = 2;
+  }
+}
+
+message Beascuit {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  repeated BeascuitSlot slots = 3;
+
+  int64 experience = 4;
+
+  oneof index {
+    ck.Empty no_index = 5;
+
+    EquippedBeascuitIndex index_value = 6;
+  }
+
+  oneof marker {
+    ck.Empty no_marker = 7;
+
+    FavoriteMarker marker_value = 8;
+  }
+
+  bool is_locked = 9;
+}
+
+message BeascuitSlot {
+  int32 category_data_id = 1;
+
+  int32 category_reroll_count = 2;
+
+  int32 sub_option_data_id = 3;
+
+  double passive_value_ratio = 4;
+
+  oneof pending_sub_option {
+    ck.Empty no_pending_sub_option = 5;
+
+    BeascuitPendingSubOption pending_sub_option_value = 6;
+  }
+}
+
+message BeascuitPendingSubOption {
+  int32 sub_option_data_id = 1;
+
+  double passive_value_ratio = 2;
+
+  ck.Time created_at = 3;
+}
+
+message EquippedBeascuitIndex {
+  int32 cookie_data_id = 1;
+
+  int32 beascuit_preset_slot_index = 2;
+}
+
+message Topping {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  repeated ToppingSubOption sub_options = 3;
+
+  int32 grade = 4;
+
+  oneof index {
+    ck.Empty no_index = 5;
+
+    EquippedToppingIndex index_value = 6;
+  }
+
+  int32 upgrade_failure_count = 7;
+
+  oneof marker {
+    ck.Empty no_marker = 8;
+
+    FavoriteMarker marker_value = 9;
+  }
+}
+
+message CookieLook {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  bool is_equipped = 3;
+
+  FavoriteMarkerOptional marker = 4;
+
+  bool is_locked = 5;
+
+  CookieLookColor color = 6;
+
+  oneof pending_dyeing {
+    CookieLookColor.Dyeing pending_dyeing_value = 8;
+
+    ck.Empty no_pending_dyeing = 9;
+  }
+
+  int32 composition_count = 7;
+}
+
+message CookieLookColor {
+  oneof value {
+    ck.Empty default = 1;
+
+    Custom custom = 2;
+
+    Dyeing dyeing = 3;
+  }
+
+  message Custom {
+    double red = 1;
+
+    double green = 2;
+
+    double blue = 3;
+  }
+
+  message Dyeing {
+    int32 primary_color_data_id = 1;
+
+    oneof secondary_color_data_id {
+      int32 secondary_color_data_id_value = 2;
+
+      ck.Empty no_secondary_color_data_id = 3;
+    }
+  }
+}
+
+message CookieLookCompositionRate {
+  int32 cookie_look_data_id = 1;
+
+  double rate = 2;
+
+  int32 order = 3;
+}
+
+message CookieLookCompositionRates {
+  int32 compose_group_data_id = 1;
+
+  int32 compose_reward_pool_data_id = 2;
+
+  repeated CookieLookCompositionRate rates = 3;
+
+  double total_rate = 4;
+}
+
+message FavoriteMarker {
+  int32 marker_type = 1;
+}
+
+message ToppingSubOption {
+  int32 data_id = 1;
+
+  double passive_value_ratio = 2;
+}
+
+message Quest {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  repeated RequirementState requirement_states = 3;
+
+  ck.Time started_at = 4;
+}
+
+message RequirementState {
+  reserved 3;
+
+  uint32 requirement_data_index = 1;
+
+  int64 current_count = 2;
+}
+
+message LandRecord {
+  oneof value {
+    Completed completed = 1;
+
+    FailedToComplete failed_to_complete = 2;
+  }
+
+  message Completed {
+    int32 land_data_id = 1;
+
+    int32 star = 2;
+  }
+
+  message FailedToComplete {
+    int32 land_data_id = 1;
+  }
+}
+
+message OngoingLandBattleMutation {
+  repeated int32 extra_land_rule_data_ids = 1;
+}
+
+message OngoingLandBattle {
+  string id = 1;
+
+  int32 land_data_id = 2;
+
+  int32 random_seed = 3;
+
+  oneof mutation {
+    OngoingLandBattleMutation mutation_value = 4;
+
+    ck.Empty no_mutation = 5;
+  }
+}
+
+message AdventureMap {
+  reserved 6, 7;
+
+  repeated LandRecord land_records = 1;
+
+  oneof ongoing_land_battle {
+    ck.Empty no_ongoing_land_battle = 2;
+
+    OngoingLandBattle ongoing_land_battle_value = 3;
+  }
+
+  repeated LandPlayCount land_play_counts = 11;
+
+  DailyDungeonState daily_dungeon_state = 9;
+}
+
+message StoryAdventure {
+  repeated StoryAdventureEpisode episodes = 1;
+}
+
+message StoryAdventureEpisode {
+  int32 episode_data_id = 1;
+
+  repeated StoryAdventureMission missions = 2;
+
+  int32 next_mission_order = 3;
+
+  StoryAdventureDailyMissionClearState daily_mission_clear_state = 4;
+
+  repeated StoryAdventureDay days = 5;
+
+  int32 progress_reward_count = 6;
+}
+
+message StoryAdventureMission {
+  int32 mission_data_id = 1;
+
+  repeated RequirementState requirement_states = 2;
+}
+
+message StoryAdventureDailyMissionClearState {
+  int32 clear_count = 1;
+
+  ck.Time last_reset_at = 2;
+
+  int32 total_clear_count = 3;
+}
+
+message StoryAdventureDay {
+  int32 day_num = 1;
+
+  repeated int32 completed_task_data_ids = 2;
+
+  repeated OngoingStoryAdventureTask ongoing_tasks = 3;
+
+  repeated int32 historically_completed_task_data_ids = 4;
+
+  repeated CompletedStoryAdventureTaskDetail completed_task_details = 5;
+
+  repeated CompletedStoryAdventureTaskDetail historically_completed_task_details = 6;
+}
+
+message OngoingStoryAdventureTask {
+  oneof value {
+    OngoingStoryTask ongoing_story_task = 1;
+
+    OngoingCompleteTask ongoing_complete_task = 2;
+
+    OngoingBattleTask ongoing_battle_task = 3;
+  }
+
+  message OngoingStoryTask {
+    int32 task_data_id = 1;
+  }
+
+  message OngoingCompleteTask {
+    int32 task_data_id = 1;
+  }
+
+  message OngoingBattleTask {
+    int32 task_data_id = 1;
+  }
+}
+
+message CompletedStoryAdventureTaskDetail {
+  oneof value {
+    CompletedStoryTaskDetail completed_story_task_detail = 1;
+  }
+
+  message CompletedStoryTaskDetail {
+    int32 task_data_id = 1;
+
+    repeated int32 flag_commands = 2;
+  }
+}
+
+message LandPlayCount {
+  int32 land_data_id = 1;
+
+  int32 daily_used_play_count = 2;
+
+  int32 daily_charged_play_count = 3;
+
+  ck.Time daily_play_count_reset_at = 4;
+}
+
+message UserBattleTeam {
+  repeated BattleTeamCookieDetail cookie_details = 1;
+
+  repeated int32 treasure_data_ids = 2;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 3;
+
+    int32 leader_cookie_data_id_value = 4;
+  }
+}
+
+message SpecAdjustmentCookie {
+  oneof value {
+    MyCookie my_cookie = 1;
+
+    FixedCookie fixed_cookie = 2;
+
+    PresetCookie preset_cookie = 3;
+  }
+
+  message MyCookie {
+    int32 cookie_data_id = 1;
+
+    int32 selected_topping_preset_index = 2;
+
+    int32 selected_beascuit_preset_index = 3;
+  }
+
+  message FixedCookie {
+    int32 cookie_data_id = 1;
+  }
+
+  message PresetCookie {
+    int32 preset_data_id = 1;
+
+    int32 cookie_data_id = 2;
+  }
+}
+
+message SpecAdjustmentTreasure {
+  oneof value {
+    MyTreasure my_treasure = 1;
+
+    FixedTreasure fixed_treasure = 2;
+  }
+
+  message MyTreasure {
+    int32 treasure_data_id = 1;
+  }
+
+  message FixedTreasure {
+    int32 treasure_data_id = 1;
+  }
+}
+
+message SpecAdjustmentBattleTeam {
+  repeated SpecAdjustmentCookie cookies = 1;
+
+  repeated SpecAdjustmentTreasure treasures = 2;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 3;
+
+    int32 leader_cookie_data_id_value = 4;
+  }
+}
+
+message BattleTeam {
+  oneof value {
+    UserBattleTeam user_battle_team = 1;
+
+    SpecAdjustmentBattleTeam spec_adjustment_battle_team = 2;
+  }
+}
+
+message SpecAdjustmentBattleTeamParticipant {
+  SpecAdjustmentBattleTeam spec_adjustment_battle_team = 1;
+
+  int32 battle_team_index = 2;
+}
+
+message DailyDungeonState {
+  oneof ongoing_dungeon {
+    ck.Empty no_ongoing_dungeon = 1;
+
+    OngoingDailyDungeon ongoing_dungeon_value = 2;
+  }
+
+  repeated DailyDungeon opened_dungeons = 3;
+
+  DailyDungeonPlayLimitState play_limit_state = 4;
+
+  ck.Time expires_at = 5;
+
+  repeated DailyDungeonRecord records = 6;
+
+  repeated DailyDungeonBountyState bounty_states = 7;
+}
+
+message DailyDungeonBattleEffectActivation {
+  int32 activation_data_id = 1;
+
+  ck.Time activated_at = 2;
+}
+
+message DailyDungeonBountyState {
+  int32 dungeon_data_id = 1;
+
+  oneof selected_bounty {
+    ck.Empty no_selected_bounty = 2;
+
+    DailyDungeonBountySelection selected_bounty_value = 3;
+  }
+}
+
+message DailyDungeonBountySelection {
+  oneof value {
+    Id id = 1;
+
+    BattleRole battle_role = 2;
+  }
+
+  message Id {
+    int32 item_data_id = 1;
+  }
+
+  message BattleRole {
+    CookieBattleRole role = 1;
+  }
+}
+
+message OngoingDailyDungeon {
+  string id = 1;
+
+  int32 dungeon_data_id = 2;
+
+  int32 level = 3;
+
+  int32 random_seed = 4;
+
+  ck.Time started_at = 5;
+}
+
+message DailyDungeon {
+  int32 dungeon_data_id = 1;
+
+  repeated DungeonBattleEffect battle_effects = 2;
+}
+
+message DungeonBattleEffect {
+  int32 data_id = 1;
+
+  int32 battle_effect_pool_data_id = 2;
+
+  int32 battle_effect_data_id = 3;
+
+  CookieBattleRole target_role = 4;
+
+  oneof effect_activation {
+    ck.Empty no_effect_activation = 5;
+
+    DailyDungeonBattleEffectActivation effect_activation_value = 6;
+  }
+}
+
+message DailyDungeonPlayLimitState {
+  int32 remaining_play_count = 1;
+
+  int32 remaining_charge_count = 2;
+
+  int32 increased_play_count_by_passive = 3;
+
+  int32 remaining_play_count_for_charge_ticket = 4;
+}
+
+message DailyDungeonRecord {
+  int32 dungeon_data_id = 1;
+
+  int32 max_cleared_level = 2;
+}
+
+message LandPosition {
+  int32 stage_id = 1;
+
+  int32 area_id = 2;
+
+  double stage_progress_ratio = 3;
+
+  double land_progress_ratio = 4;
+}
+
+message EpisodeStarRewardRecord {
+  int32 episode_data_id = 1;
+
+  int32 rewarded_count = 2;
+}
+
+message Activities {
+  repeated Activity activities = 1;
+
+  repeated int32 active_cookie_data_ids = 2;
+
+  AirBalloons air_balloons = 3;
+}
+
+message AirBalloons {
+  repeated AirBalloonCookie cookies = 1;
+
+  repeated AirBalloonSpecialItem special_items = 2;
+}
+
+message AirBalloonSpecialItem {
+  int32 data_id = 1;
+
+  int64 count = 2;
+}
+
+message AirBalloonCookie {
+  int32 data_id = 1;
+
+  CookieStatus status = 2;
+
+  int32 remaining_recent_status_rule = 3;
+}
+
+message Activity {
+  oneof value {
+    CraftProduction craft_production = 1;
+
+    ObstacleRemoval obstacle_removal = 2;
+
+    AirBalloon air_balloon = 3;
+  }
+
+  message CraftProduction {
+    string id = 1;
+
+    repeated int32 data_ids = 2;
+
+    repeated int32 cookie_data_ids = 3;
+
+    int32 completed_job_count = 4;
+
+    ck.Time begun_at = 5;
+
+    string structure_id = 6;
+  }
+
+  message ObstacleRemoval {
+    string id = 1;
+
+    int32 data_id = 2;
+
+    repeated int32 cookie_data_ids = 3;
+
+    ck.Time begun_at = 4;
+
+    string structure_id = 5;
+  }
+
+  message AirBalloon {
+    string id = 1;
+
+    string structure_id = 2;
+
+    int32 area_data_id = 3;
+
+    repeated int32 cookie_data_ids = 4;
+
+    ck.Time ends_at = 5;
+  }
+}
+
+message SocialState {
+  repeated Friend friends = 1;
+
+  repeated FriendRequest sent_friend_requests = 2;
+
+  repeated FriendRequest received_friend_requests = 3;
+
+  int64 popularity_points = 4;
+
+  int32 received_likes_count = 5;
+
+  int32 sent_daily_random_gift_count = 6;
+
+  int32 sent_special_random_gift_count = 9;
+
+  ck.Time daily_random_gift_count_next_reset_at = 7;
+
+  ck.Time special_random_gift_count_next_reset_at = 10;
+
+  bool only_friends_can_send_gifts = 8;
+}
+
+message Friend {
+  SocialSummary friend_summary = 1;
+
+  int64 friendship_points = 2;
+
+  ck.Time daily_random_gift_last_sent_at = 3;
+}
+
+message FriendRequest {
+  SocialSummary friend_summary = 1;
+
+  ck.Time requested_at = 2;
+}
+
+message GameEvents {
+  repeated GameEvent game_events = 1;
+
+  repeated GameEvent visible_ended_events = 2;
+
+  repeated string enabled_conditional_hot_time_events = 3;
+
+  map<string, double> competition_event_ranking_ratios = 4;
+}
+
+message GameEvent {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  ck.Time started_at = 3;
+
+  repeated GameEventMission ongoing_missions = 4;
+
+  map<int32, int32> cleared_mission_counts = 5;
+
+  repeated GameEventTimeAttendanceState time_attendance_states = 6;
+
+  GameEventDailyItemUsingState daily_item_using_state = 7;
+
+  bool is_acknowledged = 8;
+
+  repeated GameEventExtension extensions = 9;
+
+  map<int32, ck.Time> missions_started_at = 10;
+
+  int32 random_seed = 11;
+}
+
+message GameEventMission {
+  string event_id = 1;
+
+  Quest quest = 2;
+}
+
+message GameEventTimeAttendanceState {
+  string event_id = 1;
+
+  int32 mission_data_id = 2;
+
+  bool is_rewardable = 3;
+
+  bool is_reward_received = 4;
+
+  ck.Time next_reset_at = 5;
+}
+
+message GameEventDailyItemUsingState {
+  string event_id = 1;
+
+  repeated int32 rewarded_mission_data_ids = 2;
+
+  ck.Time next_reset_at = 3;
+}
+
+message GameEventExtension {
+  reserved 2, 4;
+
+  oneof value {
+    BulletinBoard bulletin_board = 1;
+
+    Lottery lottery = 3;
+
+    Competition competition = 5;
+
+    Structure structure = 6;
+
+    PendingRewards pending_rewards = 7;
+
+    ChoiceBoard choice_board = 8;
+
+    Deprecated deprecated = 9;
+
+    DailyStory daily_story = 10;
+
+    Shop shop = 11;
+
+    GuildDelivery guild_delivery = 12;
+
+    Survey survey = 13;
+
+    LuckyBox lucky_box = 14;
+
+    EventTasks event_tasks = 15;
+
+    PieceCollection piece_collection = 16;
+
+    Bingo bingo = 17;
+
+    LaddersAndSlidesStack ladders_and_slides_stack = 18;
+
+    CollectionGacha collection_gacha = 19;
+
+    Achievement achievement = 20;
+
+    LotteryGacha lottery_gacha = 21;
+
+    CakeTycoon cake_tycoon = 22;
+
+    WorldCupVoting world_cup_voting = 23;
+
+    EventPass event_pass = 24;
+
+    MissionRewardsShuffle mission_rewards_shuffle = 25;
+
+    SubGame sub_game = 26;
+
+    ReturnGuide return_guide = 27;
+
+    MissionBingo mission_bingo = 28;
+
+    ChoiceReward choice_reward = 29;
+
+    GachaReward gacha_reward = 30;
+
+    EventItemCount event_item_count = 31;
+
+    ContinuousAttendance continuous_attendance = 32;
+  }
+
+  message Deprecated {
+  }
+
+  message BulletinBoard {
+    map<int32, BulletinBoardStepProgress> step_progresses = 1;
+  }
+
+  message BulletinBoardStepProgress {
+    int32 step = 1;
+
+    repeated int32 collected_slots = 2;
+
+    bool is_refreshed = 3;
+  }
+
+  message Lottery {
+    bool entered = 1;
+  }
+
+  message Competition {
+    int64 competition_points = 1;
+
+    map<int32, int64> best_scores = 2;
+  }
+
+  message Structure {
+    ck.Time last_visited_at = 1;
+
+    repeated string visited_friends = 2;
+  }
+
+  message PendingRewards {
+  }
+
+  message ChoiceBoard {
+    map<int32, int32> collected_candidates_by_index = 1;
+
+    int32 seed = 2;
+  }
+
+  message DailyStory {
+    bool subscribed_parfait_channel = 1;
+  }
+
+  message Survey {
+    bool answered = 1;
+  }
+
+  message Shop {
+    int32 current_ordered_product_data_id = 1;
+  }
+
+  message GuildDelivery {
+    map<int32, GuildDeliverySlot> slots = 1;
+
+    int64 delivery_points = 2;
+
+    int64 total_obtained_delivery_points = 3;
+  }
+
+  message GuildDeliverySlot {
+    oneof quest {
+      Sealed sealed = 1;
+
+      Task task = 2;
+
+      Trade trade = 3;
+    }
+
+    message Sealed {
+      ck.Time available_after = 1;
+
+      oneof npc_data_id {
+        int32 npc_data_id_value = 2;
+
+        ck.Empty no_npc_data_id = 3;
+      }
+    }
+
+    message Task {
+      string mission_id = 1;
+
+      int32 npc_data_id = 2;
+    }
+
+    message Trade {
+      repeated Entry entries = 1;
+
+      int32 npc_data_id = 2;
+
+      message Entry {
+        int32 entry_data_id = 1;
+
+        int32 quantity = 2;
+      }
+    }
+  }
+
+  message LuckyBox {
+  }
+
+  message EventTasks {
+    repeated TaskState task_states = 1;
+
+    oneof acquired_limited_reward_amount {
+      int32 acquired_limited_reward_amount_value = 4;
+
+      ck.Empty no_acquired_limited_reward_amount = 5;
+    }
+
+    oneof next_reset_at {
+      ck.Time next_reset_at_value = 2;
+
+      ck.Empty no_next_reset_at = 3;
+    }
+
+    message TaskState {
+      int32 task_data_id = 1;
+
+      repeated RequirementState requirement_states = 2;
+
+      int32 clear_count = 3;
+    }
+  }
+
+  message PieceCollection {
+    map<int32, PieceCollectionGroup> groups = 1;
+  }
+
+  message PieceCollectionGroup {
+    int32 group_data_id = 1;
+
+    repeated int32 collected_piece_data_ids = 2;
+  }
+
+  message Bingo {
+    repeated ck.Cell stamped_cells = 1;
+
+    map<int32, BingoMission> bingo_missions = 2;
+
+    int32 rewards_received_bingo_mission_count = 3;
+  }
+
+  message BingoMission {
+    int32 data_id = 1;
+
+    BingoMissionState state = 2;
+
+    repeated ck.Cell revealed_cells = 3;
+  }
+
+  message BingoMissionState {
+    oneof value {
+      Locked locked = 1;
+
+      Unlocked unlocked = 2;
+
+      RewardsReceived rewards_received = 3;
+    }
+
+    message Locked {
+      repeated RequirementState requirement_states = 1;
+    }
+
+    message Unlocked {
+    }
+
+    message RewardsReceived {
+    }
+  }
+
+  message LaddersAndSlidesStack {
+    repeated LaddersAndSlides stack = 1;
+
+    map<int32, int32> finish_counter = 2;
+
+    repeated bool collection_for_bonus_board = 3;
+  }
+
+  message LaddersAndSlides {
+    int32 board_group_data_id = 1;
+
+    repeated int32 visited_positions = 2;
+
+    int32 current_position = 3;
+
+    LaddersAndSlidesState state = 4;
+
+    int32 bonus_dice_count = 5;
+  }
+
+  message LaddersAndSlidesState {
+    oneof value {
+      ToMovePiece to_move_piece = 1;
+
+      ToRollDice to_roll_dice = 2;
+
+      ToReceiveRandomBonus to_receive_random_bonus = 3;
+
+      ToCollectBonusBoardPiece to_collect_bonus_board_piece = 4;
+
+      ToFinish to_finish = 5;
+    }
+
+    message ToMovePiece {
+      int32 amount = 1;
+    }
+
+    message ToRollDice {
+    }
+
+    message ToReceiveRandomBonus {
+    }
+
+    message ToCollectBonusBoardPiece {
+    }
+
+    message ToFinish {
+    }
+  }
+
+  message CollectionGacha {
+    repeated CollectionGachaGroup gacha_groups = 1;
+  }
+
+  message CollectionGachaGroup {
+    int32 data_id = 1;
+
+    int32 gacha_count = 2;
+  }
+
+  message Achievement {
+    map<int32, ck.Time> missions_cleared_at = 1;
+  }
+
+  message LotteryGacha {
+    repeated LotteryGachaReceivedRandomRewardHistory received_random_reward_histories = 1;
+
+    ck.Time last_free_purchased_at = 2;
+  }
+
+  message LotteryGachaReceivedRandomRewardHistory {
+    int32 random_reward_data_id = 1;
+
+    ck.Time received_at = 2;
+  }
+
+  message CakeTycoon {
+    repeated CakeTycoonCustomer visited_customers = 1;
+
+    int32 completed_order_count = 2;
+
+    oneof reserved_customer_data_id {
+      int32 reserved_customer_data_id_value = 3;
+
+      ck.Empty no_reserved_customer_data_id = 4;
+    }
+
+    oneof current_order {
+      CakeTycoonOrder current_order_value = 5;
+
+      ck.Empty no_current_order = 6;
+    }
+  }
+
+  message CakeTycoonCustomer {
+    int32 customer_data_id = 1;
+
+    repeated CakeTycoonCustomerOrderRecord records = 2;
+
+    bool has_received_review_reward = 3;
+  }
+
+  message CakeTycoonCustomerOrderRecord {
+    int32 order_data_id = 1;
+
+    int32 max_received_star_count = 2;
+
+    ck.Time reached_max_received_star_count_at = 3;
+  }
+
+  message CakeTycoonOrder {
+    int32 customer_order_data_id = 1;
+
+    int32 recipe_data_id = 2;
+
+    int32 current_dialog_group_data_id = 3;
+
+    repeated int32 previous_dialog_group_data_ids = 4;
+
+    CakeTycoonOrderPhase phase = 5;
+  }
+
+  message CakeTycoonOrderPhase {
+    oneof value {
+      Dialog dialog = 1;
+
+      Baking baking = 2;
+    }
+
+    message Dialog {
+    }
+
+    message Baking {
+    }
+  }
+
+  message WorldCupVoting {
+    bool is_voted = 1;
+
+    int32 round = 2;
+
+    bool reward_received = 3;
+  }
+
+  message EventPass {
+  }
+
+  message MissionRewardsShuffle {
+  }
+
+  message SubGame {
+  }
+
+  message ReturnGuide {
+    bool is_additional_duration = 1;
+  }
+
+  message MissionBingo {
+    repeated MissionBingoCell cells = 1;
+
+    ck.Time started_at = 2;
+  }
+
+  message MissionBingoCell {
+    oneof value {
+      Mission mission = 1;
+
+      Sealed sealed = 2;
+    }
+
+    message Mission {
+      ck.Cell cell = 1;
+
+      string mission_id = 2;
+
+      int32 mission_data_id = 3;
+    }
+
+    message Sealed {
+      ck.Cell cell = 1;
+
+      int32 previous_mission_data_id = 3;
+
+      ck.Time available_at = 2;
+    }
+  }
+
+  message ChoiceReward {
+  }
+
+  message GachaReward {
+    bool is_lucky_reward = 1;
+  }
+
+  message EventItemCount {
+    int64 received_amount = 1;
+
+    int64 acknowledged_received_amount = 2;
+  }
+
+  message ContinuousAttendance {
+    int64 continuously_attended_days = 1;
+
+    oneof previous_continuously_attended_days {
+      int64 previous_continuously_attended_days_value = 2;
+
+      ck.Empty no_previous_continuously_attended_days = 3;
+    }
+
+    int64 max_continuously_attended_days = 4;
+
+    ck.Time last_attended_at = 5;
+
+    int32 restore_count = 6;
+  }
+
+  enum LaddersAndSlidesBoardType {
+    NORMAL = 0;
+
+    BONUS = 1;
+  }
+}
+
+message PopularityRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+}
+
+message RewardData {
+  int32 item_data_id = 1;
+
+  int64 amount = 2;
+
+  bool is_paid = 3;
+}
+
+message Mail {
+  string id = 1;
+
+  MailDetail detail = 2;
+
+  repeated RewardData rewards = 3;
+
+  bool is_rewarded = 4;
+
+  ck.Time received_at = 6;
+
+  ck.Time expires_at = 5;
+
+  repeated MailExposurePolicy exposure_policies = 7;
+}
+
+message MailDetail {
+  oneof value {
+    Normal normal = 1;
+
+    DataBased data_based = 2;
+  }
+
+  message Normal {
+    repeated MailDescription descriptions = 1;
+  }
+
+  message DataBased {
+    DataBasedMailDescription description = 1;
+  }
+}
+
+message MailDescription {
+  LanguageType language_type = 1;
+
+  string title = 2;
+
+  string body = 3;
+}
+
+message DataBasedMailDescription {
+  int32 data_id = 1;
+
+  repeated FormatStringParameter head_parameters = 2;
+
+  repeated FormatStringParameter body_parameters = 3;
+}
+
+message MailExposurePolicy {
+  oneof value {
+    Pinned pinned = 1;
+
+    Popup popup = 2;
+  }
+
+  message Pinned {
+  }
+
+  message Popup {
+  }
+}
+
+message FormatStringParameter {
+  oneof value {
+    string string = 1;
+
+    TString tstring = 2;
+  }
+}
+
+message TString {
+  string key = 1;
+
+  string original_text = 2;
+}
+
+message MailBox {
+  repeated Mail mails = 1;
+}
+
+message MailBoxSummary {
+  bool unrewarded_mail_exists = 1;
+
+  bool pinned_or_popup_mail_exists = 2;
+}
+
+message Notification {
+  oneof value {
+    MailBoxSummaryUpdated mail_box_summary_updated = 1;
+
+    UserKicked user_kicked = 2;
+  }
+
+  message MailBoxSummaryUpdated {
+    MailBoxSummary mail_box_summary = 1;
+  }
+
+  message UserKicked {
+  }
+}
+
+message BroadcastingDescription {
+  LanguageType language_type = 1;
+
+  string body = 2;
+}
+
+message BroadcastingContent {
+  repeated BroadcastingDescription descriptions = 1;
+
+  ck.Time starts_at = 2;
+
+  ck.Time ends_at = 3;
+
+  ck.Duration repeat_cycle = 4;
+}
+
+message Broadcasting {
+  int32 id = 1;
+
+  bool is_visible = 2;
+
+  BroadcastingContent content = 3;
+}
+
+message HotTimeEventTarget {
+  oneof value {
+    AllUsers all_users = 1;
+
+    Level level = 2;
+
+    ConditionalUsers conditional_users = 3;
+  }
+
+  message Condition {
+    oneof value {
+      NewUsers new_users = 1;
+
+      ReturningUsers returning_users = 2;
+    }
+
+    message NewUsers {
+    }
+
+    message ReturningUsers {
+      ck.Time from = 1;
+    }
+  }
+
+  message AllUsers {
+  }
+
+  message Level {
+    int32 min_level = 1;
+
+    int32 max_level = 2;
+  }
+
+  message ConditionalUsers {
+    Condition condition = 1;
+  }
+}
+
+message HotTimeEvent {
+  string id = 1;
+
+  HotTimeEventTarget target = 2;
+
+  ck.Time starts_at = 3;
+
+  ck.Time ends_at = 4;
+
+  int32 data_id = 5;
+
+  double passive_value = 6;
+}
+
+message InstantCompletionMethod {
+  oneof value {
+    ck.DataIdAndCounts time_reducer_spends = 1;
+
+    ck.Empty crystal = 2;
+
+    ViewedAdvertisement viewed_advertisement = 3;
+  }
+}
+
+message LandBattleReport {
+  map<int32, int64> number_of_killed_per_enemy = 1;
+
+  int64 coins = 2;
+
+  int32 jump_count = 23;
+
+  int32 obstacle_collision = 24;
+
+  int32 battle_team_tag_count = 16;
+
+  double min_team_tag_time = 17;
+
+  ck.Duration battle_duration = 3;
+
+  string checksum = 4;
+
+  double start_health_point_stat = 5;
+
+  double end_health_point = 6;
+
+  double end_health_point_ratio = 7;
+
+  double max_attack_stat = 9;
+
+  double max_defense_stat = 10;
+
+  double max_health = 11;
+
+  double max_damage = 12;
+
+  double min_cool_time_stat = 13;
+
+  map<int32, LandBattleCookieReport> cookie_reports = 8;
+
+  repeated TreasureBattleReport treasure_reports = 31;
+
+  bool is_quit = 14;
+
+  bool is_timeout = 15;
+
+  map<int32, int64> number_of_acquired_field_item = 18;
+
+  double remaining_jelly_line_health_point = 19;
+
+  double max_health_stat_with_ability = 20;
+
+  double dealt_damage = 21;
+
+  double dealt_damage_to_boss = 22;
+
+  double dealt_damage_to_boss_shield = 33;
+
+  oneof tactical_skill_usage {
+    TacticalSkillUsage tactical_skill_usage_value = 25;
+
+    ck.Empty no_tactical_skill_usage = 26;
+  }
+
+  int64 number_of_attacks = 27;
+
+  int64 number_of_dot_attacks = 28;
+
+  int32 obstacle_destruction = 29;
+
+  int64 magic_jelly_score = 30;
+
+  bool is_cleared_map_for_client = 32;
+}
+
+message LandBattleCookieReport {
+  int64 coin = 1;
+
+  int64 kill = 2;
+
+  double attack = 3;
+
+  double critical_attack = 4;
+
+  double non_critical_attack = 5;
+
+  double skill_attack = 6;
+
+  double normal_attack = 7;
+
+  double damage_taken = 8;
+
+  double skill_damage_taken = 9;
+
+  double normal_damage_taken = 10;
+
+  double reduced_damage_taken = 11;
+
+  double recovery = 12;
+
+  double heal = 13;
+
+  ck.Duration buff_time = 14;
+
+  ck.Duration debuff_time = 15;
+
+  int64 normal_attack_count = 16;
+
+  int64 skill_attack_count = 17;
+
+  double normal_attack_dps = 18;
+
+  double skill_attack_dps = 19;
+
+  ck.Duration live_time = 20;
+
+  double start_health_point_stat = 21;
+
+  double end_health_point = 22;
+
+  double start_attack_point_stat = 23;
+
+  double start_defense_point_stat = 24;
+
+  double max_damage = 25;
+
+  double start_cool_time_stat = 26;
+
+  int32 combat_power = 27;
+
+  double end_attack_point_stat = 28;
+
+  double end_defense_point_stat = 29;
+
+  double end_cool_time_stat = 30;
+
+  double max_damage_raw = 31;
+
+  int32 team_preset_data_id = 32;
+
+  double end_health_point_stat = 33;
+
+  double end_health_point_stat_with_ability = 34;
+
+  int32 cookie_preset_data_id = 35;
+}
+
+message TacticalSkillUsage {
+  int32 tactic_group_data_id = 1;
+
+  repeated double used_coordinates_x = 2;
+}
+
+message BillingInfo {
+  oneof value {
+    ck.Empty no_value = 1;
+
+    PlayStore play_store = 2;
+
+    OneStore one_store = 3;
+
+    AppStore app_store = 4;
+
+    Sandbox sandbox = 5;
+
+    GalaxyStore galaxy_store = 6;
+  }
+
+  message PlayStore {
+    string receipt = 1;
+
+    string signature = 2;
+
+    string currency = 3;
+
+    double price = 4;
+
+    int32 in_game_product_data_id = 5;
+
+    bool is_restoration = 6;
+
+    string transaction_id = 7;
+  }
+
+  message OneStore {
+    string receipt = 1;
+
+    string signature = 2;
+
+    string currency = 3;
+
+    double price = 4;
+
+    int32 in_game_product_data_id = 5;
+
+    bool is_restoration = 6;
+
+    string transaction_id = 7;
+  }
+
+  message AppStore {
+    string receipt = 1;
+
+    string currency = 2;
+
+    double price = 3;
+
+    int32 in_game_product_data_id = 4;
+
+    bool is_restoration = 5;
+
+    string transaction_id = 6;
+  }
+
+  message Sandbox {
+    string receipt = 1;
+
+    int32 in_game_product_data_id = 2;
+
+    bool is_restoration = 3;
+
+    string transaction_id = 4;
+  }
+
+  message GalaxyStore {
+    string receipt = 1;
+
+    string currency = 2;
+
+    double price = 3;
+
+    int32 in_game_product_data_id = 4;
+
+    bool is_restoration = 5;
+
+    string transaction_id = 6;
+  }
+}
+
+message VerifiedBillingInfo {
+  oneof verified {
+    Verified verified_value = 1;
+
+    ck.Empty no_verified = 2;
+  }
+
+  message Verified {
+    string product_id = 1;
+
+    string tid = 2;
+  }
+}
+
+message PvpSummary {
+  oneof value {
+    NotActivated not_activated = 1;
+
+    Activated activated = 2;
+  }
+
+  message NotActivated {
+  }
+
+  message Activated {
+    int32 tier = 1;
+
+    oneof pvp_season_data_id {
+      ck.Empty no_pvp_season_data_id = 5;
+
+      int32 pvp_season_data_id_value = 2;
+    }
+
+    bool is_top_ranker = 3;
+
+    int64 tickets = 4;
+  }
+}
+
+message Pvp {
+  bool is_activated = 1;
+
+  int32 tier = 2;
+
+  int32 rating = 3;
+
+  int32 win_count = 4;
+
+  PvpOpponentPool opponent_pool = 5;
+
+  PvpDefenseDeck defense_deck = 7;
+
+  int64 tickets = 8;
+
+  ck.Time tickets_last_updated_at = 9;
+
+  int64 reset_tickets = 10;
+
+  int32 max_rewarded_tier = 11;
+
+  int32 max_rewardable_tier = 12;
+
+  int32 last_notified_tier = 13;
+
+  oneof pvp_season_data_id {
+    ck.Empty no_pvp_season_data_id = 14;
+
+    int32 pvp_season_data_id_value = 15;
+  }
+
+  bool is_season_notified = 16;
+
+  repeated PvpSeasonResult season_results = 17;
+
+  PvpOpponentPoolResetWithCrystalCount pvp_opponent_pool_reset_with_crystal_count = 18;
+
+  repeated PvpSeasonResult season_results_history = 19;
+
+  bool is_top_ranker_notified = 20;
+
+  PvpWinningStreakState winning_streak_state = 21;
+
+  AttachedPvpPodiumPartsOptional attached_podium_parts = 22;
+}
+
+message PvpOpponentPoolResetWithCrystalCount {
+  int32 reset_count = 1;
+
+  ck.Time expires_at = 2;
+}
+
+message PvpOpponentPool {
+  repeated PvpOpponentPoolEntry entries = 1;
+
+  ck.Time next_reset_at = 2;
+}
+
+message PvpOpponentPoolEntry {
+  string id = 1;
+
+  Status status = 2;
+
+  oneof opponent {
+    PvpOpponent pvp_opponent = 3;
+
+    PvpSmashOpponent pvp_smash_opponent = 4;
+  }
+
+  enum Status {
+    READY = 0;
+
+    WIN = 1;
+
+    LOSE = 2;
+
+    DRAW = 3;
+  }
+}
+
+message PvpDefenseDeck {
+  repeated PvpDefenseCookie cookies = 1;
+
+  repeated int32 treasure_data_ids = 2;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 3;
+
+    int32 leader_cookie_data_id_value = 4;
+  }
+}
+
+message PvpDefenseCookie {
+  int32 data_id = 1;
+
+  bool is_hidden = 2;
+
+  int32 selected_topping_preset_index = 3;
+
+  int32 selected_beascuit_preset_index = 4;
+}
+
+message PvpAttackDeckDetail {
+  repeated PvpCookieDetail cookies = 1;
+
+  repeated PvpTreasureDetail treasures = 2;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 3;
+
+    int32 leader_cookie_data_id_value = 4;
+  }
+}
+
+message PvpDefenseDeckDetail {
+  repeated PvpCookieDetail cookies = 1;
+
+  repeated PvpTreasureDetail treasures = 2;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 3;
+
+    int32 leader_cookie_data_id_value = 4;
+  }
+}
+
+message PvpCookieDetail {
+  Cookie cookie = 1;
+
+  int32 selected_topping_preset_index = 2;
+
+  int32 selected_beascuit_preset_index = 3;
+}
+
+message PvpTreasureDetail {
+  int32 data_id = 1;
+
+  int32 level = 2;
+}
+
+message PvpOpponent {
+  PvpOpponentKind kind = 1;
+
+  bool is_activated = 2;
+
+  int32 tier = 3;
+
+  int32 rating = 4;
+
+  int32 win_count = 5;
+
+  int32 defense_power = 6;
+
+  repeated PvpOpponentCookie cookies = 7;
+
+  repeated PvpTreasureDetail treasures = 8;
+
+  bool is_redacted = 9;
+
+  repeated EquipmentItemByCookie equipped_equipment_items = 10;
+
+  AttachedPvpPodiumPartsOptional attached_podium_parts = 11;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 12;
+
+    int32 leader_cookie_data_id_value = 13;
+  }
+}
+
+message PvpSmashOpponent {
+  PvpOpponentKind kind = 1;
+
+  bool is_activated = 2;
+
+  int32 tier = 3;
+
+  int32 rating = 4;
+
+  int32 win_count = 5;
+
+  repeated PvpSmashDeck decks = 6;
+
+  bool is_redacted = 7;
+
+  repeated EquipmentItemByCookie equipped_equipment_items = 8;
+}
+
+message PvpSmashDeck {
+  int32 defense_power = 1;
+
+  repeated PvpOpponentCookie cookies = 2;
+
+  repeated PvpOpponentTreasure treasures = 3;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 4;
+
+    int32 leader_cookie_data_id_value = 5;
+  }
+}
+
+message EquipmentItemByCookie {
+  int32 cookie_data_id = 1;
+
+  int32 equipment_item_data_id = 2;
+
+  int32 level = 3;
+}
+
+message PvpOpponentDetail {
+  PvpOpponentKind kind = 1;
+
+  bool is_activated = 2;
+
+  int32 tier = 3;
+
+  int32 rating = 4;
+
+  int32 win_count = 5;
+
+  int32 defense_power = 6;
+
+  PvpDefenseDeckDetail defense_deck = 7;
+
+  map<int32, int32> battle_passives = 8;
+
+  map<int32, CookiePassive> cookie_passives = 17;
+
+  map<int32, int32> hot_time_battle_buffs = 15;
+
+  repeated ToppingEquipmentByCookie topping_equipments = 9;
+
+  repeated BeascuitEquipmentByCookie beascuit_equipments = 16;
+
+  oneof guild_level {
+    int32 guild_level_value = 10;
+
+    ck.Empty no_guild_level = 12;
+  }
+
+  repeated EquipmentItemByCookie equipped_equipment_items = 13;
+
+  AttachedPvpPodiumPartsOptional attached_podium_parts = 14;
+}
+
+message PvpSmashOpponentDetail {
+  PvpOpponentKind kind = 1;
+
+  bool is_activated = 2;
+
+  int32 tier = 3;
+
+  int32 rating = 4;
+
+  int32 win_count = 5;
+
+  PvpSmashDecksDetail decks = 6;
+
+  map<int32, int32> battle_passives = 7;
+
+  map<int32, CookiePassive> cookie_passives = 14;
+
+  map<int32, int32> hot_time_battle_buffs = 12;
+
+  repeated ToppingEquipmentByCookie topping_equipments = 8;
+
+  repeated BeascuitEquipmentByCookie beascuit_equipments = 13;
+
+  oneof guild_level {
+    int32 guild_level_value = 9;
+
+    ck.Empty no_guild_level = 10;
+  }
+
+  repeated EquipmentItemByCookie equipped_equipment_items = 11;
+}
+
+message ToppingEquipmentByCookie {
+  int32 cookie_data_id = 1;
+
+  repeated Topping toppings = 2;
+}
+
+message BeascuitEquipmentByCookie {
+  int32 cookie_data_id = 1;
+
+  BeascuitOptional beascuit = 2;
+}
+
+message PvpSmashDecksDetail {
+  repeated PvpSmashDeckDetail decks = 1;
+}
+
+message PvpSmashDeckDetail {
+  int32 defense_power = 1;
+
+  repeated PvpCookieDetail cookies = 2;
+
+  repeated PvpTreasureDetail treasures = 3;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 4;
+
+    int32 leader_cookie_data_id_value = 5;
+  }
+}
+
+message PvpAttackerRecord {
+  PvpOpponentKind kind = 1;
+
+  bool is_activated = 2;
+
+  int32 tier = 3;
+
+  int32 rating = 4;
+
+  int32 win_count = 5;
+
+  int32 attack_power = 6;
+
+  PvpAttackDeckDetail attack_deck = 7;
+
+  bool is_redacted = 8;
+
+  repeated EquipmentItemByCookie equipped_equipment_items = 9;
+}
+
+message PvpOpponentId {
+  oneof value {
+    User user = 1;
+
+    Bot bot = 2;
+  }
+
+  message User {
+    string user_id = 1;
+  }
+
+  message Bot {
+    int32 data_id = 1;
+  }
+}
+
+message PvpOpponentKind {
+  oneof value {
+    User user = 1;
+
+    Bot bot = 2;
+  }
+
+  message User {
+    UserSummary user_summary = 1;
+  }
+
+  message Bot {
+    int32 data_id = 1;
+  }
+}
+
+message PvpOpponentCookie {
+  oneof value {
+    Public public = 1;
+
+    Hidden hidden = 2;
+  }
+
+  message Public {
+    Cookie cookie = 1;
+
+    int32 location_index = 2;
+  }
+
+  message Hidden {
+    int32 location_index = 1;
+
+    bool is_leader_cookie = 2;
+  }
+}
+
+message PvpOpponentTreasure {
+  oneof value {
+    Public public = 1;
+
+    Hidden hidden = 2;
+  }
+
+  message Public {
+    PvpTreasureDetail treasure = 1;
+  }
+
+  message Hidden {
+  }
+}
+
+message PvpSmashAttackDecksDetail {
+  repeated PvpSmashAttackDeckDetail decks = 1;
+}
+
+message PvpSmashAttackDeckDetail {
+  repeated PvpCookieDetail cookies = 1;
+
+  repeated PvpTreasureDetail treasures = 2;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 3;
+
+    int32 leader_cookie_data_id_value = 4;
+  }
+}
+
+message OngoingPvpBattle {
+  string id = 1;
+
+  PvpBattleKind kind = 2;
+
+  ck.Time started_at = 3;
+
+  oneof attack_deck_detail {
+    PvpAttackDeckDetail pvp_attack_deck_detail = 4;
+
+    PvpSmashAttackDecksDetail pvp_smash_attack_decks_detail = 5;
+  }
+
+  oneof opponent_detail {
+    PvpOpponentDetail pvp_opponent_detail = 6;
+
+    PvpSmashOpponentDetail pvp_smash_opponent_detail = 7;
+  }
+
+  int32 random_seed = 8;
+
+  oneof spec_adjustment_group_data_id {
+    int32 spec_adjustment_group_data_id_value = 9;
+
+    ck.Empty no_spec_adjustment_group_data_id = 10;
+  }
+}
+
+message PvpBattleKind {
+  oneof value {
+    Attack attack = 1;
+
+    Revenge revenge = 2;
+  }
+
+  message Attack {
+    string opponent_pool_entry_id = 1;
+  }
+
+  message Revenge {
+    string defense_record_id = 2;
+  }
+}
+
+message PvpDefenseRecord {
+  string id = 1;
+
+  Status status = 2;
+
+  int32 rating_delta = 3;
+
+  int64 medal_reward_amount = 4;
+
+  ck.Time battle_finished_at = 5;
+
+  PvpAttackerRecord attacker_record = 6;
+
+  oneof battle_id {
+    ck.Empty no_battle_id = 7;
+
+    string battle_id_value = 8;
+  }
+
+  enum Status {
+    WIN = 0;
+
+    LOSE = 1;
+
+    DRAW = 2;
+
+    REVENGE_WIN = 3;
+
+    REVENGE_LOSE = 4;
+
+    REVENGE_DRAW = 5;
+  }
+}
+
+message PvpBattleReport {
+  Result result = 1;
+
+  ck.Duration battle_duration = 2;
+
+  string checksum = 3;
+
+  repeated PvpBattleTeamReport attack_battle_report = 4;
+
+  repeated PvpBattleTeamReport defense_battle_report = 5;
+
+  bool is_quit = 6;
+
+  bool is_timeout = 7;
+
+  repeated PvpBattleRoundReport round_reports = 8;
+
+  int32 random_index = 9;
+
+  enum Result {
+    ATTACK_WON = 0;
+
+    DEFENSE_WON = 1;
+
+    DRAW = 2;
+  }
+}
+
+message PvpBattleRoundReport {
+  PvpBattleReport.Result result = 1;
+
+  ck.Duration round_duration = 2;
+
+  PvpBattleTeamRoundReport attack_battle_report = 3;
+
+  PvpBattleTeamRoundReport defense_battle_report = 4;
+}
+
+message PvpBattleTeamRoundReport {
+  int32 team_index = 1;
+
+  map<int32, PvpBattleCookieRoundReport> cookie_reports = 2;
+}
+
+message PvpBattleCookieRoundReport {
+  double start_health_point = 1;
+
+  double end_health_point = 2;
+}
+
+message PvpBattleTeamReport {
+  double start_health_point_stat = 1;
+
+  double end_health_point = 2;
+
+  double end_health_point_ratio = 3;
+
+  double visual_end_health_point_ratio = 10;
+
+  double max_attack_stat = 5;
+
+  double max_defense_stat = 6;
+
+  double max_health = 7;
+
+  double max_damage = 8;
+
+  double min_cool_time_stat = 9;
+
+  map<int32, PvpBattleCookieReport> cookie_reports = 4;
+
+  repeated TreasureBattleReport treasure_reports = 12;
+
+  double max_health_stat_with_ability = 11;
+}
+
+message TreasureBattleReport {
+  int32 team_index = 1;
+
+  int32 treasure_data_id = 2;
+
+  double max_attack = 3;
+
+  double attack = 4;
+
+  double heal = 5;
+
+  repeated int32 activate_times = 6;
+}
+
+message PvpBattleCookieReport {
+  int64 kill = 1;
+
+  double attack = 2;
+
+  double critical_attack = 3;
+
+  double non_critical_attack = 4;
+
+  double skill_attack = 5;
+
+  double normal_attack = 6;
+
+  double damage_taken = 7;
+
+  double skill_damage_taken = 8;
+
+  double normal_damage_taken = 9;
+
+  double reduced_damage_taken = 10;
+
+  double recovery = 11;
+
+  double heal = 12;
+
+  ck.Duration buff_time = 13;
+
+  ck.Duration debuff_time = 14;
+
+  int64 normal_attack_count = 15;
+
+  int64 skill_attack_count = 16;
+
+  double normal_attack_dps = 17;
+
+  double skill_attack_dps = 18;
+
+  ck.Duration live_time = 19;
+
+  double end_health_point = 21;
+
+  double start_attack_point_stat = 22;
+
+  double start_defense_point_stat = 23;
+
+  double start_health_point_stat = 20;
+
+  double max_damage = 24;
+
+  double start_cool_time_stat = 25;
+
+  int32 combat_power = 26;
+
+  double end_attack_point_stat = 27;
+
+  double end_defense_point_stat = 28;
+
+  double end_cool_time_stat = 29;
+
+  double max_damage_raw = 30;
+
+  double max_normal_attack_raw = 31;
+
+  double min_normal_attack_raw = 32;
+
+  double end_health_point_stat = 33;
+
+  double end_health_point_stat_with_ability = 34;
+
+  bool invalid_health_point_changed = 35;
+}
+
+message PvpSeasonResult {
+  int32 pvp_season_data_id = 1;
+
+  int32 tier = 2;
+
+  int32 max_reached_tier = 8;
+
+  int32 rating = 3;
+
+  int32 depreciated_rating = 4;
+
+  bool has_rewards = 5;
+
+  oneof master_league_rank {
+    ck.Empty no_master_league_rank = 6;
+
+    int32 master_league_rank_value = 7;
+  }
+
+  bool is_top_ranker_notified = 9;
+}
+
+message PvpRankRecord {
+  oneof opponent {
+    PvpOpponent pvp_opponent = 1;
+
+    PvpSmashOpponent pvp_smash_opponent = 4;
+  }
+
+  int32 rank = 2;
+
+  int64 score = 3;
+}
+
+message PvpHallOfFameRecord {
+  UserSummary user_summary = 1;
+
+  int32 tier = 2;
+
+  int32 rank = 3;
+
+  int64 score = 4;
+
+  repeated PvpHallOfFameCookie cookies = 5;
+
+  AttachedPvpPodiumPartsOptional attached_parts = 6;
+}
+
+message PvpHallOfFameCookie {
+  int32 cookie_data_id = 1;
+
+  int32 skin_data_id = 2;
+}
+
+message PvpGuildRankRecord {
+  GuildSummary guild = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+
+  double ratio = 4;
+}
+
+message EventRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+
+  double ratio = 4;
+}
+
+message PopularityContributionRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+
+  bool is_hidden = 4;
+}
+
+message ChatRoomId {
+  oneof value {
+    OneOnOne one_on_one = 1;
+
+    WorldChannel world_channel = 2;
+
+    GlobalChannel global_channel = 3;
+
+    Guild guild = 4;
+  }
+
+  message OneOnOne {
+    string first_user_id = 1;
+
+    string second_user_id = 2;
+  }
+
+  message WorldChannel {
+    string channel_id = 1;
+  }
+
+  message GlobalChannel {
+  }
+
+  message Guild {
+    string guild_id = 1;
+  }
+}
+
+message ChatPayload {
+  oneof value {
+    Message message = 1;
+
+    DailyRandomGift daily_random_gift = 2;
+
+    SpecialRandomGift special_random_gift = 25;
+
+    PopularityGift popularity_gift = 3;
+
+    CookieGotten cookie_gotten = 4;
+
+    CookieNormalMaxUpgrade cookie_normal_max_upgrade = 5;
+
+    BeascuitGotten beascuit_gotten = 42;
+
+    ToppingGotten topping_gotten = 6;
+
+    ToppingMaxUpgrade topping_max_upgrade = 7;
+
+    TreasureMaxLevel treasure_max_level = 8;
+
+    StructureMaxLevel structure_max_level = 9;
+
+    PvpTopRanker pvp_top_ranker = 10;
+
+    FriendlyPvpMatchResult friendly_pvp_match_result = 11;
+
+    BroadcastingMessage broadcasting_message = 12;
+
+    UserKicked user_kicked = 13;
+
+    GuildInvite guild_invite = 14;
+
+    GuildInviteAction guild_invite_action = 15;
+
+    GuildJoin guild_join = 16;
+
+    GuildLeave guild_leave = 17;
+
+    GuildBan guild_ban = 18;
+
+    GuildRoleChange guild_role_change = 19;
+
+    GuildLevelUp guild_level_up = 20;
+
+    GuildBattleStageCleared guild_battle_stage_cleared = 21;
+
+    HotTimeEventChanged hot_time_event_changed = 22;
+
+    HotTimeEventDeleted hot_time_event_deleted = 23;
+
+    GuildRelicLevelUp guild_relic_level_up = 26;
+
+    GuildRelicFirstDonate guild_relic_first_donate = 27;
+
+    GuildRelicRoomPassiveIncrease guild_relic_room_passive_increase = 28;
+
+    GuildSegmentUnlocked guild_segment_unlocked = 29;
+
+    GuildTownEditAuthorityChanged guild_town_edit_authority_changed = 30;
+
+    GuildRelicLevelDown guild_relic_level_down = 31;
+
+    GuildRelicRemove guild_relic_remove = 32;
+
+    GuildRelicRoomPassiveDecrease guild_relic_room_passive_decrease = 33;
+
+    GuildRelicRoomPassiveDisappear guild_relic_room_passive_disappear = 34;
+
+    GuildRelicReclaim guild_relic_reclaim = 35;
+
+    CookieBeyondMaxUpgrade cookie_beyond_max_upgrade = 36;
+
+    GuildBattleTierReached guild_battle_tier_reached = 37;
+
+    GuildBattleTierInitialized guild_battle_tier_initialized = 38;
+
+    CookieSkinGotten cookie_skin_gotten = 39;
+
+    JamStoneMaxLevel jam_stone_max_level = 40;
+
+    GuildRelicLevelUpV2 guild_relic_level_up_v2 = 41;
+
+    BeastCookieMaxUpgrade beast_cookie_max_upgrade = 43;
+
+    AwakeningMaxLevel awakening_max_level = 44;
+  }
+
+  message Message {
+    string message = 1;
+  }
+
+  message DailyRandomGift {
+    int32 daily_random_gift_data_id = 3;
+
+    int32 item_data_id = 1;
+
+    int64 amount = 2;
+  }
+
+  message SpecialRandomGift {
+    int32 special_random_gift_data_id = 3;
+
+    int32 item_data_id = 1;
+
+    int64 amount = 2;
+  }
+
+  message PopularityGift {
+    int32 item_data_id = 1;
+
+    int64 amount = 2;
+  }
+
+  message CookieGotten {
+    int32 cookie_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message CookieNormalMaxUpgrade {
+    int32 cookie_data_id = 1;
+
+    int32 grade = 2;
+
+    UserInfo user = 3;
+  }
+
+  message BeascuitGotten {
+    int32 beascuit_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message ToppingGotten {
+    int32 topping_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message ToppingMaxUpgrade {
+    int32 topping_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message TreasureMaxLevel {
+    int32 treasure_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message StructureMaxLevel {
+    int32 structure_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message PvpTopRanker {
+    int32 rank = 1;
+
+    UserInfo user = 2;
+  }
+
+  message CookieSkinGotten {
+    int32 cookie_skin_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message FriendlyPvpMatchResult {
+    string attacker_id = 1;
+
+    string defender_id = 2;
+
+    PvpBattleReport.Result battle_result_for_attacker = 3;
+  }
+
+  message BroadcastingMessage {
+    Broadcasting message = 1;
+  }
+
+  message HotTimeEventChanged {
+    HotTimeEvent event = 1;
+  }
+
+  message HotTimeEventDeleted {
+    string event_id = 1;
+  }
+
+  message UserKicked {
+  }
+
+  message GuildInvite {
+    string guild_id = 1;
+
+    UserInfo sender = 2;
+
+    string invite_id = 3;
+  }
+
+  message GuildInviteAction {
+    string guild_id = 1;
+
+    string invite_id = 2;
+
+    bool accepted = 3;
+  }
+
+  message GuildJoin {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+  }
+
+  message GuildLeave {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+  }
+
+  message GuildBan {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+  }
+
+  message GuildLevelUp {
+    string guild_id = 1;
+
+    int32 level = 2;
+
+    bool is_max_level = 3;
+  }
+
+  message GuildRoleChange {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+
+    GuildMemberRole from = 3;
+
+    GuildMemberRole to = 4;
+
+    bool caused_by_inactivity = 5;
+  }
+
+  message GuildBattleStageCleared {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+
+    int32 last_cleared_guild_battle_data_id = 3;
+  }
+
+  message GuildRelicLevelUp {
+    string guild_id = 1;
+
+    int32 relic_data_id = 2;
+
+    int32 relic_level = 3;
+  }
+
+  message GuildRelicFirstDonate {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+
+    int32 relic_data_id = 3;
+  }
+
+  message GuildRelicRoomPassiveIncrease {
+    string guild_id = 1;
+
+    int32 museum_room_data_id = 2;
+
+    int32 relic_level = 3;
+  }
+
+  message GuildSegmentUnlocked {
+    string guild_id = 1;
+
+    int32 segment_data_id = 2;
+  }
+
+  message GuildTownEditAuthorityChanged {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+  }
+
+  message GuildRelicLevelDown {
+    string guild_id = 1;
+
+    int32 relic_data_id = 2;
+
+    int32 relic_level = 3;
+  }
+
+  message GuildRelicRemove {
+    string guild_id = 1;
+
+    int32 relic_data_id = 2;
+  }
+
+  message GuildRelicRoomPassiveDecrease {
+    string guild_id = 1;
+
+    int32 museum_room_data_id = 2;
+
+    int32 relic_level = 3;
+  }
+
+  message GuildRelicRoomPassiveDisappear {
+    string guild_id = 1;
+
+    int32 museum_room_data_id = 2;
+  }
+
+  message GuildRelicReclaim {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+  }
+
+  message CookieBeyondMaxUpgrade {
+    int32 cookie_data_id = 1;
+
+    int32 grade = 2;
+
+    UserInfo user = 3;
+  }
+
+  message GuildBattleTierReached {
+    string guild_id = 1;
+
+    int32 tier = 2;
+  }
+
+  message GuildBattleTierInitialized {
+    string guild_id = 1;
+  }
+
+  message JamStoneMaxLevel {
+    int32 equipment_item_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message AwakeningMaxLevel {
+    int32 equipment_item_data_id = 1;
+
+    UserInfo user = 2;
+  }
+
+  message GuildRelicLevelUpV2 {
+    string guild_id = 1;
+
+    UserInfo member = 2;
+
+    int32 relic_data_id = 3;
+
+    int32 relic_level = 4;
+  }
+
+  message BeastCookieMaxUpgrade {
+    int32 cookie_data_id = 1;
+
+    UserInfo user = 2;
+  }
+}
+
+message ChatMessage {
+  UserInfo sender = 1;
+
+  ChatPayload payload = 2;
+
+  ck.Time sent_at = 3;
+}
+
+message UserInfo {
+  string user_id = 1;
+
+  string user_name = 2;
+
+  bool is_top_ranker = 3;
+}
+
+message ChatInfo {
+  ChatRoomId chat_room_id = 1;
+
+  oneof last_chat_message {
+    ChatMessage last_chat_message_value = 2;
+
+    ck.Empty no_last_chat_message = 3;
+  }
+}
+
+message LandStarReward {
+  int32 star = 1;
+
+  repeated Reward rewards = 2;
+}
+
+message DailyPurchaseLimitState {
+  int32 item_data_id = 1;
+
+  int32 purchased_count = 2;
+
+  ck.Time next_reset_at = 3;
+}
+
+message CurrencyInfo {
+  CurrencyAmount coins = 1;
+
+  CurrencyAmount crystals = 2;
+
+  CurrencyAmount rainbow_cubes = 3;
+
+  CurrencyAmount stamina = 4;
+
+  CurrencyAmount pvp_medals = 5;
+
+  CurrencyAmount big_stamina = 6;
+
+  CurrencyAmount cookie_look_gacha_items = 7;
+}
+
+message PushNotificationSetting {
+  int32 push_data_id = 1;
+
+  bool enabled = 2;
+}
+
+message FriendInviteState {
+  bool is_invited = 1;
+}
+
+message PersonalInfoState {
+  bool is_deleted = 1;
+
+  oneof inserted_at {
+    ck.Empty no_inserted_at = 2;
+
+    ck.Time inserted_at_value = 3;
+  }
+}
+
+message ForeignEnvelope {
+  oneof value {
+    ck.Empty no_value = 1;
+
+    string link = 2;
+  }
+}
+
+message NoticeHomeShortcut {
+  oneof value {
+    int32 notice_message_id = 1;
+
+    string external_link = 2;
+
+    ShortcutData shortcut_data = 3;
+
+    ck.Empty no_shortcut = 4;
+  }
+
+  message ShortcutData {
+    int32 shortcut_data_id = 1;
+
+    int32 shortcut_value = 2;
+  }
+}
+
+message NoticeHomeContent {
+  bool is_big_banner_type = 1;
+
+  int32 order_index = 2;
+
+  string banner_resource_url = 3;
+
+  NoticeHomeShortcut shortcut = 4;
+
+  ck.Time starts_at = 5;
+
+  ck.Time ends_at = 6;
+
+  LanguageType language_type = 7;
+}
+
+message NoticeHome {
+  int32 id = 1;
+
+  NoticeHomeContent content = 2;
+}
+
+message NoticeMessageContent {
+  NoticeCategory category = 1;
+
+  repeated MailDescription descriptions = 2;
+
+  bool is_emergency = 3;
+
+  oneof shortcut_button {
+    NoticeMessageShortcutButton shortcut_button_value = 4;
+
+    ck.Empty no_shortcut_button = 5;
+  }
+
+  TargetLanguageTypes target_language_types = 6;
+
+  ck.Time starts_at = 7;
+
+  ck.Time ends_at = 8;
+}
+
+message NoticeMessageShortcutButton {
+  repeated MailDescription titles = 1;
+
+  string link = 2;
+}
+
+message NoticeMessage {
+  int32 id = 1;
+
+  NoticeMessageContent content = 2;
+}
+
+message TargetLanguageTypes {
+  oneof value {
+    ck.Empty all_language_types = 1;
+
+    Particular particular = 2;
+  }
+
+  message Particular {
+    repeated LanguageType language_types = 1;
+  }
+}
+
+message NoticeCommunityContentForLanguageType {
+  LanguageType language_type = 1;
+
+  string title = 2;
+
+  string external_link = 3;
+
+  string thumbnail_resource_url = 4;
+}
+
+message NoticeCommunityContent {
+  reserved 2;
+
+  int32 order_index = 1;
+
+  NoticeCommunityContentForLanguageType content = 3;
+}
+
+message NoticeCommunity {
+  int32 id = 1;
+
+  NoticeCommunityContent content = 2;
+}
+
+message NoticeStoreContentForLanguageType {
+  LanguageType language_type = 1;
+
+  string title = 2;
+
+  string external_link = 3;
+
+  string store_resource_url = 4;
+}
+
+message NoticeStoreContent {
+  int32 order_index = 1;
+
+  NoticeStoreContentForLanguageType content = 2;
+
+  ck.Time starts_at = 3;
+
+  ck.Time ends_at = 4;
+}
+
+message NoticeStore {
+  int32 id = 1;
+
+  NoticeStoreContent content = 2;
+}
+
+message GuildActivityState {
+  GuildJoinState join_state = 1;
+
+  ck.Time guild_creatable_at = 2;
+
+  ck.Time guild_joinable_at = 3;
+
+  repeated GuildJoinLimit guild_join_limits = 8;
+
+  ck.Time last_attended_at = 4;
+
+  repeated GuildNotification notifications = 6;
+
+  repeated ReceivedGuildInvite invites = 7;
+
+  repeated SentGuildJoinRequest join_requests = 9;
+
+  GuildSegmentUnlockContributionState guild_segment_unlock_contribution_state = 10;
+
+  GuildBattleTicketState battle_ticket_state = 11;
+
+  repeated GuildMuseumType notified_museums = 12;
+}
+
+message GuildBattleTicketState {
+  oneof battle_season_data_id {
+    int32 battle_season_data_id_value = 1;
+
+    ck.Empty no_battle_season_data_id = 2;
+  }
+
+  int64 tickets = 3;
+
+  ck.Time expires_at = 4;
+
+  map<int32, int32> play_count_for_boss = 5;
+}
+
+message GuildJoinLimit {
+  string guild_id = 1;
+
+  ck.Time joinable_at = 2;
+}
+
+message ReceivedGuildInvite {
+  string invite_id = 1;
+
+  string guild_id = 2;
+
+  ck.Time invited_at = 3;
+
+  string inviter = 4;
+}
+
+message GuildJoinRequest {
+  SocialSummary requester_summary = 1;
+
+  PvpSummaryForGuild pvp_summary = 2;
+
+  ck.Time requested_at = 3;
+}
+
+message SentGuildJoinRequest {
+  string guild_id = 1;
+
+  ck.Time requested_at = 2;
+}
+
+message GuildNotification {
+  oneof value {
+    Banned banned = 1;
+
+    RoleChanged role_changed = 2;
+
+    JoinRequestRejected join_request_rejected = 3;
+  }
+
+  message Banned {
+    string guild_id = 1;
+  }
+
+  message RoleChanged {
+    string guild_id = 1;
+
+    GuildMemberRole new_role = 2;
+  }
+
+  message JoinRequestRejected {
+    string guild_id = 1;
+  }
+}
+
+message GuildJoinState {
+  oneof value {
+    NotJoined not_joined = 1;
+
+    Joined joined = 2;
+  }
+
+  message NotJoined {
+  }
+
+  message Joined {
+    Guild guild = 1;
+
+    ck.Time joined_at = 2;
+  }
+}
+
+message GuildJoinStateSummary {
+  oneof value {
+    NotJoined not_joined = 1;
+
+    Joined joined = 2;
+  }
+
+  message NotJoined {
+  }
+
+  message Joined {
+    string guild_id = 1;
+
+    string guild_name = 2;
+
+    int64 guild_activity_points = 4;
+
+    ck.Time joined_at = 5;
+  }
+}
+
+message GuildProfile {
+  int32 emblem_data_id = 1;
+
+  string description = 2;
+
+  GuildJoinMethod join_method = 3;
+
+  oneof min_level {
+    int32 min_level_value = 4;
+
+    ck.Empty no_min_level = 5;
+  }
+
+  oneof min_combat_power {
+    int32 min_combat_power_value = 6;
+
+    ck.Empty no_min_combat_power = 7;
+  }
+}
+
+message GuildMember {
+  SocialSummary social_summary = 1;
+
+  GuildMemberRole role = 2;
+
+  int64 activity_points = 3;
+
+  int64 segment_unlock_activity_points = 4;
+
+  PvpSummaryForGuild pvp_summary = 5;
+
+  GuildMemberAvatar avatar = 6;
+
+  ck.Time last_attended_at = 7;
+
+  int64 relic_donation_points = 8;
+
+  ck.Time last_chat_checked_at = 9;
+
+  bool is_last_notice_checked = 10;
+}
+
+message PvpSummaryForGuild {
+  oneof value {
+    ck.Empty no_value = 1;
+
+    Summary summary = 2;
+  }
+
+  message Summary {
+    int32 combat_power = 1;
+  }
+}
+
+message GuildSummary {
+  string id = 1;
+
+  string name = 2;
+
+  GuildProfile profile = 3;
+
+  int64 experience = 4;
+
+  int32 rating = 5;
+
+  int32 rank = 6;
+
+  double rank_ratio = 9;
+
+  oneof tier {
+    int32 tier_value = 13;
+
+    ck.Empty no_tier = 14;
+  }
+
+  bool is_ranked = 10;
+
+  GuildMember master = 7;
+
+  int32 member_count = 8;
+
+  map<int32, int64> relics = 11;
+
+  int64 infinite_dungeon_season_score = 12;
+}
+
+message GuildSummaryForProfile {
+  string id = 1;
+
+  string name = 2;
+
+  GuildProfile profile = 3;
+
+  int64 rank_score = 4;
+
+  int32 rank = 5;
+
+  int32 infinite_dungeon_season_data_id = 6;
+
+  oneof infinite_dungeon_rank_score {
+    int64 infinite_dungeon_rank_score_value = 7;
+
+    ck.Empty no_infinite_dungeon_rank_score = 8;
+  }
+
+  oneof infinite_dungeon_rank {
+    int64 infinite_dungeon_rank_value = 9;
+
+    ck.Empty no_infinite_dungeon_rank = 10;
+  }
+}
+
+message Guild {
+  string id = 1;
+
+  string name = 2;
+
+  GuildProfile profile = 3;
+
+  string notice = 9;
+
+  int64 experience = 4;
+
+  int32 rating = 5;
+
+  int32 rank = 6;
+
+  int32 tier = 12;
+
+  bool is_ranked = 11;
+
+  double rank_ratio = 10;
+
+  GuildMember master = 7;
+
+  int32 member_count = 8;
+
+  int64 infinite_dungeon_season_score = 13;
+}
+
+message GuildRankRecord {
+  GuildSummary guild_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+}
+
+message GuildBattleUserSummaryForClient {
+  UserSummary user_summary = 1;
+
+  bool is_left_user = 2;
+}
+
+message GuildBattleBossReport {
+  int32 boss_data_id = 1;
+
+  int32 max_reached_level = 2;
+
+  int64 accumulated_damage = 3;
+
+  bool is_new_max_reached_level = 4;
+
+  bool is_new_accumulated_damage = 5;
+}
+
+message GuildBattleParticipationReport {
+  GuildBattleUserSummaryForClient user_summary = 1;
+
+  map<int32, int64> total_dealt_damages = 2;
+}
+
+message GuildBattleTotalReport {
+  repeated GuildBattleBossReport boss_reports = 1;
+
+  repeated GuildBattleParticipationReport participation_reports = 2;
+}
+
+message GuildBattleSeasonResult {
+  int32 battle_season_data_id = 1;
+
+  int32 tier = 2;
+
+  int32 rating = 3;
+
+  int32 rank = 4;
+
+  int64 total_dealt_damage = 5;
+
+  bool is_new_rank = 6;
+
+  bool is_new_rating = 7;
+
+  GuildBattleTotalReport report = 8;
+}
+
+message GuildBattleSeasonGroupResult {
+  int32 battle_season_group_data_id = 1;
+
+  int32 tier = 2;
+
+  int32 rating = 3;
+
+  int32 rank = 4;
+
+  int64 total_dealt_damage = 5;
+
+  bool is_new_rank = 6;
+
+  bool is_new_rating = 7;
+
+  GuildBattleTotalReport report = 8;
+}
+
+message GuildBattleSeasonLogs {
+  oneof season_group_result {
+    GuildBattleSeasonGroupResult season_group_result_value = 1;
+
+    ck.Empty no_season_group_result = 2;
+  }
+
+  repeated GuildBattleSeasonResult season_results = 3;
+
+  GuildSummary guild_summary = 4;
+}
+
+message GuildBattleStages {
+  int32 boss_data_id = 1;
+
+  int64 accumulated_damage = 3;
+
+  repeated GuildBattleStage stages = 2;
+}
+
+message GuildBattleStage {
+  int32 guild_battle_data_id = 1;
+
+  bool complete_reward_receivable = 2;
+
+  int32 participated_member_count = 3;
+}
+
+message GuildBattleState {
+  int32 battle_season_data_id = 1;
+
+  repeated GuildBattleStages stages_for_boss = 2;
+
+  int32 rating = 3;
+
+  int32 tier = 8;
+
+  oneof last_notified_tier {
+    int32 last_notified_tier_value = 9;
+
+    ck.Empty no_last_notified_tier = 10;
+  }
+
+  int32 rank = 4;
+
+  double rank_ratio = 5;
+
+  bool is_ranked = 6;
+
+  repeated GuildBattleLog logs = 7;
+
+  repeated UserSummary user_summaries_for_log = 13;
+
+  map<int32, int32> max_played_dungeon_for_boss = 11;
+}
+
+message OngoingGuildBattle {
+  string id = 1;
+
+  int32 boss_data_id = 2;
+
+  int32 random_seed = 3;
+
+  int64 start_accumulated_damage = 4;
+
+  ck.Time started_at = 5;
+
+  UnfinishedGuildBattleDetection unfinished_guild_battle_detection = 6;
+}
+
+message UnfinishedGuildBattleDetection {
+  int32 count = 1;
+
+  ck.Time last_detected_at = 2;
+}
+
+message GuildBattleParticipation {
+  string member_id = 1;
+
+  int32 battle_season_data_id = 2;
+
+  OngoingGuildBattle ongoing_battle = 3;
+}
+
+message GuildBattleLog {
+  string battle_id = 8;
+
+  string member_id = 1;
+
+  ck.Time battle_ended_at = 2;
+
+  int32 start_guild_battle_data_id = 3;
+
+  int32 end_guild_battle_data_id = 4;
+
+  int64 start_accumulated_damage = 5;
+
+  int64 end_accumulated_damage = 6;
+
+  BattleTeamDetailView deck_view = 7;
+}
+
+message GuildSegmentUnlockContributionState {
+  ck.Time last_contributed_at = 1;
+
+  int64 contributed_item_amount = 2;
+}
+
+message GuildBattleRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+
+  int32 participated_count = 4;
+}
+
+message SocialRaid {
+  string raid_id = 1;
+
+  int32 season_data_id = 2;
+
+  int32 stage_data_id = 3;
+
+  repeated SocialRaidUserRecord user_records = 4;
+
+  oneof raid_ends_at {
+    ck.Empty no_raid_ends_at = 5;
+
+    ck.Time raid_ends_at_value = 6;
+  }
+
+  int64 remaining_health_point = 7;
+
+  repeated OngoingSocialRaidParticipation ongoing_participations = 8;
+
+  repeated SocialRaidHelpAsk help_asks = 9;
+
+  oneof help_asked_to_all_users_at {
+    ck.Empty no_help_asked_to_all_users_at = 10;
+
+    ck.Time help_asked_to_all_users_at_value = 11;
+  }
+
+  bool owner_reward_received = 12;
+
+  string raid_owner_id = 13;
+
+  ck.Time raid_started_at = 14;
+
+  bool help_gift_sent = 15;
+
+  oneof boss_killed_at {
+    ck.Empty no_boss_killed_at = 16;
+
+    ck.Time boss_killed_at_value = 17;
+  }
+}
+
+message SocialRaidUserRecord {
+  string battle_id = 1;
+
+  string user_id = 2;
+
+  int64 dealt_damage = 3;
+}
+
+message OngoingSocialRaidParticipation {
+  string user_id = 1;
+
+  ck.Time started_at = 2;
+}
+
+message OngoingSocialRaidBattle {
+  string battle_id = 1;
+
+  string raid_owner_id = 2;
+
+  string raid_id = 3;
+
+  int32 season_data_id = 4;
+
+  int32 battle_team_index = 5;
+
+  int64 start_health_point = 6;
+
+  ck.Time started_at = 7;
+
+  int32 random_seed = 8;
+
+  int32 stage_data_id = 9;
+}
+
+message SocialRaids {
+  repeated SocialRaidSeason seasons = 1;
+
+  oneof ongoing_battle {
+    OngoingSocialRaidBattle ongoing_battle_value = 2;
+
+    ck.Empty no_ongoing_battle = 3;
+  }
+}
+
+message SocialRaidSeason {
+  int32 season_data_id = 1;
+
+  repeated SocialRaid raids = 2;
+
+  repeated ParticipatedSocialRaidForHelp participated_raids_for_help = 3;
+
+  ck.Time all_users_raid_list_updated_at = 6;
+}
+
+message ParticipatedSocialRaidForHelp {
+  string raid_id = 1;
+
+  string raid_owner_id = 2;
+
+  int32 participated_count = 3;
+
+  bool is_notified = 4;
+
+  oneof reward_receivable {
+    bool reward_receivable_value = 5;
+
+    ck.Empty no_reward_receivable = 6;
+  }
+}
+
+message SocialRaidSummary {
+  repeated SocialRaidUserSummary user_summaries = 1;
+
+  string raid_id = 2;
+
+  string raid_owner_id = 3;
+
+  int32 stage_data_id = 4;
+
+  repeated SocialRaidUserRecord user_records = 5;
+
+  oneof raid_ends_at {
+    ck.Empty no_raid_ends_at = 6;
+
+    ck.Time raid_ends_at_value = 7;
+  }
+
+  int64 remaining_health_point = 8;
+
+  bool is_deleted_owner = 9;
+
+  oneof boss_killed_at {
+    ck.Empty no_boss_killed_at = 10;
+
+    ck.Time boss_killed_at_value = 11;
+  }
+
+  bool is_exist_ongoing_battles = 12;
+}
+
+message SocialRaidUserSummary {
+  string user_id = 1;
+
+  string name = 2;
+
+  ProfileImage profile_image = 3;
+
+  oneof profile_title {
+    ck.Empty no_profile_title = 4;
+
+    ProfileTitle profile_title_value = 5;
+  }
+
+  oneof profile_frame {
+    ck.Empty no_profile_frame = 6;
+
+    ProfileFrame profile_frame_value = 7;
+  }
+
+  int32 level = 8;
+}
+
+message SocialRaidHelpAsk {
+  string user_id = 1;
+
+  ck.Time asked_at = 2;
+}
+
+message SeasonableRecordsGroup {
+  SeasonableRecordType seasonable_record_type = 1;
+
+  repeated int32 record_data_ids = 2;
+}
+
+message Passives {
+  repeated Passive passives = 1;
+
+  message Passive {
+    KingdomPassiveContentType passive_type = 1;
+
+    map<int32, int32> passives = 2;
+  }
+}
+
+message GameEventSchedule {
+  string event_id = 1;
+
+  int32 event_data_id = 2;
+
+  ck.Time starts_at = 3;
+
+  ck.Time ends_at = 4;
+
+  ck.Time visible_until = 5;
+
+  ck.Time schedule_visible_at = 6;
+}
+
+message RecordTower {
+  repeated int32 rewarded_record_group_data_ids = 1;
+}
+
+message EventDungeonBattleStageReport {
+  map<int32, int64> number_of_killed_per_enemy = 1;
+
+  int64 coins = 2;
+
+  int32 jump_count = 22;
+
+  int32 obstacle_collision = 23;
+
+  ck.Duration battle_duration = 3;
+
+  string checksum = 4;
+
+  double start_health_point_stat = 5;
+
+  double end_health_point = 6;
+
+  double end_health_point_ratio = 7;
+
+  double max_attack_stat = 9;
+
+  double max_defense_stat = 10;
+
+  double max_health = 11;
+
+  double max_damage = 12;
+
+  double min_cool_time_stat = 13;
+
+  map<int32, EventDungeonBattleStageCookieReport> cookie_reports = 8;
+
+  repeated TreasureBattleReport treasure_reports = 28;
+
+  bool is_quit = 14;
+
+  bool is_timeout = 15;
+
+  int64 event_items_amount = 16;
+
+  int64 event_item_limit = 17;
+
+  int32 event_item_data_id = 18;
+
+  double max_health_stat_with_ability = 19;
+
+  double dealt_damage = 20;
+
+  double dealt_damage_to_boss = 21;
+
+  int64 number_of_attacks = 24;
+
+  int64 number_of_dot_attacks = 25;
+
+  int32 obstacle_destruction = 26;
+
+  int64 magic_jelly_score = 27;
+
+  bool is_cleared_map_for_client = 29;
+}
+
+message EventDungeonBattleStageCookieReport {
+  int64 coin = 1;
+
+  int64 kill = 2;
+
+  double attack = 3;
+
+  double critical_attack = 4;
+
+  double non_critical_attack = 5;
+
+  double skill_attack = 6;
+
+  double normal_attack = 7;
+
+  double damage_taken = 8;
+
+  double skill_damage_taken = 9;
+
+  double normal_damage_taken = 10;
+
+  double reduced_damage_taken = 11;
+
+  double recovery = 12;
+
+  double heal = 13;
+
+  ck.Duration buff_time = 14;
+
+  ck.Duration debuff_time = 15;
+
+  int64 normal_attack_count = 16;
+
+  int64 skill_attack_count = 17;
+
+  double normal_attack_dps = 18;
+
+  double skill_attack_dps = 19;
+
+  ck.Duration live_time = 20;
+
+  double end_health_point = 22;
+
+  double start_attack_point_stat = 23;
+
+  double start_defense_point_stat = 24;
+
+  double start_health_point_stat = 21;
+
+  double max_damage = 25;
+
+  double start_cool_time_stat = 26;
+
+  int32 combat_power = 27;
+
+  int64 event_item_amount = 28;
+
+  double end_attack_point_stat = 29;
+
+  double end_defense_point_stat = 30;
+
+  double end_cool_time_stat = 31;
+
+  double max_damage_raw = 32;
+
+  int32 team_preset_data_id = 33;
+
+  double end_health_point_stat = 34;
+
+  double end_health_point_stat_with_ability = 35;
+}
+
+message EventDungeonRhythmStageReport {
+  int64 coins = 1;
+
+  double end_health_point = 2;
+
+  int64 score = 3;
+
+  int64 event_items_amount = 4;
+
+  int32 fever_count = 5;
+
+  int32 collision_count = 6;
+
+  int32 max_combo = 7;
+
+  int64 event_item_limit = 8;
+
+  string checksum = 9;
+
+  double damage_by_obstacle = 10;
+
+  ck.Duration play_duration = 11;
+
+  int32 magic_jelly_count = 12;
+
+  double max_health_point = 13;
+
+  int32 perfect_count = 14;
+
+  int32 great_count = 15;
+
+  int32 good_count = 16;
+
+  int32 miss_count = 17;
+
+  int32 applied_collection_effect_count = 18;
+
+  int32 event_item_data_id = 19;
+}
+
+message EventDungeonKeyState {
+  int32 event_dungeon_group_data_id = 1;
+
+  int32 item_data_id = 2;
+
+  int64 keys = 3;
+
+  ck.Time last_updated_at = 4;
+}
+
+message EventDungeon {
+  int32 event_dungeon_season_data_id = 1;
+
+  repeated EventDungeonStage stages = 2;
+
+  oneof ongoing_stage {
+    ck.Empty no_ongoing_stage = 3;
+
+    OngoingEventDungeonStage ongoing_stage_value = 4;
+  }
+
+  repeated EventDungeonStage tutorial_stages = 5;
+}
+
+message EventDungeonStage {
+  oneof value {
+    BattleStage battle_stage = 1;
+
+    RhythmStage rhythm_stage = 2;
+  }
+
+  message BattleStage {
+    int32 stage_data_id = 1;
+
+    bool is_clear = 2;
+  }
+
+  message RhythmStage {
+    int32 stage_data_id = 1;
+
+    bool is_clear = 2;
+
+    int64 max_score = 3;
+
+    int32 max_combo = 4;
+  }
+}
+
+message OngoingEventDungeonStage {
+  oneof value {
+    OngoingBattleStage ongoing_battle_stage = 1;
+
+    OngoingRhythmStage ongoing_rhythm_stage = 2;
+  }
+
+  message OngoingBattleStage {
+    string id = 1;
+
+    int32 event_dungeon_season_data_id = 2;
+
+    int32 event_dungeon_stage_data_id = 3;
+
+    int32 land_data_id = 4;
+
+    int32 random_seed = 5;
+  }
+
+  message OngoingRhythmStage {
+    string id = 1;
+
+    int32 event_dungeon_season_data_id = 2;
+
+    int32 event_dungeon_stage_data_id = 3;
+
+    Participant head_participant = 4;
+
+    repeated Participant tail_participants = 5;
+
+    int32 land_data_id = 6;
+
+    int32 random_seed = 7;
+
+    int32 play_count = 8;
+
+    message Participant {
+      int32 cookie_data_id = 1;
+
+      int32 skin_data_id = 2;
+
+      bool is_fixed = 3;
+    }
+  }
+}
+
+message EventDungeons {
+  repeated EventDungeon dungeons = 1;
+
+  repeated EventDungeonKeyState key_states = 2;
+
+  repeated EventDungeonHistory histories = 3;
+}
+
+message EventDungeonHistory {
+  int32 season_data_id = 1;
+
+  repeated int32 cleared_stage_data_ids = 2;
+
+  repeated int32 cleared_tutorial_stage_data_ids = 3;
+}
+
+message PackagePurchaseLimitDelta {
+  int32 package_data_id = 1;
+
+  int32 delta = 2;
+}
+
+message GuildMemberPvpRankForClient {
+  SocialSummary social_summary = 1;
+
+  int32 rating = 2;
+
+  int32 rank = 3;
+
+  bool included_in_total = 4;
+}
+
+message GuildEventRankRecord {
+  GuildSummary guild_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+
+  double ratio = 4;
+}
+
+message GuildEventMemberRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+}
+
+message RewardSelection {
+  int32 reward_group_data_id = 1;
+
+  int32 reward_selection_data_id = 2;
+}
+
+message BattleTeamCookieDetail {
+  int32 cookie_data_id = 1;
+
+  int32 selected_topping_preset_index = 2;
+
+  int32 selected_beascuit_preset_index = 3;
+}
+
+message GuildRelic {
+  int32 data_id = 1;
+
+  int64 total_amount = 2;
+
+  oneof first_donor_member_id {
+    string first_donor_member_id_value = 3;
+
+    ck.Empty no_first_donor_member_id = 5;
+  }
+
+  map<string, int64> donations = 4;
+}
+
+message EventSurveyResponse {
+  int32 question_data_id = 1;
+
+  repeated int32 answer_data_ids = 2;
+}
+
+message EventSurveyQuestionResult {
+  int32 question_data_id = 1;
+
+  repeated EventSurveyAnswerResult answer_results = 2;
+}
+
+message EventSurveyAnswerResult {
+  int32 answer_data_id = 1;
+
+  double result_pct = 2;
+
+  bool selected = 3;
+}
+
+message GuildMemberAvatar {
+  oneof avatar_cookie {
+    AvatarCookie cookie = 1;
+
+    ck.Empty no_cookie = 2;
+  }
+
+  string greeting_message = 3;
+}
+
+message AvatarCookie {
+  int32 cookie_data_id = 1;
+
+  int32 skin_data_id = 2;
+}
+
+message InfiniteDungeons {
+  repeated InfiniteDungeon dungeons = 1;
+
+  bool tutorial_courage_used = 2;
+
+  repeated InfiniteDungeonSeasonResult season_results = 3;
+
+  oneof courage {
+    InfiniteDungeonCourage courage_value = 4;
+
+    ck.Empty no_courage = 5;
+  }
+
+  repeated InfiniteDungeonClearRewardBox clear_reward_boxes = 6;
+
+  oneof ongoing_battle {
+    OngoingInfiniteDungeonBattle ongoing_battle_value = 7;
+
+    ck.Empty no_ongoing_battle = 8;
+  }
+
+  repeated InfiniteDungeonArtifact artifacts = 9;
+
+  bool is_achievement_rewards_received = 10;
+}
+
+message InfiniteDungeonArtifact {
+  int32 group_data_id = 1;
+
+  int32 level = 2;
+}
+
+message InfiniteDungeon {
+  int32 infinite_dungeon_season_data_id = 1;
+
+  bool is_season_notified = 2;
+
+  oneof last_notified_tier_data_id {
+    int32 last_notified_tier_data_id_value = 3;
+
+    ck.Empty no_last_notified_tier_data_id = 4;
+  }
+
+  repeated InfiniteDungeonStage stages = 5;
+
+  oneof max_cleared_dungeon_data_id_for_last_version {
+    int32 max_cleared_dungeon_data_id_for_last_version_value = 6;
+
+    ck.Empty no_max_cleared_dungeon_data_id_for_last_version = 7;
+  }
+}
+
+message InfiniteDungeonStage {
+  int32 stage_data_id = 1;
+
+  bool is_clear = 2;
+
+  oneof best_score {
+    InfiniteDungeonScore best_score_value = 3;
+
+    ck.Empty no_best_score = 4;
+  }
+
+  oneof max_cleared_dungeon_data_id {
+    int32 max_cleared_dungeon_data_id_value = 6;
+
+    ck.Empty no_max_cleared_dungeon_data_id = 7;
+  }
+
+  bool is_first_clear_rewards_received = 8;
+}
+
+message InfiniteDungeonScore {
+  int64 score = 1;
+
+  int32 battle_time_millis = 2;
+}
+
+message InfiniteDungeonClearRewardBox {
+  int32 dungeon_data_id = 4;
+
+  int32 reward_pool_data_id = 1;
+
+  int32 relic_data_id = 2;
+
+  bool is_opened = 3;
+}
+
+message OngoingInfiniteDungeonBattle {
+  string id = 1;
+
+  int32 random_seed = 2;
+
+  int32 season_data_id = 3;
+
+  ck.Time battle_started_at = 4;
+
+  int32 stage_data_id = 5;
+
+  repeated InfiniteDungeonArtifact artifacts = 6;
+}
+
+message OngoingBattleTeamState {
+  int32 battle_team_index = 1;
+
+  repeated OngoingTreasureState treasure_states = 2;
+
+  repeated OngoingCookieState cookie_states = 3;
+}
+
+message OngoingTreasureState {
+  int32 treasure_data_id = 1;
+
+  int32 used_count = 2;
+
+  double cool_time_ratio = 3;
+}
+
+message OngoingCookieState {
+  int32 cookie_data_id = 1;
+
+  double health_point_ratio = 2;
+
+  bool is_dead = 3;
+
+  double cool_time_ratio = 4;
+
+  repeated OngoingBattleStoreState battle_store_states = 5;
+}
+
+message OngoingBattleStoreState {
+  string battle_store_type = 1;
+
+  repeated string battle_store_values = 2;
+}
+
+message InfiniteDungeonAccumulatedReport {
+  int32 cookie_data_id = 1;
+
+  map<string, double> report_values = 2;
+}
+
+message BattleActionGroupState {
+  int32 battle_action_group_data_id = 1;
+
+  int32 used_count = 2;
+}
+
+message InfiniteDungeonCourage {
+  int32 courage_data_id = 1;
+
+  ck.Time activated_until = 2;
+}
+
+message InfiniteDungeonRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int32 tier_data_id = 3;
+
+  InfiniteDungeonScore infinite_dungeon_score = 4;
+}
+
+message InfiniteDungeonGuildRankRecord {
+  GuildSummary guild_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+
+  double ratio = 4;
+}
+
+message InfiniteDungeonGuildMemberRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int32 tier_data_id = 3;
+
+  InfiniteDungeonScore infinite_dungeon_score = 4;
+
+  bool is_included_in_total = 5;
+}
+
+message EditCommand {
+  oneof value {
+    Sell sell = 1;
+
+    Purchase purchase = 2;
+
+    Split split = 3;
+
+    Merge merge = 4;
+
+    Unstash unstash = 5;
+
+    Update update = 6;
+
+    Stash stash = 7;
+
+    UpdateTile update_tile = 8;
+
+    SetHideFloor set_hide_floor = 9;
+
+    SetSkin set_skin = 10;
+
+    SetTownBackgroundSkin set_town_background_skin = 11;
+  }
+
+  message ProxyStructureId {
+    oneof value {
+      string dummy_id = 1;
+
+      string concrete_id = 2;
+    }
+  }
+
+  message Sell {
+    ProxyStructureId proxy_structure_id = 1;
+  }
+
+  message Purchase {
+    string dummy_structure_id = 1;
+
+    int32 structure_data_id = 2;
+
+    ck.Time purchased_at = 3;
+  }
+
+  message Split {
+    string structure_id = 1;
+
+    ck.Time split_at = 2;
+  }
+
+  message Merge {
+    repeated ProxyStructureId proxy_structure_ids = 1;
+
+    string new_dummy_structure_id = 2;
+
+    ck.Time merged_at = 3;
+  }
+
+  message Unstash {
+    ProxyStructureId proxy_structure_id = 1;
+
+    StructurePlacement placement = 2;
+
+    ck.Time unstashed_at = 3;
+  }
+
+  message Update {
+    string structure_id = 1;
+
+    StructurePlacement placement = 2;
+
+    ck.Time updated_at = 3;
+  }
+
+  message Stash {
+    string structure_id = 1;
+
+    ck.Time stashed_at = 2;
+  }
+
+  message UpdateTile {
+    int32 tile_data_id = 1;
+
+    repeated TilePlacement placements = 2;
+  }
+
+  message SetHideFloor {
+    ProxyStructureId proxy_structure_id = 1;
+
+    bool hide_floor = 2;
+  }
+
+  message SetSkin {
+    ProxyStructureId proxy_structure_id = 1;
+
+    int32 structure_skin_data_id = 2;
+  }
+
+  message SetTownBackgroundSkin {
+    int32 town_background_skin_data_id = 1;
+  }
+}
+
+message EditCookieLookCommand {
+  oneof value {
+    Equip equip = 1;
+
+    Unequip unequip = 2;
+
+    Mark mark = 3;
+
+    Unmark unmark = 4;
+
+    Lock lock = 5;
+
+    Unlock unlock = 6;
+
+    SwapVoice swap_voice = 7;
+  }
+
+  message ProxyCookieLookId {
+    oneof value {
+      string concrete_id = 1;
+
+      ConvertId convert_id = 2;
+
+      string dummy_id = 3;
+    }
+
+    message ConvertId {
+      int32 vanilla_data_id = 1;
+
+      string dummy_id = 2;
+    }
+  }
+
+  message Equip {
+    ProxyCookieLookId proxy_cookie_look_id = 1;
+  }
+
+  message Unequip {
+    ProxyCookieLookId proxy_cookie_look_id = 1;
+  }
+
+  message Mark {
+    ProxyCookieLookId proxy_cookie_look_id = 1;
+
+    FavoriteMarker marker = 2;
+  }
+
+  message Unmark {
+    ProxyCookieLookId proxy_cookie_look_id = 1;
+  }
+
+  message Lock {
+    ProxyCookieLookId proxy_cookie_look_id = 1;
+  }
+
+  message Unlock {
+    ProxyCookieLookId proxy_cookie_look_id = 1;
+  }
+
+  message SwapVoice {
+    int32 voice_data_id = 1;
+  }
+}
+
+message InfiniteDungeonSeasonResult {
+  int32 infinite_dungeon_season_data_id = 1;
+
+  int32 tier_data_id = 2;
+
+  oneof infinite_dungeon_score {
+    InfiniteDungeonScore infinite_dungeon_score_value = 3;
+
+    ck.Empty no_infinite_dungeon_score = 4;
+  }
+
+  bool is_received = 5;
+}
+
+message QuestRequirementStateKey {
+  oneof value {
+    Quest quest = 1;
+
+    EventMission event_mission = 2;
+
+    DailyMission daily_mission = 3;
+
+    WeeklyMission weekly_mission = 16;
+
+    SeasonMission season_mission = 4;
+
+    Castle castle = 5;
+
+    PackageUnlock package_unlock = 6;
+
+    EventTask event_task = 7;
+
+    BingoMissionUnlock bingo_mission_unlock = 8;
+
+    OperationEvent operation_event = 9;
+
+    PackageMission package_mission = 10;
+
+    StoryAdventureMission story_adventure_mission = 11;
+
+    PackagePurchaseLimitBonus package_purchase_limit_bonus = 12;
+
+    CookieTrialMission cookie_trial_mission = 13;
+
+    ShopAccumulatedBonus shop_accumulated_bonus = 14;
+
+    PiggyBankPackage piggy_bank_package = 15;
+
+    StoryTaskGameMission story_task_game_mission = 17;
+
+    UnionWarDailyMission union_war_daily_mission = 18;
+
+    UnionWarSupportMission union_war_support_mission = 19;
+  }
+
+  message Quest {
+    string quest_id = 1;
+  }
+
+  message EventMission {
+    string quest_id = 1;
+  }
+
+  message DailyMission {
+    string quest_id = 1;
+  }
+
+  message WeeklyMission {
+    string quest_id = 1;
+  }
+
+  message SeasonMission {
+    string quest_id = 1;
+  }
+
+  message Castle {
+    string quest_id = 1;
+  }
+
+  message PackageUnlock {
+    string quest_id = 1;
+  }
+
+  message EventTask {
+    string event_id = 1;
+
+    int32 task_data_id = 2;
+  }
+
+  message OperationEvent {
+    string event_id = 1;
+  }
+
+  message BingoMissionUnlock {
+    string event_id = 1;
+
+    int32 bingo_mission_data_id = 2;
+  }
+
+  message PackageMission {
+    int32 package_data_id = 1;
+
+    int32 mission_data_id = 2;
+  }
+
+  message StoryAdventureMission {
+    int32 episode_data_id = 1;
+
+    int32 mission_data_id = 2;
+  }
+
+  message PackagePurchaseLimitBonus {
+    int32 package_data_id = 1;
+  }
+
+  message CookieTrialMission {
+    int32 group_data_id = 1;
+
+    int32 mission_data_id = 2;
+  }
+
+  message ShopAccumulatedBonus {
+    int32 bonus_data_id = 1;
+  }
+
+  message PiggyBankPackage {
+    int32 package_data_id = 1;
+  }
+
+  message StoryTaskGameMission {
+    int32 story_task_game_data_id = 1;
+
+    int32 mission_data_id = 2;
+  }
+
+  message UnionWarDailyMission {
+    int32 season_data_id = 1;
+
+    int32 mission_data_id = 2;
+  }
+
+  message UnionWarSupportMission {
+    int32 season_data_id = 1;
+
+    int32 mission_data_id = 2;
+  }
+}
+
+message QuestRequirementStateChange {
+  QuestRequirementStateKey key = 1;
+
+  RequirementState changed_requirement_state = 2;
+}
+
+message ProsperityEntry {
+  ProsperityType prosperity_type = 1;
+
+  int64 points = 2;
+
+  int64 points_without_time_limited = 3;
+
+  repeated int32 parameters = 4;
+
+  repeated int32 parameters_without_time_limited = 5;
+
+  repeated ProsperityDetail details = 6;
+
+  message ProsperityDetail {
+    int64 points = 1;
+
+    repeated int32 parameters = 2;
+
+    bool is_time_limited = 3;
+  }
+}
+
+message KingdomProsperity {
+  repeated int32 rewarded_prosperity_levels = 1;
+}
+
+message ServerClosedComment {
+  LanguageType language_type = 1;
+
+  string comment = 2;
+}
+
+message HeroesHall {
+  HallArea hall_area = 1;
+
+  oneof statue_area {
+    StatueArea area = 2;
+
+    ck.Empty closed = 3;
+  }
+}
+
+message HallArea {
+  repeated HeroesHallCookie heroes_hall_cookies = 1;
+
+  repeated HeroesHallSlot slots = 2;
+}
+
+message HeroesHallSlot {
+  int32 slot_data_id = 1;
+
+  HeroesHallSlotStatus slot_status = 2;
+}
+
+message HeroesHallSlotStatus {
+  oneof value {
+    Used used = 1;
+
+    CoolDown cool_down = 2;
+  }
+
+  message Used {
+    int32 cookie_data_id = 1;
+  }
+
+  message CoolDown {
+    ck.Time until = 1;
+  }
+}
+
+message StatueArea {
+  int32 heroes_statue_level = 1;
+}
+
+message HeroesHallCookie {
+  int32 cookie_data_id = 1;
+
+  ck.Time registered_at = 2;
+}
+
+message SummonRate {
+  int32 data_id = 1;
+
+  double rate = 2;
+
+  int32 order = 3;
+
+  int32 min_quantity = 4;
+
+  int32 max_quantity = 5;
+
+  bool is_special_target = 6;
+
+  bool is_show_target_quantity = 7;
+
+  oneof rate_up_step_data_id {
+    int32 rate_up_step_data_id_value = 8;
+
+    ck.Empty no_rate_up_step_data_id = 9;
+  }
+}
+
+message SummonRates {
+  int32 reward_box_data_id = 1;
+
+  repeated SummonRate rates = 2;
+
+  double total_summon_rate = 3;
+}
+
+message ActivityParticipants {
+  int32 activity_data_id = 1;
+
+  repeated int32 participant_data_ids = 2;
+}
+
+message EquipmentItem {
+  int32 data_id = 1;
+
+  int32 level = 2;
+
+  int32 upgrade_failure_count = 3;
+
+  bool is_next_level_up_success = 4;
+}
+
+message MagicCandyMaterialReward {
+  reserved 3, 4;
+
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message ProfileDecoReward {
+  int32 data_id = 1;
+
+  ProfileDecoType deco_type = 2;
+}
+
+message AirBalloonSpecialItemReward {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+}
+
+message CookieView {
+  int32 data_id = 1;
+
+  int64 experience = 2;
+
+  int32 skill_level = 3;
+
+  int32 grade = 4;
+
+  int32 skin_data_id = 5;
+
+  repeated EquippedEquipmentItemView equipped_equipment_items = 6;
+}
+
+message EquippedEquipmentItemView {
+  int32 data_id = 1;
+
+  int32 level = 2;
+}
+
+message TreasureView {
+  int32 data_id = 1;
+
+  int32 level = 2;
+}
+
+message BattleTeamDetailView {
+  repeated CookieView cookies = 1;
+
+  repeated TreasureView treasures = 2;
+
+  int32 combat_power = 3;
+}
+
+message GuildBattlePlayResult {
+  oneof value {
+    Reset reset = 1;
+
+    Complete complete = 2;
+  }
+
+  message Reset {
+    int32 boss_data_id = 1;
+
+    int64 start_accumulated_damage = 2;
+
+    int64 end_accumulated_damage = 3;
+  }
+
+  message Complete {
+    int32 boss_data_id = 1;
+
+    int64 start_accumulated_damage = 2;
+
+    int64 end_accumulated_damage = 3;
+  }
+}
+
+message BoardAdventureCoordinates {
+  int32 x = 1;
+
+  int32 y = 2;
+}
+
+message BoardAdventurePayment {
+  oneof value {
+    SessionCoin session_coin = 1;
+
+    PlayerHealthPoint player_health_point = 2;
+  }
+
+  message SessionCoin {
+    int64 amount = 1;
+  }
+
+  message PlayerHealthPoint {
+    int64 amount = 1;
+  }
+}
+
+message BoardAdventureReward {
+  oneof value {
+    SessionCoin session_coin = 1;
+
+    PlayerExperiencePoint player_experience_point = 2;
+
+    PlayerHealthPoint player_health_point = 3;
+
+    Souvenir souvenir = 4;
+
+    Effect effect = 5;
+  }
+
+  message SessionCoin {
+    int64 amount = 1;
+  }
+
+  message PlayerExperiencePoint {
+    int64 amount = 1;
+  }
+
+  message PlayerHealthPoint {
+    int64 amount = 1;
+  }
+
+  message Souvenir {
+    int32 data_id = 1;
+  }
+
+  message Effect {
+    int32 data_id = 1;
+
+    int64 amount = 2;
+  }
+}
+
+message BoardAdventures {
+  repeated BoardAdventure board_adventure_seasons = 1;
+}
+
+message BoardAdventure {
+  int32 season_data_id = 1;
+
+  int64 player_experience_points = 2;
+
+  repeated int32 souvenir_data_ids = 3;
+
+  oneof current_session {
+    BoardAdventureSession current_session_value = 4;
+
+    ck.Empty no_current_session = 5;
+  }
+
+  oneof max_cleared_difficulty {
+    BoardAdventureDifficulty max_cleared_difficulty_value = 6;
+
+    ck.Empty no_max_cleared_difficulty = 7;
+  }
+
+  int32 played_session_count = 8;
+
+  repeated DifficultyMaxScore max_scores = 9;
+
+  repeated BoardAdventureSessionRecord session_records = 10;
+
+  bool season_rewards_received = 11;
+
+  message DifficultyMaxScore {
+    BoardAdventureDifficulty difficulty = 1;
+
+    int64 max_score = 2;
+  }
+}
+
+message BoardAdventureSession {
+  string session_id = 1;
+
+  BoardAdventureDifficulty difficulty = 2;
+
+  BoardAdventureMap map = 3;
+
+  BoardAdventurePlayer player = 4;
+
+  int64 session_coins = 5;
+
+  map<int32, int64> effects = 6;
+
+  oneof ongoing_action {
+    OngoingBoardAdventureAction ongoing_action_value = 7;
+
+    ck.Empty no_ongoing_action = 8;
+  }
+
+  int32 total_effect_selection_reroll_count = 14;
+
+  repeated int32 locked_souvenir_data_ids_at_start = 9;
+
+  double final_boss_dealt_damage = 10;
+
+  int64 total_obtained_session_coin_amount = 11;
+
+  int64 score = 12;
+
+  bool score_red_flag_detected = 13;
+}
+
+message BoardAdventureMap {
+  int32 data_id = 1;
+
+  repeated BoardAdventureMapObjectState map_object_states = 2;
+}
+
+message BoardAdventureMapObjectState {
+  int32 data_id = 1;
+
+  BoardAdventureMapObjectVisibleState visible_state = 2;
+
+  BoardAdventureMapObjectInteractionState interaction_state = 3;
+}
+
+message BoardAdventureMapObjectInteractionState {
+  oneof value {
+    NonInteractable non_interactable = 1;
+
+    MultipleTries multiple_tries = 2;
+
+    Interactable interactable = 3;
+  }
+
+  message NonInteractable {
+  }
+
+  message MultipleTries {
+    int32 try_count = 1;
+
+    bool completed = 2;
+  }
+
+  message Interactable {
+    bool interacted = 1;
+  }
+}
+
+message BoardAdventurePlayer {
+  BoardAdventureCoordinates position = 1;
+
+  int64 health_points = 2;
+
+  int32 repair_count = 3;
+}
+
+message OngoingBoardAdventureAction {
+  oneof value {
+    Battle battle = 1;
+
+    MiniGame mini_game = 2;
+
+    EffectSelection effect_selection = 3;
+  }
+
+  message Battle {
+    int32 map_object_data_id = 1;
+
+    BoardAdventureDifficulty difficulty = 2;
+
+    string battle_id = 3;
+
+    int32 seed = 4;
+  }
+
+  message MiniGame {
+    int32 map_object_data_id = 1;
+  }
+
+  message EffectSelection {
+    int32 map_object_data_id = 1;
+
+    repeated Slot effect_slots = 2;
+
+    int32 reroll_count = 3;
+
+    message Slot {
+      int32 effect_data_id = 1;
+
+      bool is_purchased = 2;
+    }
+  }
+}
+
+message BoardAdventureSessionRecord {
+  int32 map_data_id = 1;
+
+  BoardAdventureCoordinates final_position = 2;
+
+  int32 session_number = 11;
+
+  BoardAdventureDifficulty difficulty = 3;
+
+  int64 final_score = 4;
+
+  int32 player_level = 5;
+
+  int64 player_health_points = 6;
+
+  int32 visited_count = 12;
+
+  double final_boss_dealt_damage = 7;
+
+  int64 total_obtained_session_coin_amount = 8;
+
+  repeated int32 souvenir_data_ids = 10;
+
+  map<int32, int64> effects = 9;
+}
+
+message BoardAdventureRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  double ratio = 3;
+
+  int64 score = 4;
+}
+
+message BoardAdventureSessionResult {
+  int32 visited_count = 1;
+
+  int64 final_score = 2;
+
+  int64 session_score = 3;
+
+  int64 player_health_point_bonus_score = 4;
+
+  int64 final_boss_dealt_damage_bonus_score = 5;
+
+  BoardAdventureDifficulty difficulty = 8;
+
+  bool is_score_new_record = 6;
+
+  repeated int32 unlocked_souvenir_data_ids = 7;
+}
+
+message BoardAdventureActionCompletionResult {
+  oneof value {
+    Success success = 1;
+
+    Abuse abuse = 2;
+  }
+
+  message Success {
+    repeated Reward rewards = 1;
+
+    repeated BoardAdventureReward board_adventure_rewards = 2;
+  }
+
+  message Abuse {
+    oneof health_point_payment {
+      BoardAdventurePayment.PlayerHealthPoint health_point_payment_value = 1;
+
+      ck.Empty no_health_point_payment = 2;
+    }
+  }
+}
+
+message FloatingObjectGroups {
+  repeated FloatingObjectGroup groups = 1;
+}
+
+message FloatingObjectGroup {
+  int32 group_data_id = 1;
+
+  int32 daily_non_empty_object_respawn_count = 2;
+
+  ck.Time last_respawned_at = 3;
+
+  FloatingObjectGroupState floating_object_group_state = 4;
+}
+
+message FloatingObjectGroupState {
+  oneof value {
+    EmptyObjectGroup empty_object_group = 1;
+
+    NonEmptyObjectGroup non_empty_object_group = 2;
+  }
+
+  message EmptyObjectGroup {
+  }
+
+  message NonEmptyObjectGroup {
+    int32 reward_count = 1;
+  }
+}
+
+message AdvertisementState {
+  ck.Time last_reset_at = 1;
+
+  map<int32, ck.Time> last_viewed_at_by_advertisement_data_id = 2;
+
+  map<int32, int32> daily_view_count_by_advertisement_data_id = 3;
+}
+
+message ViewedAdvertisement {
+  string advertisement_id = 1;
+
+  int32 advertisement_data_id = 2;
+}
+
+message EventRanking {
+  EventRankRecord my_record = 1;
+
+  repeated EventRankRecord top_records = 2;
+
+  map<int32, int64> minimum_scores = 3;
+
+  oneof competition_data_id {
+    int32 competition_data_id_value = 4;
+
+    ck.Empty no_competition_data_id = 5;
+  }
+}
+
+message EventDungeonRhythmStageBonusRates {
+  double cookie_bonus_rate = 1;
+
+  double skin_bonus_rate = 2;
+
+  double collection_bonus_rate = 3;
+
+  double health_point_bonus_rate = 4;
+}
+
+message RhythmStageParticipants {
+  Participant head_participant = 1;
+
+  repeated Participant tail_participants = 2;
+
+  message Participant {
+    int32 cookie_data_id = 1;
+
+    bool is_fixed = 2;
+  }
+}
+
+message ToppingCombinations {
+  repeated ToppingCombinationSlot unlocked_slots = 1;
+}
+
+message ToppingCombinationSlot {
+  int32 data_id = 1;
+
+  ToppingCombinationSlotState state = 2;
+}
+
+message ToppingCombinationSlotState {
+  oneof value {
+    EmptySlot empty_slot = 1;
+
+    SavedSlot saved_slot = 2;
+  }
+
+  message SavedSlot {
+    string name = 1;
+
+    map<int32, string> toppings = 2;
+  }
+
+  message EmptySlot {
+  }
+}
+
+message SingleRewardGachaPickup {
+  int32 slot_data_id = 1;
+
+  int32 pick_up_reward_data_id = 2;
+
+  repeated int32 additional_rate_up_reward_data_ids = 3;
+}
+
+message GachaPickupGroups {
+  map<int32, GachaPickupGroup> pickup_groups = 1;
+}
+
+message GachaPickupGroup {
+  int32 summon_group_data_id = 1;
+
+  GachaPickupExtension extension = 2;
+}
+
+message GachaPickupExtension {
+  oneof value {
+    SingleRewardGachaPickups single_reward_gacha_pickups = 1;
+
+    ThemeGachaPickup theme_gacha_pickup = 2;
+
+    ck.Empty no_extension = 3;
+  }
+
+  message SingleRewardGachaPickups {
+    repeated SingleRewardGachaPickup pickups = 1;
+  }
+
+  message ThemeGachaPickup {
+    int32 picked_up_theme_data_id = 1;
+  }
+}
+
+message TownContest {
+  int32 contest_season_data_id = 1;
+
+  oneof submitted_preset {
+    ck.Empty no_submitted_preset = 2;
+
+    SubmittedPreset submitted_preset_value = 3;
+  }
+
+  int32 daily_voting_participation_count = 4;
+
+  ck.Time daily_voting_participation_next_reset_at = 5;
+
+  bool daily_voting_participation_rewards_received = 6;
+
+  oneof season_final_rank {
+    ck.Empty no_season_final_rank = 7;
+
+    int32 season_final_rank_value = 8;
+  }
+
+  bool is_submitted_personal_info = 9;
+}
+
+message TownContests {
+  repeated TownContest contests = 1;
+}
+
+message TownSubmission {
+  UserSummary user_summary = 1;
+
+  string preset_id = 2;
+
+  string screenshot_url = 3;
+
+  bool is_reported_before = 4;
+}
+
+message SubmittedPreset {
+  string preset_id = 1;
+
+  ck.Time town_last_edited_at = 2;
+}
+
+message PersonalInfo {
+  string name = 1;
+
+  int32 birth_year = 2;
+
+  int32 birth_month = 3;
+
+  int32 birth_date = 4;
+
+  string phone_number_country_code = 5;
+
+  string phone_number = 6;
+
+  string email = 7;
+
+  string country = 8;
+
+  string address1 = 9;
+
+  string address2 = 10;
+
+  string zip_code = 11;
+}
+
+message CookieRankRecord {
+  int32 data_id = 1;
+
+  int32 rank = 2;
+
+  double score = 3;
+}
+
+message SpeechBalloonGroups {
+  repeated SpeechBalloonGroup groups = 1;
+}
+
+message SpeechBalloonGroup {
+  int32 group_data_id = 1;
+
+  repeated SpeechBalloon balloons = 2;
+
+  int32 appear_count = 3;
+
+  ck.Time appear_next_reset_at = 4;
+}
+
+message SpeechBalloon {
+  string id = 1;
+
+  int32 cookie_data_id = 2;
+
+  ck.Time available_from = 3;
+}
+
+message CakeDungeons {
+  repeated CakeDungeonSeason seasons = 1;
+
+  repeated CakeDungeon dungeons = 2;
+
+  oneof ongoing_action {
+    ck.Empty no_ongoing_action = 3;
+
+    OngoingCakeDungeonAction ongoing_action_value = 4;
+  }
+}
+
+message CakeDungeonSeason {
+  int32 data_id = 1;
+
+  bool season_rewards_received = 2;
+
+  repeated Dungeon dungeons = 3;
+
+  message Dungeon {
+    int32 data_id = 1;
+
+    oneof dungeon_record {
+      ck.Empty no_dungeon_record = 2;
+
+      CakeDungeonRecord dungeon_record_value = 3;
+    }
+
+    int64 acquired_special_piece_amount = 4;
+
+    int64 acquired_normal_piece_amount = 5;
+  }
+}
+
+message CakeDungeonRecord {
+  int64 score = 1;
+}
+
+message CakeDungeon {
+  int32 data_id = 1;
+
+  repeated CakeDungeonFixedEffect fixed_effects = 2;
+
+  CakeDungeonRandomEffects random_effects = 3;
+}
+
+message CakeDungeonFixedEffect {
+  int32 group_data_id = 1;
+
+  int32 level = 2;
+}
+
+message CakeDungeonRandomEffects {
+  repeated CakeDungeonRandomEffectSlot slots = 1;
+
+  int32 reroll_count = 2;
+}
+
+message CakeDungeonRandomEffectSlot {
+  int32 slot_data_id = 1;
+
+  oneof effect_data_id {
+    ck.Empty no_effect_data_id = 2;
+
+    int32 effect_data_id_value = 3;
+  }
+}
+
+message OngoingCakeDungeonAction {
+  oneof value {
+    Battle battle = 1;
+
+    Run run = 2;
+  }
+
+  message Battle {
+    string id = 1;
+
+    int32 season_data_id = 2;
+
+    int32 dungeon_data_id = 3;
+
+    int32 random_seed = 4;
+
+    int32 battle_team_index = 5;
+
+    ck.Time battle_started_at = 6;
+
+    bool is_season_ongoing = 7;
+  }
+
+  message Run {
+    string id = 1;
+
+    int32 season_data_id = 2;
+
+    int32 dungeon_data_id = 3;
+
+    int32 random_seed = 4;
+
+    ck.Time run_started_at = 5;
+
+    bool is_season_ongoing = 6;
+  }
+}
+
+message ProsperityRankingRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 score = 3;
+
+  double ratio = 4;
+}
+
+message HotTimeBuffs {
+  repeated HotTimeBuff buffs = 1;
+}
+
+message HotTimeBuff {
+  string id = 1;
+
+  int32 data_id = 2;
+
+  ck.Time expires_at = 3;
+}
+
+message BattleTypeLockerSet {
+  BattleType context = 1;
+
+  repeated string content_locker_ids = 2;
+}
+
+message CookieBattleTypeLocker {
+  int32 cookie_data_id = 1;
+
+  repeated BattleTypeLockerSet locker_map = 2;
+}
+
+message ContentAccessControl {
+  repeated CookieBattleTypeLocker cookie_battle_type_lockers = 1;
+}
+
+message CookieTrials {
+  repeated CookieTrialGroup ongoing_trials = 1;
+
+  repeated int32 cleared_trial_group_data_ids = 2;
+}
+
+message CookieTrialGroup {
+  int32 data_id = 1;
+
+  repeated CookieTrialMission ongoing_missions = 2;
+
+  repeated int32 cleared_mission_data_ids = 3;
+
+  string content_locker_id = 4;
+}
+
+message CookieTrialMission {
+  int32 data_id = 1;
+
+  repeated RequirementState requirement_states = 2;
+}
+
+message MusicBox {
+  repeated int32 purchased_music_box_track_data_ids = 1;
+
+  MusicBoxPlaylist favorite_playlist = 2;
+
+  int32 last_music_box_setup_version = 3;
+
+  MusicBoxPlaylist town_bgm_playlist = 4;
+}
+
+message MusicBoxPlaylist {
+  repeated int32 music_box_track_data_ids = 1;
+}
+
+message PvpSeasonInfo {
+  int32 pvp_season_data_id = 1;
+
+  int32 tier = 2;
+
+  int32 rank = 3;
+
+  int32 rating = 4;
+}
+
+message VisualNovelFavorGiftRecipientState {
+  int32 visual_novel_favor_gift_group_data_id = 1;
+
+  int32 recipient_data_id = 2;
+
+  int32 current_favor_point = 3;
+
+  int32 daily_gift_remaining_count = 4;
+
+  repeated int32 available_gift_item_data_ids = 5;
+
+  int32 remaining_free_refresh = 6;
+
+  ck.Time resets_at = 7;
+}
+
+message VisualNovelFavorGiftState {
+  repeated VisualNovelFavorGiftRecipientState recipient_states = 1;
+}
+
+message HonorTrophy {
+  int32 honor_trophy_data_id = 1;
+
+  oneof index {
+    int32 index_value = 2;
+
+    ck.Empty no_index = 3;
+  }
+}
+
+message HonorResult {
+  int32 honor_trophy_data_id = 1;
+}
+
+message VisualNovels {
+  repeated VisualNovel visual_novels = 1;
+}
+
+message VisualNovel {
+  int32 novel_data_id = 1;
+
+  oneof session {
+    VisualNovelSession session_value = 2;
+
+    ck.Empty no_session = 3;
+  }
+
+  repeated VisualNovelTaskHistory histories = 4;
+
+  string main_character_name = 5;
+}
+
+message VisualNovelSession {
+  oneof ongoing_task {
+    OngoingVisualNovelTask ongoing_task_value = 1;
+
+    ck.Empty no_ongoing_task = 2;
+  }
+
+  int32 completed_game_over_task_count = 3;
+
+  repeated CompletedVisualNovelTask completed_tasks = 4;
+
+  repeated VisualNovelPoint points = 5;
+
+  oneof last_completed_task_data_id {
+    int32 last_completed_task_data_id_value = 6;
+
+    ck.Empty no_last_completed_task_data_id = 7;
+  }
+}
+
+message VisualNovelTaskHistory {
+  oneof value {
+    StoryTask story_task = 1;
+
+    GameOverTask game_over_task = 2;
+
+    EndingTask ending_task = 3;
+  }
+
+  message StoryTask {
+    int32 task_data_id = 1;
+
+    repeated int32 selection_cutscene_data_ids = 2;
+  }
+
+  message GameOverTask {
+    int32 task_data_id = 1;
+  }
+
+  message EndingTask {
+    int32 task_data_id = 1;
+
+    repeated int32 ending_cutscene_data_ids = 2;
+  }
+}
+
+message CompletedVisualNovelTask {
+  oneof value {
+    StoryTask story_task = 1;
+
+    GameOverTask game_over_task = 2;
+
+    EndingTask ending_task = 3;
+  }
+
+  message PrevCompletedTaskDataId {
+    oneof prev_completed_task_data_id {
+      int32 prev_completed_task_data_id_value = 1;
+
+      ck.Empty no_prev_completed_task_data_id = 2;
+    }
+  }
+
+  message StoryTask {
+    int32 task_data_id = 1;
+
+    repeated int32 selection_cutscene_data_ids = 2;
+
+    PrevCompletedTaskDataId prev_completed_task_data_id = 3;
+  }
+
+  message GameOverTask {
+    int32 task_data_id = 1;
+
+    PrevCompletedTaskDataId prev_completed_task_data_id = 2;
+  }
+
+  message EndingTask {
+    int32 task_data_id = 1;
+
+    int32 ending_cutscene_data_id = 2;
+
+    PrevCompletedTaskDataId prev_completed_task_data_id = 3;
+  }
+}
+
+message OngoingVisualNovelTask {
+  oneof value {
+    Task task = 1;
+
+    EndingTask ending_task = 2;
+  }
+
+  message Task {
+    int32 task_data_id = 1;
+  }
+
+  message EndingTask {
+    int32 task_data_id = 1;
+
+    int32 ending_cutscene_data_id = 2;
+  }
+}
+
+message VisualNovelPoint {
+  int32 data_id = 1;
+
+  int32 amount = 2;
+}
+
+message DeliveryTicket {
+  int64 amount = 1;
+
+  ck.Time last_updated_at = 2;
+}
+
+message KingdomPassSeasonResult {
+  int32 kingdom_season_data_id = 1;
+
+  oneof kingdom_pass_data_id {
+    ck.Empty no_kingdom_pass_data_id = 2;
+
+    int32 kingdom_pass_data_id_value = 3;
+  }
+}
+
+message SubGames {
+  MemoryGames memory_games = 1;
+
+  JokerGames joker_games = 2;
+
+  MiningGames mining_games = 3;
+
+  StoryTaskGames story_task_games = 4;
+
+  MissionRunGames mission_run_games = 5;
+
+  StorkGames stork_games = 6;
+
+  FindOutGames find_out_games = 7;
+}
+
+message FindOutGameStage {
+  int32 data_id = 1;
+
+  repeated int32 object_group_data_ids = 2;
+
+  repeated int32 cleared_object_data_ids = 3;
+
+  repeated int32 hint_purchased_object_group_data_ids = 4;
+
+  FindOutGameStageState state = 5;
+}
+
+message FindOutGameGroup {
+  int32 sub_game_group_data_id = 1;
+
+  repeated FindOutGameStage stages = 2;
+
+  int32 stages_all_finished_count = 3;
+}
+
+message FindOutGames {
+  repeated FindOutGameGroup groups = 1;
+}
+
+message MemoryGames {
+  repeated int32 cleared_memory_game_data_ids = 1;
+
+  oneof ongoing_memory_game {
+    OngoingMemoryGame ongoing_memory_game_value = 2;
+
+    ck.Empty no_ongoing_memory_game = 3;
+  }
+}
+
+message OngoingMemoryGame {
+  int32 memory_game_data_id = 1;
+}
+
+message JokerGames {
+  map<int32, OngoingJokerGame> ongoing_joker_games = 1;
+}
+
+message OngoingJokerGame {
+  int32 sub_game_group_data_id = 1;
+
+  int32 joker_game_data_id = 2;
+
+  oneof chosen_joker_game_reward_data_id {
+    int32 chosen_joker_game_reward_data_id_value = 3;
+
+    ck.Empty no_chosen_joker_game_reward_data_id = 4;
+  }
+
+  int32 round_number = 5;
+
+  JokerGameRoundState round_state = 6;
+}
+
+message MiningGames {
+  repeated MiningGame ongoing_mining_games = 1;
+}
+
+message MiningGame {
+  int32 mining_game_data_id = 1;
+
+  int32 current_layer = 2;
+
+  bool is_restarted = 3;
+
+  MiningGameBoardState board_state = 4;
+}
+
+message MiningGameBoardState {
+  int32 width = 1;
+
+  int32 height = 2;
+
+  ck.Coordinates last_known_player_coord = 3;
+
+  repeated MiningGameBoardTile tiles = 4;
+
+  repeated ck.Coordinates clear_hinted_coords = 5;
+}
+
+message MiningGameBoardTile {
+  int32 blocker_current_durability = 1;
+
+  MiningGameBoardTileObject tile_object = 2;
+}
+
+message MiningGameBoardTileObject {
+  oneof value {
+    Unknown unknown = 1;
+
+    Nothing nothing = 2;
+
+    Item item = 3;
+
+    LootBox loot_box = 4;
+
+    ClearLevel clear_level = 5;
+
+    SkipLevel skip_level = 6;
+  }
+
+  message Unknown {
+  }
+
+  message Nothing {
+  }
+
+  message Item {
+    int32 item_data_id = 1;
+
+    int64 amount = 2;
+  }
+
+  message LootBox {
+    int32 reward_data_id = 1;
+
+    int64 amount = 2;
+  }
+
+  message ClearLevel {
+  }
+
+  message SkipLevel {
+  }
+}
+
+message StorkGames {
+  repeated StorkGame games = 1;
+}
+
+message StorkGame {
+  int32 stork_game_group_data_id = 1;
+
+  repeated int32 records = 2;
+}
+
+message TargetTopping {
+  oneof value {
+    string topping_id = 1;
+
+    int32 topping_data_id = 2;
+  }
+}
+
+message TargetCookieLook {
+  oneof value {
+    string cookie_look_id = 1;
+
+    int32 cookie_look_data_id = 2;
+  }
+}
+
+message CookieSquadSeason {
+  int32 data_id = 1;
+
+  repeated CookieSquadStatueParts acquired_statue_parts = 2;
+
+  bool is_rewarded = 3;
+
+  int64 last_checked_point = 4;
+
+  repeated int32 checked_statue_parts_data_ids = 5;
+}
+
+message CookieSquadStatueParts {
+  int32 data_id = 1;
+
+  int32 level = 2;
+}
+
+message ToppingOptional {
+  oneof value {
+    Topping topping_value = 1;
+
+    ck.Empty no_topping_value = 2;
+  }
+}
+
+message CookieLookOptional {
+  oneof value {
+    CookieLook cookie_look_value = 1;
+
+    ck.Empty no_cookie_look_value = 2;
+  }
+}
+
+message CustomCookieOptional {
+  oneof value {
+    CustomCookie custom_cookie_value = 5;
+
+    ck.Empty no_custom_cookie_value = 6;
+  }
+}
+
+message PaymentOptional {
+  oneof value {
+    Payment payment_value = 1;
+
+    ck.Empty no_payment_value = 2;
+  }
+}
+
+message FavoriteMarkerOptional {
+  oneof value {
+    FavoriteMarker favorite_marker_value = 1;
+
+    ck.Empty no_favorite_marker_value = 2;
+  }
+}
+
+message CookieRelationships {
+  repeated CookieRelationship relationships = 1;
+
+  repeated CookieSkinRelationship skin_relationships = 2;
+}
+
+message CookieRelationship {
+  int32 data_id = 1;
+
+  repeated int32 rewarded_indices = 2;
+}
+
+message CookieSkinRelationship {
+  int32 data_id = 1;
+
+  repeated int32 rewarded_indices = 2;
+
+  repeated int32 rewarded_limited_reward_data_ids = 3;
+}
+
+message Episodes {
+  repeated EpisodeGroup groups = 1;
+
+  repeated int32 cleared_story_collection_book_mission_data_ids = 2;
+
+  EpisodeLandMutation episode_land_mutation = 3;
+}
+
+message EpisodeGroup {
+  int32 episode_group_data_id = 1;
+
+  repeated int32 cleared_nodes = 2;
+
+  EpisodeGroupCollection collection = 3;
+
+  repeated EpisodeBranchExplorationState branch_exploration_states = 4;
+
+  repeated EpisodeStarRewardRecord episode_star_reward_records = 5;
+}
+
+message EpisodeGroupCollection {
+  repeated int32 unlocked_collection_entry_data_ids = 1;
+
+  repeated int32 completed_episode_group_collections_character_data_ids = 2;
+}
+
+message EpisodeBranchExplorationState {
+  int32 episode_data_id = 1;
+
+  repeated EpisodeMapEdge exploring_edges = 2;
+}
+
+message EpisodeMapEdge {
+  int32 from = 1;
+
+  int32 to = 2;
+}
+
+message EpisodeLandMutation {
+  oneof season {
+    EpisodeLandMutationSeason season_value = 1;
+
+    ck.Empty no_season = 2;
+  }
+}
+
+message EpisodeLandMutationSeason {
+  int32 current_season_data_id = 1;
+
+  ck.Time current_rotation_started_at = 2;
+
+  repeated EpisodeLandMutationEntry entries = 3;
+}
+
+message EpisodeLandMutationEntry {
+  int32 node_data_id = 1;
+
+  int32 played_count = 2;
+
+  repeated int32 extra_land_rule_data_ids = 3;
+
+  map<int32, int64> extra_rewards_if_cleared = 4;
+}
+
+message EpisodeLandMutationRewards {
+  repeated RewardsPerPlay rewards_per_play = 1;
+
+  int32 episode_land_mutation_season_data_id = 2;
+
+  oneof entry {
+    EpisodeLandMutationEntry entry_value = 3;
+
+    ck.Empty no_entry = 4;
+  }
+}
+
+message RelayDungeons {
+  repeated RelayDungeonSeason seasons = 1;
+}
+
+message RelayDungeonSeason {
+  int32 data_id = 1;
+
+  CurrentRelayDungeonStage current_stage = 2;
+
+  repeated int32 enter_rewards_received_stage_group_data_ids = 3;
+
+  repeated int32 cleared_stage_data_ids = 4;
+
+  repeated RelayDungeonTacticDataIds selected_tactic_data_ids_by_battle_team_index = 5;
+
+  int32 battle_point_support_daily_purchase_count = 6;
+
+  ck.Time battle_point_support_daily_purchase_count_last_reset_at = 7;
+
+  bool season_rewards_received = 8;
+}
+
+message CurrentRelayDungeonStage {
+  int32 data_id = 1;
+
+  bool is_using_battle_point_support = 2;
+
+  int64 total_enemy_damage = 3;
+
+  oneof ongoing_battle {
+    OngoingRelayDungeonBattle ongoing_battle_value = 4;
+
+    ck.Empty no_ongoing_battle = 5;
+  }
+}
+
+message OngoingRelayDungeonBattle {
+  string battle_id = 1;
+
+  int32 battle_team_index = 2;
+
+  int32 random_seed = 3;
+}
+
+message RelayDungeonTacticDataIds {
+  repeated int32 data_ids = 1;
+}
+
+message RelayDungeonRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  double ratio = 3;
+
+  RelayDungeonRankScore relay_dungeon_rank_score = 4;
+}
+
+message RelayDungeonRankScore {
+  int32 current_stage_order = 1;
+
+  int64 current_stage_max_enemy_damage = 2;
+}
+
+message PvpWinningStreakState {
+  int32 wins = 1;
+
+  ck.Time last_updated_at = 2;
+}
+
+message AttachedPvpPodiumParts {
+  repeated int32 parts = 1;
+}
+
+message AttachedPvpPodiumPartsOptional {
+  oneof value {
+    AttachedPvpPodiumParts attached_pvp_podium_parts_value = 1;
+
+    ck.Empty no_attached_pvp_podium_parts_value = 2;
+  }
+}
+
+message PvpAnalyticsDeck {
+  int32 rank = 1;
+
+  repeated int32 cookie_data_ids = 2;
+
+  repeated int32 treasure_data_ids = 3;
+
+  int32 win_rate = 4;
+
+  int64 pick_count = 5;
+}
+
+message PvpAnalyticsCookie {
+  int32 rank = 1;
+
+  int32 cookie_data_id = 2;
+
+  int32 pick_rate = 3;
+
+  repeated int32 topping_data_ids = 4;
+}
+
+message JamStoneDungeonState {
+  oneof ongoing_dungeon {
+    ck.Empty no_ongoing_dungeon = 1;
+
+    OngoingJamStoneDungeon ongoing_dungeon_value = 2;
+  }
+
+  JamStoneDungeonPlayLimitState play_limit_state = 3;
+
+  repeated JamStoneDungeonRecord records = 4;
+}
+
+message OngoingJamStoneDungeon {
+  string id = 1;
+
+  int32 dungeon_data_id = 2;
+
+  int32 random_seed = 3;
+}
+
+message JamStoneDungeonPlayLimitState {
+  int32 remaining_play_count = 1;
+
+  int32 max_play_count = 2;
+
+  ck.Time expires_at = 3;
+}
+
+message JamStoneDungeonRecord {
+  int32 dungeon_group_data_id = 1;
+
+  oneof highest_cleared_dungeon_data_id {
+    ck.Empty no_highest_cleared_dungeon_data_id = 2;
+
+    int32 highest_cleared_dungeon_data_id_value = 3;
+  }
+}
+
+message TowerAdventures {
+  repeated TowerAdventure towers = 1;
+
+  oneof ongoing_battle {
+    ck.Empty no_ongoing_battle = 2;
+
+    OngoingTowerAdventureBattle ongoing_battle_value = 3;
+  }
+}
+
+message TowerAdventure {
+  TowerAdventureType tower_adventure_type = 1;
+
+  TowerAdventureSeason season = 2;
+
+  int32 max_cleared_floor = 3;
+
+  repeated int32 first_clear_rewards_received_node_data_ids = 4;
+}
+
+message TowerAdventureSeason {
+  int32 tower_adventure_season_data_id = 1;
+
+  repeated int32 cleared_node_data_ids = 2;
+
+  map<int32, int32> picked_land_data_ids = 3;
+
+  ck.Time current_max_floor_node_cleared_at = 4;
+
+  oneof last_checked_max_floor {
+    ck.Empty no_last_checked_max_floor = 5;
+
+    int32 last_checked_max_floor_value = 6;
+  }
+}
+
+message OngoingTowerAdventureBattle {
+  oneof value {
+    EpisodeTypeBattle episode_type_battle = 1;
+
+    PvpTypeBattle pvp_type_battle = 2;
+
+    RunMode run_mode = 3;
+  }
+
+  message EpisodeTypeBattle {
+    TowerAdventureType tower_adventure_type = 1;
+
+    string id = 2;
+
+    int32 tower_adventure_season_data_id = 3;
+
+    int32 tower_adventure_node_data_id = 4;
+
+    int32 random_seed = 5;
+
+    int32 land_data_id = 6;
+
+    int32 land_level = 7;
+
+    repeated int32 activated_effect_data_ids = 8;
+  }
+
+  message PvpTypeBattle {
+    TowerAdventureType tower_adventure_type = 1;
+
+    string id = 2;
+
+    int32 tower_adventure_season_data_id = 3;
+
+    int32 tower_adventure_node_data_id = 4;
+
+    int32 random_seed = 5;
+
+    TowerAdventurePvpBotOpponentDetail bot_opponent_detail = 6;
+  }
+
+  message RunMode {
+    TowerAdventureType tower_adventure_type = 1;
+
+    string id = 2;
+
+    int32 tower_adventure_season_data_id = 3;
+
+    int32 tower_adventure_node_data_id = 4;
+
+    int32 land_data_id = 5;
+
+    int32 random_seed = 6;
+  }
+}
+
+message TowerAdventurePvpBotOpponentDetail {
+  int32 bot_data_id = 1;
+
+  int32 tier = 2;
+
+  PvpDefenseDeckDetail defense_deck = 3;
+
+  map<int32, int32> battle_passives = 4;
+
+  repeated ToppingEquipmentByCookie topping_equipments = 5;
+}
+
+message TowerAdventureSeasonRandomSeeds {
+  TowerAdventureType tower_adventure_type = 1;
+
+  int32 tower_adventure_season_data_id = 2;
+
+  repeated TowerAdventureSeasonNodeRandomSeed node_random_seeds = 3;
+
+  repeated TowerAdventureSeasonBattleTeamConditionPoolRandomSeed battle_team_condition_pool_random_seeds = 4;
+}
+
+message TowerAdventureSeasonNodeRandomSeed {
+  int32 tower_adventure_node_data_id = 1;
+
+  int32 land_or_pvp_pool_random_seed = 2;
+
+  int32 land_level_random_seed = 3;
+}
+
+message TowerAdventureSeasonBattleTeamConditionPoolRandomSeed {
+  int32 battle_team_condition_pool_data_id = 1;
+
+  repeated int32 battle_team_condition_random_seeds = 2;
+}
+
+message BattleTeamDetail {
+  repeated BattleDeckDetail decks = 1;
+
+  map<int32, int32> battle_passives = 2;
+
+  map<int32, CookiePassive> cookie_passives = 7;
+
+  repeated ToppingEquipmentByCookie topping_equipments = 3;
+
+  repeated BeascuitEquipmentByCookie beascuit_equipments = 6;
+
+  repeated EquipmentItemByCookie equipped_equipment_items = 4;
+
+  map<int32, int32> hot_time_battle_buffs = 5;
+}
+
+message CookiePassive {
+  int32 cookie_data_id = 1;
+
+  repeated int32 cookie_passive_data_ids = 2;
+}
+
+message BattleCookieDetail {
+  oneof value {
+    MyCookieDetail my_cookie_detail = 1;
+
+    FixedCookieDetail fixed_cookie_detail = 2;
+
+    PresetCookieDetail preset_cookie_detail = 3;
+  }
+
+  message MyCookieDetail {
+    Cookie cookie = 1;
+
+    int32 selected_topping_preset_index = 2;
+
+    int32 selected_beascuit_preset_index = 3;
+  }
+
+  message FixedCookieDetail {
+    int32 team_preset_data_id = 1;
+
+    Cookie cookie = 2;
+
+    int32 topping_preset_data_id = 3;
+
+    int32 beascuit_preset_data_id = 4;
+  }
+
+  message PresetCookieDetail {
+    int32 cookie_preset_data_id = 1;
+
+    Cookie cookie = 2;
+
+    oneof topping_preset_data_id {
+      ck.Empty no_topping_preset_data_id = 3;
+
+      int32 topping_preset_data_id_value = 4;
+    }
+
+    oneof beascuit_preset_data_id {
+      ck.Empty no_beascuit_preset_data_id = 5;
+
+      int32 beascuit_preset_data_id_value = 6;
+    }
+  }
+}
+
+message BattleTreasureDetail {
+  oneof value {
+    MyTreasureDetail my_treasure_detail = 1;
+
+    FixedTreasureDetail fixed_treasure_detail = 2;
+  }
+
+  message MyTreasureDetail {
+    int32 data_id = 1;
+
+    int32 level = 2;
+  }
+
+  message FixedTreasureDetail {
+    int32 team_preset_data_id = 1;
+
+    int32 data_id = 2;
+
+    int32 level = 3;
+  }
+}
+
+message BattleDeckDetail {
+  repeated BattleCookieDetail cookies = 1;
+
+  repeated BattleTreasureDetail treasures = 2;
+
+  oneof leader_cookie_data_id {
+    ck.Empty no_leader_cookie_data_id = 3;
+
+    int32 leader_cookie_data_id_value = 4;
+  }
+}
+
+message RandomDungeons {
+  repeated RandomDungeonSeason seasons = 1;
+
+  repeated RandomDungeonUpgradeEffects upgrade_effects = 2;
+
+  oneof ongoing_battle {
+    OngoingRandomDungeonBattle ongoing_battle_value = 3;
+
+    ck.Empty no_ongoing_battle = 4;
+  }
+
+  repeated RandomDungeonEffectEnchants effect_enchants = 5;
+}
+
+message RandomDungeonSeason {
+  int32 data_id = 1;
+
+  oneof season_score {
+    ck.Empty no_season_score = 2;
+
+    RandomDungeonScore season_score_value = 3;
+  }
+
+  repeated RandomDungeonPlayLog logs = 4;
+}
+
+message RandomDungeonScore {
+  int64 dealt_damage = 1;
+
+  int32 battle_time_millis = 2;
+}
+
+message RandomDungeonPlayLog {
+  string battle_id = 1;
+
+  repeated int32 last_cookie_preset_data_ids = 2;
+
+  repeated int32 acquired_effect_data_ids = 3;
+
+  RandomDungeonScore score = 4;
+}
+
+message RandomDungeonUpgradeEffects {
+  int32 season_group_data_id = 1;
+
+  repeated RandomDungeonUpgradeEffect effects = 2;
+}
+
+message RandomDungeonUpgradeEffect {
+  int32 group_data_id = 1;
+
+  int32 level = 2;
+}
+
+message OngoingRandomDungeonBattle {
+  string battle_id = 1;
+
+  int32 season_data_id = 2;
+
+  repeated RandomDungeonDeckChangePool deck_change_pools = 3;
+
+  int32 random_seed = 4;
+
+  int32 rerolled_count = 5;
+
+  int32 land_data_id = 6;
+
+  bool is_start_battle = 7;
+}
+
+message RandomDungeonEffectEnchants {
+  int32 season_group_data_id = 1;
+
+  map<int32, RandomDungeonEffectEnchant> effect_enchants = 2;
+}
+
+message RandomDungeonEffectEnchant {
+  int32 slot = 1;
+
+  int32 effect_group_data_id = 2;
+
+  int32 effect_data_id = 3;
+}
+
+message RandomDungeonDeckChangePool {
+  string pool_id = 1;
+
+  repeated RandomDungeonCookieChangeSlotPool slot_pools = 2;
+}
+
+message RandomDungeonCookieChangeSlotPool {
+  int32 slot = 1;
+
+  repeated int32 cookie_preset_data_ids = 2;
+}
+
+message RandomDungeonDeckChangePoolDetail {
+  string pool_id = 1;
+
+  repeated RandomDungeonCookieChangeSlotPoolDetail slot_pools = 2;
+}
+
+message RandomDungeonCookieChangeSlotPoolDetail {
+  int32 slot = 1;
+
+  repeated int32 cookie_preset_data_ids = 2;
+
+  repeated BattleCookieDetail cookie_details = 3;
+
+  repeated ToppingEquipmentByCookie topping_equipments = 4;
+
+  repeated BeascuitEquipmentByCookie beascuit_equipments = 5;
+}
+
+message StoryTaskGames {
+  repeated StoryTaskGame games = 1;
+}
+
+message StoryTaskGame {
+  int32 story_task_game_data_id = 1;
+
+  ck.Time opened_at = 2;
+
+  oneof max_cleared_task_data_id {
+    ck.Empty no_max_cleared_task_data_id = 9;
+
+    int32 max_cleared_task_data_id_value = 10;
+  }
+
+  repeated int32 rewarded_chapter_data_ids = 11;
+
+  oneof max_failed_task_data_id {
+    ck.Empty no_max_failed_task_data_id = 14;
+
+    int32 max_failed_task_data_id_value = 15;
+  }
+
+  repeated StoryTaskGameMission ongoing_missions = 12;
+
+  repeated int32 completed_mission_data_ids = 13;
+}
+
+message StoryTaskGameMission {
+  int32 mission_data_id = 1;
+
+  repeated RequirementState requirement_states = 2;
+}
+
+message BeastRaids {
+  repeated BeastRaidSeason seasons = 1;
+
+  bool is_activated = 2;
+
+  oneof ongoing_battle {
+    OngoingBeastRaidBattle ongoing_battle_value = 3;
+
+    ck.Empty no_ongoing_battle = 4;
+  }
+}
+
+message BeastRaidSeason {
+  int32 season_data_id = 1;
+
+  oneof season_result {
+    ck.Empty no_season_result = 2;
+
+    BeastRaidSeasonResult season_result_value = 3;
+  }
+
+  int32 max_rewarded_tier_data_id = 4;
+
+  int32 max_rewardable_tier_data_id = 5;
+
+  bool is_season_notified = 6;
+
+  int32 last_notified_tier_data_id = 7;
+
+  repeated BeastRaidDungeon dungeons = 8;
+
+  bool is_tier_achievement_profile_received = 9;
+
+  bool is_dungeon_clear_profile_received = 10;
+}
+
+message BeastRaidDungeon {
+  int32 dungeon_data_id = 1;
+
+  bool is_clear = 2;
+
+  oneof best_score {
+    ck.Empty no_best_score = 4;
+
+    BeastRaidScore best_score_value = 5;
+  }
+
+  bool is_first_clear_rewards_received = 6;
+}
+
+message BeastRaidSeasonResult {
+  int32 season_data_id = 1;
+
+  oneof record {
+    ck.Empty no_record = 2;
+
+    BeastRaidRankRecord record_value = 3;
+  }
+
+  bool is_reward_received = 4;
+}
+
+message BeastRaidRankRecord {
+  string user_id = 1;
+
+  int32 rank = 2;
+
+  int32 tier_data_id = 3;
+
+  BeastRaidScore score = 4;
+}
+
+message BeastRaidRankRecordWithSummary {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int32 tier_data_id = 3;
+
+  BeastRaidScore beast_raid_score = 4;
+}
+
+message BeastRaidScore {
+  int64 score = 1;
+
+  int32 battle_time_millis = 2;
+}
+
+message OngoingBeastRaidBattle {
+  string battle_id = 1;
+
+  int32 dungeon_data_id = 2;
+
+  int32 season_data_id = 3;
+
+  int32 random_seed = 4;
+
+  ck.Time battle_started_at = 5;
+
+  int32 land_data_id = 6;
+}
+
+message UnionWars {
+  repeated UnionWar wars = 1;
+
+  oneof ongoing_battle {
+    OngoingUnionWarBattle ongoing_battle_value = 10;
+
+    ck.Empty no_ongoing_battle = 11;
+  }
+}
+
+message UnionWar {
+  int32 season_data_id = 1;
+
+  repeated UnionWarPoints total_points = 2;
+
+  repeated UnionWarPoints max_points = 3;
+
+  repeated UnionWarBossMission boss_missions = 4;
+
+  UnionWarDailyMissions daily_missions = 5;
+
+  UnionWarSupportMissions support_missions = 6;
+
+  repeated UnionWarSupportDeliveries support_deliveries = 7;
+}
+
+message UnionWarBossMission {
+  int32 content_group_data_id = 1;
+
+  repeated int32 cleared_mission_data_ids = 2;
+}
+
+message UnionWarPoint {
+  int32 content_group_data_id = 1;
+
+  int64 point = 2;
+}
+
+message UnionWarPoints {
+  UnionWarPointType point_type = 1;
+
+  repeated UnionWarPoint points = 2;
+}
+
+message OngoingUnionWarBattle {
+  string battle_id = 1;
+
+  int32 season_data_id = 2;
+
+  int32 schedule_data_id = 3;
+
+  int32 content_data_id = 4;
+
+  ck.Time battle_started_at = 5;
+
+  int32 random_seed = 6;
+
+  repeated UnionWarPoint level_up_server_points = 7;
+
+  int32 land_data_id = 8;
+
+  oneof summon_npc_data_id {
+    int32 summon_npc_data_id_value = 9;
+
+    ck.Empty no_summon_npc_data_id = 10;
+  }
+
+  oneof last_cleared_boss_mission_data_id {
+    int32 last_cleared_boss_mission_data_id_value = 11;
+
+    ck.Empty no_last_cleared_boss_mission_data_id = 12;
+  }
+}
+
+message UnionWarDailyMission {
+  int32 mission_data_id = 1;
+
+  repeated RequirementState requirement_states = 2;
+}
+
+message UnionWarDailyMissions {
+  repeated UnionWarDailyMission missions = 1;
+
+  ck.Time mission_updated_at = 2;
+
+  repeated int32 cleared_mission_data_ids = 3;
+}
+
+message UnionWarContentRankRecordWithSummary {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 point = 3;
+}
+
+message UnionWarSeasonRankRecordWithSummary {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  int64 point = 3;
+
+  oneof master_league_ratio {
+    ck.Empty no_master_league_ratio = 4;
+
+    double master_league_ratio_value = 5;
+  }
+}
+
+message UnionWarSupportMission {
+  int32 mission_data_id = 1;
+
+  repeated RequirementState requirement_states = 2;
+}
+
+message UnionWarSupportMissions {
+  repeated UnionWarSupportMission missions = 1;
+
+  ck.Time mission_updated_at = 2;
+}
+
+message UnionWarSupportDeliverySlot {
+  int32 support_delivery_data_id = 1;
+
+  int32 quantity = 2;
+}
+
+message UnionWarSupportDeliveries {
+  int32 content_data_id = 1;
+
+  repeated UnionWarSupportDeliverySlot slots = 2;
+}
+
+message MissionRunGames {
+  repeated MissionRunGameGroup groups = 1;
+
+  oneof ongoing_mission_run_game {
+    OngoingMissionRunGame ongoing_mission_run_game_value = 2;
+
+    ck.Empty no_ongoing_mission_run_game = 3;
+  }
+}
+
+message MissionRunGameGroup {
+  int32 sub_game_group_data_id = 1;
+
+  repeated int32 cleared_game_data_ids = 2;
+
+  oneof best_score {
+    ck.Empty no_best_score = 3;
+
+    int64 best_score_value = 4;
+  }
+}
+
+message OngoingMissionRunGame {
+  string battle_id = 1;
+
+  int32 land_data_id = 2;
+
+  int32 game_data_id = 3;
+
+  ck.Time started_at = 4;
+
+  int32 cookie_data_id = 5;
+
+  int32 random_seed = 6;
+}
+
+message LobbyState {
+  LobbyEvents events = 1;
+
+  LobbyQuestBoard quest_board = 2;
+
+  repeated int32 chosen_dialog_group_data_ids = 3;
+
+  LobbyReportCount report_count = 4;
+
+  LobbyBuffTimes buff_times = 5;
+
+  repeated LobbyTimeBoost time_boosts = 6;
+}
+
+message LobbyBuffTimes {
+  map<int32, LobbyBuffInfo> buffs_info = 1;
+
+  ck.Time last_updated_at = 3;
+}
+
+message LobbyBuffInfo {
+  int64 accumulated_seconds = 1;
+
+  int32 daily_acquired = 2;
+}
+
+message LobbyTimeBoost {
+  int32 data_id = 1;
+
+  int64 amount = 2;
+
+  ck.Time received_at = 3;
+}
+
+message LobbyEvents {
+  repeated LobbyEvent events = 1;
+}
+
+message LobbyEvent {
+  int32 data_id = 1;
+
+  ck.Time started_at = 2;
+
+  ck.Time ends_at = 3;
+
+  LobbyEventState state = 4;
+
+  bool rewards_received = 5;
+}
+
+message LobbyEventState {
+  oneof value {
+    OpenVault open_vault = 1;
+
+    RemoveObstacle remove_obstacle = 2;
+
+    PostOffice post_office = 3;
+  }
+
+  message OpenVault {
+    int32 password_entered_count = 1;
+  }
+
+  message RemoveObstacle {
+  }
+
+  message PostOffice {
+    int32 post_office_reward_group_data_id = 1;
+  }
+}
+
+message LobbyQuestBoard {
+  bool has_available_quests = 1;
+
+  repeated string pending_completed_quest_ids = 2;
+}
+
+message LobbyReportCount {
+  int32 daily_report_count = 1;
+
+  oneof last_reported_at {
+    ck.Time last_reported_at_value = 2;
+
+    ck.Empty no_last_reported_at = 3;
+  }
+}
+
+message LobbyGameResult {
+  int32 score = 1;
+
+  int32 rank = 2;
+
+  repeated Reward rewards = 3;
+
+  LobbyGameSeason season = 4;
+
+  LobbyGameResultExtension extension = 5;
+}
+
+message LobbyGameResultExtension {
+  oneof value {
+    Quiz quiz = 1;
+
+    Tree tree = 2;
+  }
+
+  message Quiz {
+  }
+
+  message Tree {
+    int32 max_combo = 1;
+
+    int32 max_combo_score = 2;
+
+    bool is_default_reward = 3;
+  }
+}
+
+message LobbyGameRankRecord {
+  UserSummary user_summary = 1;
+
+  int32 rank = 2;
+
+  double ratio = 3;
+
+  int64 score = 4;
+}
+
+message LobbyGames {
+  map<int32, LobbyGameSeason> seasons = 1;
+}
+
+message LobbyGameSeason {
+  int32 data_id = 1;
+
+  int64 accumulated_score = 2;
+
+  bool rewards_received = 3;
+
+  LobbyGameExtension extension = 4;
+
+  LobbyGameDailyAcquiredCoins daily_acquired_coins = 5;
+}
+
+message LobbyGameExtension {
+  oneof value {
+    Quiz quiz = 1;
+
+    Tree tree = 2;
+  }
+
+  message Quiz {
+    int32 total_correct_answers = 1;
+
+    int32 ongoing_correct_answer_streak = 2;
+
+    int32 max_correct_answer_streak = 3;
+  }
+
+  message Tree {
+    int32 max_combo = 1;
+
+    int32 max_score = 2;
+
+    int32 cut_count = 3;
+  }
+}
+
+message LobbyGameDailyAcquiredCoins {
+  int32 amount = 1;
+
+  ck.Time updated_at = 2;
+}
+
+message TimeOptional {
+  oneof value {
+    ck.Time time_value = 1;
+
+    ck.Empty no_time_value = 2;
+  }
+}
+
+enum InfiniteDungeonDifficulty {
+  INFINITE_DUNGEON_DIFFICULTY_EASY = 0;
+
+  INFINITE_DUNGEON_DIFFICULTY_NORMAL = 1;
+
+  INFINITE_DUNGEON_DIFFICULTY_HARD = 2;
+
+  INFINITE_DUNGEON_DIFFICULTY_EXPERT1 = 3;
+
+  INFINITE_DUNGEON_DIFFICULTY_EXPERT2 = 4;
+
+  INFINITE_DUNGEON_DIFFICULTY_EXPERT3 = 5;
+}
+
+enum KingdomPassiveContentType {
+  STRUCTURE_PASSIVE = 0;
+
+  COOKIE_RELATIONSHIP_PASSIVE = 1;
+
+  COOKIE_SKIN_RELATIONSHIP_PASSIVE = 2;
+
+  KINGDOM_PASS_PASSIVE = 3;
+
+  GUILD_PASSIVE = 4;
+
+  GNOME_LAB_PASSIVE = 5;
+
+  GUILD_RELIC_PASSIVE = 6;
+
+  PROSPERITY_PASSIVE = 7;
+
+  HEROES_HALL_STATUE_PASSIVE = 8;
+
+  STRUCTURE_CONDITIONAL_PASSIVE = 9;
+
+  COOKIE_SQUAD_PASSIVE = 10;
+
+  AIR_BALLOON_SPECIAL_ITEM_PASSIVE = 11;
+
+  WONDER_PASSIVE = 12;
+}
+
+enum Rotation {
+  ZERO = 0;
+
+  ONCE = 1;
+
+  TWICE = 2;
+
+  TRIPLE = 3;
+}
+
+enum PvpType {
+  PVP_NORMAL = 0;
+
+  PVP_SMASH = 1;
+}
+
+enum ConstructionKind {
+  INITIAL_CONSTRUCTION = 0;
+
+  RESTORATION = 1;
+
+  LEVEL_UP = 2;
+}
+
+enum StructureProductionStatus {
+  PRODUCTION_NORMAL = 0;
+
+  PRODUCTION_DISABLED = 1;
+
+  PRODUCTION_REPLACED = 2;
+}
+
+enum CookieBattleRole {
+  ATTACKER = 0;
+
+  DEFENDER = 1;
+
+  MAGICIAN = 2;
+
+  ASSASSIN = 3;
+
+  HEALER = 4;
+
+  BOMBER = 5;
+
+  SUPPORTER = 6;
+
+  SHOOTER = 7;
+
+  BTS = 8;
+}
+
+enum EpisodeDifficulty {
+  NORMAL = 0;
+
+  HARD = 1;
+
+  MASTER_MODE = 2;
+}
+
+enum LandDifficulty {
+  ADVENTURE_NORMAL = 0;
+
+  ADVENTURE_DARK = 1;
+
+  ADVENTURE_MASTER = 2;
+
+  SPECIAL_EPISODE_STORY = 3;
+
+  SPECIAL_EPISODE_NORMAL = 4;
+
+  SPECIAL_EPISODE_HARD = 5;
+
+  SPECIAL_EPISODE3STAR_NORMAL = 6;
+
+  SPECIAL_EPISODE3STAR_HARD = 7;
+
+  BEAST_YEAST_STORY = 8;
+
+  BEAST_YEAST_NORMAL = 9;
+
+  BEAST_YEAST_HARD = 10;
+
+  BEAST_RAID_EASY = 11;
+
+  BEAST_RAID_NORMAL = 12;
+
+  BEAST_RAID_HARD = 13;
+
+  BEAST_RAID_EXPERT = 14;
+
+  BEAST_RAID_MASTER = 15;
+}
+
+enum CookieStatus {
+  COOKIE_STATUS_LOWEST = 0;
+
+  COOKIE_STATUS_LOW = 1;
+
+  COOKIE_STATUS_NORMAL = 2;
+
+  COOKIE_STATUS_HIGH = 3;
+
+  COOKIE_STATUS_HIGHEST = 4;
+}
+
+enum LanguageType {
+  KO = 0;
+
+  EN = 1;
+
+  JP = 2;
+
+  CN = 3;
+
+  TH = 4;
+
+  FR = 5;
+
+  DE = 6;
+}
+
+enum PvpOpponentPoolResetMethod {
+  FREE = 0;
+
+  CRYSTAL = 1;
+
+  PVP_RESET_TICKET = 2;
+}
+
+enum NoticeCategory {
+  NOTICE = 0;
+
+  INTRODUCE = 1;
+
+  EVENT = 2;
+}
+
+enum GuildMuseumType {
+  KINGDOM_HISTORY = 0;
+
+  NATURE_ENVIRONMENT = 1;
+
+  MAGIC = 2;
+
+  KINGDOM_HISTORY2 = 3;
+}
+
+enum GuildJoinMethod {
+  AUTOMATIC = 0;
+
+  INVITE_ONLY = 1;
+
+  REQUEST_ACCEPTANCE = 2;
+}
+
+enum GuildMemberRole {
+  MASTER = 0;
+
+  SUB_MASTER = 1;
+
+  NORMAL_ROLE = 2;
+}
+
+enum SeasonableRecordType {
+  SEASONABLE_RECORD_TYPE_SMASH = 0;
+
+  SEASONABLE_RECORD_TYPE_SOCIAL_RAID = 1;
+
+  SEASONABLE_RECORD_TYPE_BEAST_RAID = 2;
+}
+
+enum PurchaseInsufficientItemReasonType {
+  UNKNOWN = 0;
+
+  SOCIAL_GIFT = 1;
+
+  TRAIN = 2;
+
+  WISHTREE = 3;
+
+  PURCHASE_PACKAGE = 4;
+
+  PURCHASE_STRUCTURE = 5;
+
+  UNLOCK_TILE = 6;
+
+  UPGRADE_INVENTORY = 7;
+
+  REMOVE_OBSTACLE = 8;
+
+  UNLOCK_SEGMENT = 9;
+
+  STRUCTURE_LEVEL_UP = 10;
+
+  STRUCTURE_CONSTRUCTING = 12;
+
+  WORLD_MAP_STRUCTURE_CONSTRUCTING = 13;
+
+  CRAFT_PRODUCTION_ACTIVITY = 14;
+
+  COOKIE_SKILL_LEVEL_UP = 15;
+
+  SHORTCUT = 16;
+
+  PURCHASE_STRUCTURE_SKIN = 17;
+
+  GNOME_RESEARCH_LEVEL_UP = 18;
+
+  OCEAN_UNLOCK_SEGMENT = 19;
+
+  OCEAN_EDIT_STRUCTURE = 20;
+
+  reserved 11;
+}
+
+enum BattleType {
+  BATTLE_TYPE_ADVENTURE = 0;
+
+  BATTLE_TYPE_DAILY_DUNGEON = 1;
+
+  BATTLE_TYPE_PVP = 2;
+
+  BATTLE_TYPE_GUILD = 3;
+
+  BATTLE_TYPE_CAKE_TOWER = 4;
+
+  BATTLE_TYPE_OCEAN = 5;
+
+  BATTLE_TYPE_SOCIAL_RAID = 6;
+
+  BATTLE_TYPE_EVENT_DUNGEON = 7;
+
+  BATTLE_TYPE_PVP_SMASH = 8;
+
+  BATTLE_TYPE_INFINITE_DUNGEON = 9;
+
+  BATTLE_TYPE_MASTER_MODE_ADVENTURE = 10;
+
+  BATTLE_TYPE_BOARD_ADVENTURE = 11;
+
+  BATTLE_TYPE_RHYTHM_MODE_EVENT_DUNGEON = 12;
+
+  BATTLE_TYPE_CAKE_DUNGEON = 13;
+
+  BATTLE_TYPE_SPECIAL_EPISODE = 14;
+
+  BATTLE_TYPE_RELAY_DUNGEON = 15;
+
+  BATTLE_TYPE_JAM_STONE_DUNGEON = 16;
+
+  BATTLE_TYPE_RANDOM_DUNGEON = 17;
+
+  BATTLE_TYPE_BEAST_YEAST_ADVENTURE = 18;
+
+  BATTLE_TYPE_BEAST_RAID = 19;
+
+  BATTLE_TYPE_UNION_WAR = 20;
+
+  BATTLE_TYPE_CHOCO_CAKE_TOWER = 21;
+
+  BATTLE_TYPE_STRAWBERRY_CAKE_TOWER = 22;
+}
+
+enum RankingType {
+  RANKING_COMPETITION_EVENT = 0;
+
+  RANKING_PVP = 1;
+
+  RANKING_SMASH = 2;
+
+  RANKING_SMASH_GUILD = 3;
+
+  RANKING_GUILD_DELIVERY_EVENT = 4;
+
+  RANKING_INFINITE_DUNGEON = 5;
+
+  RANKING_GUILD_BATTLE = 6;
+
+  RANKING_BOARD_ADVENTURE = 7;
+
+  RANKING_TOWN_CONTEST = 8;
+
+  RANKING_PROSPERITY_ALL = 9;
+
+  RANKING_PROSPERITY_WITHOUT_TIME_LIMITED = 10;
+
+  RANKING_CAKE_DUNGEON_SEASON = 11;
+
+  RANKING_CAKE_DUNGEON_ALL_TIME = 12;
+
+  RANKING_RELAY_DUNGEON = 13;
+
+  RANKING_RANDOM_DUNGEON = 14;
+
+  RANKING_BEAST_RAID = 15;
+
+  RANKING_UNION_WAR = 16;
+
+  RANKING_LOBBY_GAME = 17;
+}
+
+enum ProsperityType {
+  PROSPERITY_CASTLE_LEVEL = 0;
+
+  PROSPERITY_SEGMENT_EXPANSION = 1;
+
+  PROSPERITY_LANDMARK_STRUCTURE_LEVEL = 2;
+
+  PROSPERITY_PRODUCTION_STRUCTURE_LEVEL = 3;
+
+  PROSPERITY_COOKIE_HOUSE_STRUCTURE_LEVEL = 4;
+
+  PROSPERITY_GNOME_LAB_RESEARCH = 5;
+
+  PROSPERITY_OCEAN_SEGMENT_EXPANSION = 6;
+
+  PROSPERITY_COOKIE = 7;
+
+  PROSPERITY_CRAFTSMAN = 8;
+
+  PROSPERITY_STORAGE_EXPANSION = 9;
+
+  PROSPERITY_THEME = 10;
+
+  PROSPERITY_CASTLE_SKIN = 11;
+
+  PROSPERITY_COOKIE_SKIN = 12;
+
+  PROSPERITY_HEROES_HALL = 13;
+
+  PROSPERITY_WONDER_SKIN = 14;
+}
+
+enum EquipmentItemUpgradeResult {
+  FAILURE = 0;
+
+  SUCCESS = 1;
+
+  GREAT_SUCCESS = 2;
+}
+
+enum BoardAdventureDifficulty {
+  BOARD_ADVENTURE_NORMAL = 0;
+
+  BOARD_ADVENTURE_HARD = 1;
+
+  BOARD_ADVENTURE_MASTER = 2;
+
+  BOARD_ADVENTURE_HELL1 = 3;
+
+  BOARD_ADVENTURE_HELL2 = 4;
+
+  BOARD_ADVENTURE_HELL3 = 5;
+
+  BOARD_ADVENTURE_HELL4 = 6;
+
+  BOARD_ADVENTURE_HELL5 = 7;
+}
+
+enum BoardAdventureMapObjectVisibleState {
+  NOT_VISIBLE = 0;
+
+  HALF_VISIBLE = 1;
+
+  VISIBLE = 2;
+
+  VISITED = 3;
+}
+
+enum EventDungeonRhythmStageGrade {
+  D = 0;
+
+  C = 1;
+
+  B = 2;
+
+  A = 3;
+
+  S = 4;
+}
+
+enum ProsperityRankingType {
+  PROSPERITY_RANKING_ALL = 0;
+
+  PROSPERITY_RANKING_TIME_LIMITED_EXCLUDED = 1;
+}
+
+enum FindOutGameStageState {
+  LOCKED = 0;
+
+  UNLOCKED = 1;
+
+  STARTED = 2;
+
+  FINISHED = 3;
+}
+
+enum JokerGameRoundState {
+  PLAYING = 0;
+
+  WIN = 1;
+
+  LOSE = 2;
+}
+
+enum ToppingBatchUpgradeEndCause {
+  UPGRADE_SUCCESS = 0;
+
+  NOT_SUFFICIENT_COIN = 1;
+
+  NOT_SUFFICIENT_PIECE = 2;
+
+  NOT_SUFFICIENT_COIN_AND_PIECE = 3;
+
+  MAX_ATTEMPT_REACHED = 4;
+}
+
+enum PvpAnalyticsDeckType {
+  PVP_ANALYTICS_DECK_ATTACK = 0;
+
+  PVP_ANALYTICS_DECK_DEFENSE = 1;
+}
+
+enum EquipmentItemType {
+  MAGIC_CANDY = 0;
+
+  JAM_STONE = 1;
+
+  AWAKENING = 2;
+}
+
+enum TowerAdventureType {
+  TOWER_ADVENTURE_TYPE_CAKE_TOWER = 0;
+
+  TOWER_ADVENTURE_TYPE_FROZEN_WAVE_TOWER = 1;
+
+  TOWER_ADVENTURE_TYPE_CHOCO_CAKE_TOWER = 2;
+
+  TOWER_ADVENTURE_TYPE_STRAWBERRY_CAKE_TOWER = 3;
+}
+
+enum KingdomPassMissionType {
+  KINGDOM_PASS_MISSION_TYPE_DAILY = 0;
+
+  KINGDOM_PASS_MISSION_TYPE_WEEKLY = 1;
+
+  KINGDOM_PASS_MISSION_TYPE_SEASONAL = 2;
+}
+
+enum ProfileDecoType {
+  PROFILE_DECO_TYPE_BACKGROUND = 0;
+
+  PROFILE_DECO_TYPE_BADGE = 1;
+}
+
+enum UnionWarPointType {
+  UNION_WAR_POINT_TYPE_LEVEL_UP = 0;
+
+  UNION_WAR_POINT_TYPE_CONTRIBUTION = 1;
+
+  UNION_WAR_POINT_TYPE_DEALT_DAMAGE_TO_BOSS = 2;
+}
+
+enum LobbyInteractionType {
+  TALK_TO_NPC = 0;
+
+  INTERACT_WITH_ACTION_OBJECT = 1;
+}
+
+enum LobbyEmotionType {
+  SPECIAL = 0;
+
+  MOTION = 1;
+
+  EMOJI = 2;
+}
